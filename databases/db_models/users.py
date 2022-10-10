@@ -30,3 +30,4 @@ class UserProfile(Base):
     user_email = Column(String)
     theme = Column(String)
     # user_login = relationship('UserLogin', foreign_keys='UserLogin.user_id')
+

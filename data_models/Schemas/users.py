@@ -22,17 +22,18 @@ class UserLoginRequest(BaseModel):
 
 
 class UserRegistration(BaseModel):
-    user_id: str
+    user_id: Union[str, None]
     user_email: EmailStr
     user_password: str
     first_name: str
     last_name: str
     user_role: str
-    is_first_login: str
-    created_at: str
-    updated_at: str
+    is_first_login: Union[str, None]
 
-    # class UserDetails(BaseModel, UsersRegistration):
+
+    class Token(BaseModel):
+        access_token: str
+        token_type: str# class UserDetails(BaseModel, UsersRegistration):
 
     class Config():  # to convert non dict obj to json
         orm_mode = True

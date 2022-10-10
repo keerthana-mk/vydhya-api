@@ -1,11 +1,10 @@
 import hashlib
 
-from fastapi import Depends
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
 from data_models.Schemas.users import UserRegistration, UserLoginResponse
-from databases.db_connection import get_db, get_db_actual
+from app.config import get_db_actual
 from databases.db_models.users import UserLogin
 from databases.repository.users import UserLoginRepository, UserProfileRepository
 
@@ -65,8 +64,7 @@ class DefaultAuthentication(BaseAuthentication):
         try:
             user_id = UserLoginRepository.add_user_login(user_details.user_email, hashed_password,
                                                          user_details.first_name, user_details.last_name,
-                                                         user_details.user_role, user_details.created_at,
-                                                         user_details.updated_at)
+                                                         user_details.user_role)
             UserProfileRepository.create_user_profile(user_id, user_details.user_email, user_details.user_role,
                                                       "primary")
             return True

@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 
 from data_models.Schemas.users import UserRegistration, UserRegistrationResponse, UserLoginResponse, UserLoginRequest
-from databases.db_connection import engine, get_db
+from app.config import engine 
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
 
@@ -24,14 +24,7 @@ async def root():
     # return check_db_connected()
     return {"message": "Hello World"}
 
-
-@app.post("/login", response_model=UserLoginResponse, tags='User Login')
-def login_user(user_login_req: UserLoginRequest):
-    auth_service = BaseAuthentication.get_auth_service()
-    return auth_service.verify_user(user_login_req.user_id, user_login_req.user_password)
-
-
-@app.post("/user_registration", response_model=UserRegistrationResponse, tags='User Registration and Login')
+@app.post("/user_registration", response_model=UserRegistrationResponse, tags=['User Registration and Login'])
 def create_user(user_details: UserRegistration):
     auth_service = BaseAuthentication.get_auth_service()
     try:
@@ -46,3 +39,16 @@ def create_user(user_details: UserRegistration):
             status_code=500
         )
     return response
+
+@app.post("/login", response_model=UserLoginResponse, tags=['User Registration and Login'])
+def login_user(user_login_req: UserLoginRequest):
+    auth_service = BaseAuthentication.get_auth_service()
+    return auth_service.verify_user(user_login_req.user_id, user_login_req.user_password)
+
+# @app.post('/login/google', response_model=UserLoginResponse, tags=['User Registration and Login'])
+# async def login_user1(request: Request):
+#     redirect_uri = request.url_for('auth')
+#     return await goauth.google.authorize_access_token(request, redirect_uri)
+
+# @app.post('/token', response_model= Token)
+# def
