@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from data_models.Schemas.users import UserRegistration, UserRegistrationResponse, UserLoginResponse, UserLoginRequest
+from data_models.Schemas.profiles import UserProfileResponse, UserProfileRequests
 from app.config import engine 
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
@@ -13,11 +14,16 @@ def create_tables():  # new
 
 def start_application():
     app = FastAPI(title="Vydhya", version="v1")
-    create_tables()
+    # create_tables()
     return app
 
 
 app = start_application()
+
+@app.on_event('startup')
+def create_all_tables():
+    create_tables()
+
 
 @app.get("/")
 async def root():
@@ -52,3 +58,29 @@ def login_user(user_login_req: UserLoginRequest):
 
 # @app.post('/token', response_model= Token)
 # def
+
+@app.post("/profile", response_model=UserProfileResponse, tags=['User Profiles'])
+def update_patient_profile(user_id, user_role, user_profile : UserProfileRequests):
+
+    profile_service = ProfileServices()
+    if user_role == 'patient':
+        updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile['patient'])
+        return UserProfileResponse(patient = PatientProfileResponse(user_id = updated_user_profile.user_id,
+        user_name = updated_user_profile.user_name,
+        user_email = updated_user_profile.user_email,
+        theme = updated_user_profile.theme,
+        gender = updated_user_profile.gender,
+        dob = update_user_profile.dob,
+        height = updated_user_profile.height,
+        weight = updated_user_profile.weight,
+        vaccinations = update_user_profile.vaccinations,
+        blood_type = updated_user_profile.blood_type,
+        allergies = updated_user_profile.allergies,
+        medications = updated_user_profile.medications,
+        blood_pressure = updated_user_profile.blood_pressure,
+        preexist_conditions = updated_user_profile.preexist_conditions,
+        health_plan_id = updated_user_profile.health_plan_id,
+        monthly_medical_expense = updated_user_profile.monthly_medical_expense))
+         
+
+    

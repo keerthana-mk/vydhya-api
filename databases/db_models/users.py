@@ -7,6 +7,7 @@ from databases.base_class import Base
 
 
 class UserLogin(Base):
+    
     user_id = Column(String, primary_key=True, index=True)
     user_email = Column(String, nullable=False)
     user_password = Column(String, nullable=False)

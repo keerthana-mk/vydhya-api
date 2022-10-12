@@ -8,13 +8,11 @@ from sqlalchemy.dialects.postgresql import ARRAY
 from databases.base_class import Base
 from databases.db_models.users import UserLogin
 
-
-# class ListDetails:
-#     list_details = []
-
 class PatientProfile(Base):
     user_id = Column(String, primary_key=True, index=True)
     user_name = Column(String, default = UserLogin.first_name+" "+UserLogin.last_name, nullable=False)
+    user_email = Column(String)
+    theme = Column(String, default='primary')
     gender = Column(String, nullable=False)
     dob = Column(String)
     height = Column(String)
@@ -32,6 +30,8 @@ class PatientProfile(Base):
 class DoctorProfile(Base):
     user_id = Column(String, primary_key=True, index=True)
     user_name = Column(String, default = UserLogin.first_name+" "+UserLogin.last_name, nullable=False)
+    user_email = Column(String)
+    theme = Column(String, default='primary')
     experience = Column(Integer, nullable=False)
     hospital_name = Column(String)
     speciality = Column(String)
@@ -42,6 +42,8 @@ class DoctorProfile(Base):
 class InsurerProfile(Base):
     insurer_id = Column(String, primary_key=True)
     user_id = Column(String, ForeignKey(UserLogin.user_id))
+    user_email = Column(String)
+    theme = Column(String, default='primary')
     insurance_name = Column(String)
     plan_id = Column(String)
 

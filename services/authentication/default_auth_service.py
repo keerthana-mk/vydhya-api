@@ -55,6 +55,7 @@ class DefaultAuthentication(BaseAuthentication):
             )
 
     def add_user(self, user_details: UserRegistration):
+        profile_service = ProfileServices()
         if UserLoginRepository.get_user_login(user_details.user_id, user_details.user_email) is not None:
             error_message = f'user_id {user_details.user_id} or user_email {user_details.user_email} already exists'
             print(error_message)
@@ -65,7 +66,7 @@ class DefaultAuthentication(BaseAuthentication):
             user_id = UserLoginRepository.add_user_login(user_details.user_email, hashed_password,
                                                          user_details.first_name, user_details.last_name,
                                                          user_details.user_role)
-            UserProfileRepository.create_user_profile(user_id, user_details.user_email, user_details.user_role,
+            profile_service.create_user_profie(user_id, user_details.user_email, user_details.user_role,
                                                       "primary")
             return True
         except Exception as e:
