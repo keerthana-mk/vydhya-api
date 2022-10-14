@@ -5,6 +5,10 @@ from data_models.Schemas.profiles import UserProfileResponse, UserProfileRequest
 from app.config import engine 
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
+from services.Profile.profiles_services import ProfileServices
+from data_models.Schemas.profiles import PatientProfileResponse
+from data_models.Schemas.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response
+from data_models.Schemas.logging import logger
 
 
 def create_tables():  # new
@@ -17,6 +21,7 @@ def start_application():
     # create_tables()
     return app
 
+logger.info('****************** Starting Server *****************')
 
 app = start_application()
 
@@ -59,28 +64,32 @@ def login_user(user_login_req: UserLoginRequest):
 # @app.post('/token', response_model= Token)
 # def
 
-@app.post("/profile", response_model=UserProfileResponse, tags=['User Profiles'])
-def update_patient_profile(user_id, user_role, user_profile : UserProfileRequests):
+@app.post("/profile", response_model=UserProfileResponse, tags=['User Profiles'], response_model_exclude_none=True)
+def update_user_profile(user_id, user_role, user_profile : UserProfileRequests):
 
     profile_service = ProfileServices()
     if user_role == 'patient':
-        updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile['patient'])
-        return UserProfileResponse(patient = PatientProfileResponse(user_id = updated_user_profile.user_id,
-        user_name = updated_user_profile.user_name,
-        user_email = updated_user_profile.user_email,
-        theme = updated_user_profile.theme,
-        gender = updated_user_profile.gender,
-        dob = update_user_profile.dob,
-        height = updated_user_profile.height,
-        weight = updated_user_profile.weight,
-        vaccinations = update_user_profile.vaccinations,
-        blood_type = updated_user_profile.blood_type,
-        allergies = updated_user_profile.allergies,
-        medications = updated_user_profile.medications,
-        blood_pressure = updated_user_profile.blood_pressure,
-        preexist_conditions = updated_user_profile.preexist_conditions,
-        health_plan_id = updated_user_profile.health_plan_id,
-        monthly_medical_expense = updated_user_profile.monthly_medical_expense))
-         
-
+        updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.patient)
+        return convert_patient_reponse(updated_user_profile)
+    if user_role == 'doctor':
+        updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.doctor)
+        return convert_doctor_response(updated_user_profile)
+    if user_role == 'insurer':
+        updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.insurer)
+        return convert_insurer_response(updated_user_profile)
+    
+@app.get("/profile", response_model=UserProfileResponse, tags=['User Profiles'],response_model_exclude_none=True)      
+def get_user_profiles(user_id, user_role):
+    profile_service = ProfileServices()
+    if user_role == 'patient':
+        user_profile_details = profile_service.get_user_profile(user_id, user_role)
+        return convert_patient_reponse(user_profile_details)
+    if user_role == 'doctor':
+        user_profile_details = profile_service.get_user_profile(user_id, user_role)
+        return convert_doctor_response(user_profile_details)
+    if user_role == 'insurer':
+        user_profile_details = profile_service.get_user_profile(user_id, user_role)
+        return convert_insurer_response(user_profile_details)
+    
+    return ' User role doesnt exist'
     

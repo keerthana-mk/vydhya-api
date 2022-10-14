@@ -11,7 +11,7 @@ class UserLoginRepository:
     @staticmethod
     def get_user_login(user_id, user_email):
         query_result = UserLoginRepository.database.query(UserLogin).filter(
-            or_(UserLogin.user_id == user_id, UserLogin.user_email == user_email))
+            or_(UserLogin.user_id == user_id, UserLogin.user_name == user_email))
         query_result = query_result.all()
         return query_result[0] if len(query_result) == 1 else None
 
@@ -31,7 +31,7 @@ class UserLoginRepository:
         new_user_id = f'{user_role}_{last_user_num + 1}'
         new_user_login = UserLogin(
             user_id=new_user_id,
-            user_email=user_email,
+            user_name=user_email,
             user_password=user_password,
             first_name=first_name,
             last_name=last_name,

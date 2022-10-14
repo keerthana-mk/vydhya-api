@@ -10,7 +10,7 @@ class UserRegistrationResponse(BaseModel):
 
 class UserLoginResponse(BaseModel):
     user_id: Union[str, None]
-    user_email: Union[str, None]
+    user_name: Union[str, None]
     user_role: Union[str, None]
     theme: Union[str, None]
     error: Union[str, None]

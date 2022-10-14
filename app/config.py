@@ -8,15 +8,15 @@ from authlib.integrations.starlette_client import OAuth
 from authlib.integrations.starlette_client import OAuthError
 from starlette.config import Config
 from httpx import AsyncClient, Auth, Client, Request, Response
+import logging
+from logging.config import dictConfig
 
 # env_path = Path('../') / '.env'
 env_path = Path('.env')
 load_dotenv(dotenv_path=env_path)
-
-
 class DatabaseSetting:
     POSTGRES_USER: str = os.getenv("POSTGRES_USER")
-    POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_PASSWORD:str = os.getenv("POSTGRES_PASSWORD")
     POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER")
     POSTGRES_PORT: str = os.getenv("POSTGRES_PORT")
     POSTGRES_DB: str = os.getenv("POSTGRES_DB")

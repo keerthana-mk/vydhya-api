@@ -16,3 +16,8 @@ authlib
 itsdangerous
 
 httpx
+
+#logging
+logging
+
+gunicorn
