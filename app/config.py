@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 from sqlalchemy import create_engine, databases
 from sqlalchemy.orm import sessionmaker
 from authlib.integrations.starlette_client import OAuth
@@ -12,8 +12,8 @@ import logging
 from logging.config import dictConfig
 
 # env_path = Path('../') / '.env'
-# env_path = Path('.env')
-# load_dotenv(dotenv_path=env_path)
+env_path = Path('.env')
+load_dotenv(dotenv_path=env_path)
 class DatabaseSetting:
     POSTGRES_USER: str = os.getenv("POSTGRES_USER")
     POSTGRES_PASSWORD:str = os.getenv("POSTGRES_PASSWORD")
