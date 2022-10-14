@@ -1,5 +1,5 @@
 #for loading environment variables
-python-dotenv~=0.21.0
+# python-dotenv~=0.21.0
 #for email validation
 pydantic[email]~=1.10.2
 #hashing
