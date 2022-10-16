@@ -1,6 +1,7 @@
 from pydantic import BaseModel, validator
 from datetime import datetime
 from .profiles import UserProfileResponse, PatientProfileResponse, DoctorProfileResponse, InsurerProfileResponse
+from typing import Union, List, Dict
 
 
 class DateTimeModel(BaseModel):
@@ -13,6 +14,11 @@ class DateTimeModel(BaseModel):
             value: datetime,
     ) -> datetime:
         return value or datetime.now().strftime('%y-%m-%d %H:%M:%S')
+
+class StandardHttpResponse(BaseModel):
+    status: int
+    error: Union[str, None]
+    data: Union[Dict, None]
 
 def convert_patient_reponse(patient_data_obj):
      return UserProfileResponse(patient = PatientProfileResponse(user_id = patient_data_obj.user_id,
@@ -55,3 +61,9 @@ def convert_insurer_response(insurer_data_obj):
         insurance_name = insurer_data_obj.insurance_name,
         plan_id = insurer_data_obj.plan_id
     ))
+
+def get_http_response(data, status, error=None):
+    if error is not None:
+        return StandardHttpResponse(status=int(status), data=data, error=error)
+    else:
+        return StandardHttpResponse(status=int(status), data=data)
