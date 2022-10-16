@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
 from data_models.Schemas.users import UserRegistration, UserRegistrationResponse, UserLoginResponse, UserLoginRequest
 from data_models.Schemas.profiles import UserProfileResponse, UserProfileRequests
@@ -8,11 +9,23 @@ from services.authentication.default_auth_service import BaseAuthentication
 from services.Profile.profiles_services import ProfileServices
 from data_models.Schemas.profiles import PatientProfileResponse
 from data_models.Schemas.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, get_http_response, StandardHttpResponse
-from data_models.Schemas.logging import logger
+# from data_models.Schemas.logging import logger
+import logging
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+ch = logging.StreamHandler()
+fh = logging.FileHandler(filename='./server.log')
+formatter = logging.Formatter(
+    "%(asctime)s - %(module)s - %(funcName)s - line:%(lineno)d - %(levelname)s - %(message)s"
+)
+ch.setFormatter(formatter)
+fh.setFormatter(formatter)
+logger.addHandler(ch) #Exporting logs to the screen
+logger.addHandler(fh) #Exporting logs to a file
 
 
 def create_tables():  # new
-    print("Creating tables")
+    logger.error("Creating tables...")
     Base.metadata.create_all(bind=engine)
 
 
@@ -21,12 +34,16 @@ def start_application():
     # create_tables()
     return app
 
-logger.info('****************** Starting Server *****************')
+# logger.info('****************** Starting Server *****************')
 
 app = start_application()
 
 @app.on_event('startup')
 def create_all_tables():
+    logger = logging.getLogger("uvicorn.access")
+    handler = logging.handlers.RotatingFileHandler("api.log",mode="a",maxBytes = 100*1024, backupCount = 3)
+    handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+    logger.addHandler(handler)
     create_tables()
 
 
@@ -35,25 +52,23 @@ async def root():
     # return check_db_connected()
     return {"message": "Hello World"}
 
-@app.post("/user_registration", response_model=StandardHttpResponse, tags=['User Registration and Login'])
+@app.post("/user_registration", response_model=StandardHttpResponse, tags=['User Registration and Login'], response_model_exclude_none=True)
 def create_user(user_details: UserRegistration):
     auth_service = BaseAuthentication.get_auth_service()
+    error_message, data = None, None
     try:
         auth_service.add_user(user_details)
         data = UserRegistrationResponse(
             message=f'successfully created user {user_details.user_id}',
             status_code=200
         )
-        return get_http_response(data, 200)
+        status = 200
     except Exception as e:
         error_message = f'failed to register user: {str(e)}'
-        data = UserRegistrationResponse(
-            message=f'failed to register user: {str(e)}',
-            status_code=500
-        )
-        return get_http_response(data, 500, error_message)
+        
+    return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 
-@app.post("/login", response_model=StandardHttpResponse, tags=['User Registration and Login'])
+@app.post("/login", response_model=StandardHttpResponse, tags=['User Registration and Login'], response_model_exclude_none=True)
 def login_user(user_login_req: UserLoginRequest):
     auth_service = BaseAuthentication.get_auth_service()
     error_message, data = None, None
@@ -63,7 +78,7 @@ def login_user(user_login_req: UserLoginRequest):
     except Exception as e:
         error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
         status = 500
-    return get_http_response(data, status, error_message)
+    return JSONResponse(content = get_http_response(data, status, error_message), status_code=status)
 
 # @app.post('/login/google', response_model=UserLoginResponse, tags=['User Registration and Login'])
 # async def login_user1(request: Request):
@@ -96,11 +111,12 @@ def update_user_profile(user_id, user_role, user_profile : UserProfileRequests):
     except Exception as e:
         error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
         status = 500
-    return get_http_response(data, status, error_message)
+    return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 
     
-@app.get("/profile", response_model=StandardHttpResponse, tags=['User Profiles'],response_model_exclude_none=True)      
+@app.get("/profile", response_model=StandardHttpResponse, tags=['User Profiles'], response_model_exclude_none=True)      
 def get_user_profiles(user_id, user_role):
+    logger.info("please tell me i am here")
     profile_service = ProfileServices()
     error_message, data = None, None
     try:
@@ -120,8 +136,9 @@ def get_user_profiles(user_id, user_role):
             error_message = f'unsupported user_role: {user_role}'
             status = 500
     except Exception as e:
-        error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
+        error_message = f'error while authenticating user {user_id}: {str(e)}'
+        print(error_message)
         status = 500
-    return get_http_response(data, status, error_message)
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
     

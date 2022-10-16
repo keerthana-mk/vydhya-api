@@ -26,11 +26,14 @@ class ProfileServices:
             InsurerProfileRepository.create_user_profile('insurance_id_'+str(insurer_id), user_id, user_email, user_role, theme)
 
     def get_user_profile(self, user_id, user_role):
+        logger.info("here??")
         user_login = UserLoginRepository.get_user_login(user_id, user_id)
+        logger.info('am i coming here?')
         if user_role not in ['patient', 'doctor', 'insurer']:
             raise Exception(f'invalid user role: {user_role}')
         user_details = None
         if user_login is None:
+            logger.info('unable to find user')
             raise Exception(f'unable to find user {user_id}')
         if user_role == 'patient':
             user_details = PatientProfileRepository.get_patient_profile(user_login.user_id)

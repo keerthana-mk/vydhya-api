@@ -38,13 +38,9 @@ class DefaultAuthentication(BaseAuthentication):
         hashed_password = DefaultAuthentication.generate_hash(password)
         user_login = UserLoginRepository.get_user_login(user_id, user_id)
         if user_login is None:
-            return UserLoginResponse(
-                error=f'user not found'
-            )
+            raise Exception(error=f'user not found')
         elif user_login.user_password != hashed_password:
-            return UserLoginResponse(
-                error=f'user credentials invalid'
-            )
+            raise Exception(error=f'user credentials invalid')
         else:
             user_profile = self.profile_services.get_user_profile(user_login.user_id, user_login.user_role)
             return UserLoginResponse(

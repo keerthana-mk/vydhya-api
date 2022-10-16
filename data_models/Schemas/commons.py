@@ -2,6 +2,7 @@ from pydantic import BaseModel, validator
 from datetime import datetime
 from .profiles import UserProfileResponse, PatientProfileResponse, DoctorProfileResponse, InsurerProfileResponse
 from typing import Union, List, Dict
+from fastapi.encoders import jsonable_encoder
 
 
 class DateTimeModel(BaseModel):
@@ -18,7 +19,7 @@ class DateTimeModel(BaseModel):
 class StandardHttpResponse(BaseModel):
     status: int
     error: Union[str, None]
-    data: Union[Dict, None]
+    data: Union[dict, None]
 
 def convert_patient_reponse(patient_data_obj):
      return UserProfileResponse(patient = PatientProfileResponse(user_id = patient_data_obj.user_id,
@@ -64,6 +65,6 @@ def convert_insurer_response(insurer_data_obj):
 
 def get_http_response(data, status, error=None):
     if error is not None:
-        return StandardHttpResponse(status=int(status), data=data, error=error)
+        return jsonable_encoder(StandardHttpResponse(status=int(status), data=data, error=error))
     else:
-        return StandardHttpResponse(status=int(status), data=data)
+        return jsonable_encoder(StandardHttpResponse(status=int(status), data=data))
