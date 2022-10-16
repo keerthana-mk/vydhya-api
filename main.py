@@ -82,14 +82,17 @@ def update_user_profile(user_id, user_role, user_profile : UserProfileRequests):
             updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.patient)
             data = convert_patient_reponse(updated_user_profile)
             status = 200
-        if user_role == 'doctor':
+        elif user_role == 'doctor':
             updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.doctor)
             data = convert_doctor_response(updated_user_profile)
             status = 200
-        if user_role == 'insurer':
+        elif user_role == 'insurer':
             updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.insurer)
             data = convert_insurer_response(updated_user_profile)
             status = 200
+        else:
+            error_message = f'unsupported user_role: {user_role}'
+            status = 500
     except Exception as e:
         error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
         status = 500
@@ -105,14 +108,17 @@ def get_user_profiles(user_id, user_role):
             user_profile_details = profile_service.get_user_profile(user_id, user_role)
             data = convert_patient_reponse(user_profile_details)
             status = 200
-        if user_role == 'doctor':
+        elif user_role == 'doctor':
             user_profile_details = profile_service.get_user_profile(user_id, user_role)
             data = convert_doctor_response(user_profile_details)
             status = 200
-        if user_role == 'insurer':
+        elif user_role == 'insurer':
             user_profile_details = profile_service.get_user_profile(user_id, user_role)
             data = convert_insurer_response(user_profile_details)
             status = 200
+        else:
+            error_message = f'unsupported user_role: {user_role}'
+            status = 500
     except Exception as e:
         error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
         status = 500
