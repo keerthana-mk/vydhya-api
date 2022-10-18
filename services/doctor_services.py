@@ -17,6 +17,7 @@ class DoctorService:
             doctor_profiles = DoctorProfileRepository.get_doctor_by_speciality(search_key)
 
         doctor_details_list = []
+        logging.info(f'found {len(doctor_details_list)} doctors')
         for doctor_profile in doctor_profiles:
             if covid_support:
                 if int(doctor_profile.is_hosp_covid_supported) == 1:

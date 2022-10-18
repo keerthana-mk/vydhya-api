@@ -772,3 +772,79 @@ BaseException: unsupported search filter: name1
 2022-10-18 12:50:39,331 - server - serve - line:85 - INFO - Finished server process [44654]
 2022-10-18 12:50:39,331 - server - serve - line:85 - INFO - Finished server process [44654]
 2022-10-18 12:50:39,435 - basereload - shutdown - line:103 - INFO - Stopping reloader process [43608]
+2022-10-18 13:49:28,011 - config - __init__ - line:359 - INFO - Will watch for changes in these directories: ['/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api']
+2022-10-18 13:49:28,012 - config - bind_socket - line:585 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2022-10-18 13:49:28,012 - basereload - startup - line:72 - INFO - Started reloader process [45196] using WatchFiles
+2022-10-18 13:49:28,407 - server - serve - line:75 - INFO - Started server process [45199]
+2022-10-18 13:49:28,407 - server - serve - line:75 - INFO - Started server process [45199]
+2022-10-18 13:49:28,407 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 13:49:28,407 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 13:49:28,407 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 13:49:28,407 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 13:49:28,945 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 13:49:28,945 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 13:51:16,166 - main - _log_changes - line:276 - INFO - 6 changes detected
+2022-10-18 13:51:16,170 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 13:51:16,271 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 13:51:16,271 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 13:51:16,377 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 13:51:16,377 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 13:51:16,380 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 13:51:16,380 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 13:51:16,380 - server - serve - line:85 - INFO - Finished server process [45199]
+2022-10-18 13:51:16,380 - server - serve - line:85 - INFO - Finished server process [45199]
+2022-10-18 13:51:16,631 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 13:51:17,040 - server - serve - line:75 - INFO - Started server process [45242]
+2022-10-18 13:51:17,040 - server - serve - line:75 - INFO - Started server process [45242]
+2022-10-18 13:51:17,040 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 13:51:17,040 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 13:51:17,040 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 13:51:17,040 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 13:51:17,486 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 13:51:17,486 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 13:51:22,957 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:51:22,957 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:52:38,153 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 13:52:38,154 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 13:52:38,181 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 13:52:38,181 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 13:52:38,285 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 13:52:38,285 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 13:52:38,286 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 13:52:38,286 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 13:52:38,286 - server - serve - line:85 - INFO - Finished server process [45242]
+2022-10-18 13:52:38,286 - server - serve - line:85 - INFO - Finished server process [45242]
+2022-10-18 13:52:38,488 - main - _log_changes - line:276 - INFO - 4 changes detected
+2022-10-18 13:52:38,916 - server - serve - line:75 - INFO - Started server process [45284]
+2022-10-18 13:52:38,916 - server - serve - line:75 - INFO - Started server process [45284]
+2022-10-18 13:52:38,916 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 13:52:38,916 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 13:52:38,916 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 13:52:38,916 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 13:52:39,387 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 13:52:39,387 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 13:52:41,316 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:52:41,316 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:02,650 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:02,650 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:08,524 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:08,524 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:14,579 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:14,579 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:24,682 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:24,682 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:53,235 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:53:53,235 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:54:23,224 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:54:23,224 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:54:32,279 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:54:32,279 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 13:54:39,771 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 13:54:39,771 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 13:54:39,877 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 13:54:39,877 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 13:54:39,879 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 13:54:39,879 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 13:54:39,879 - server - serve - line:85 - INFO - Finished server process [45284]
+2022-10-18 13:54:39,879 - server - serve - line:85 - INFO - Finished server process [45284]
+2022-10-18 13:54:39,982 - basereload - shutdown - line:103 - INFO - Stopping reloader process [45196]
