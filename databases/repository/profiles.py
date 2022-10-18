@@ -1,5 +1,8 @@
-from databases.db_models.profiles import PatientProfile, DoctorProfile, InsurerProfile
-import sqlalchemy.sql.expression.*
+from sqlalchemy.orm import Session
+
+from app.config import get_db_actual
+from databases.db_models.profiles import PatientProfile
+
 
 class PatientProfileRepository:
     database: Session = get_db_actual()
@@ -15,17 +18,18 @@ class PatientProfileRepository:
         PatientProfileRepository().database.add(new_user_profile)
         PatientProfileRepository().database.commit()
 
-    
     @staticmethod
     def get_patient_profile(user_id):
-        patient_query = PatientProfileRepository.database.query(PatientProfile).filter((PatientProfile.user_id == user_id))
+        patient_query = PatientProfileRepository.database.query(PatientProfile).filter(
+            (PatientProfile.user_id == user_id))
         patient_query = patient_query.all()
         return patient_query
 
     @staticmethod
     def update_patient_profile(user_id, user_profile_details):
         try:
-            PatientProfileRepository.database.query(PatientProfile).filter(PatientProfile.user_id == user_id).update(user_profile_details)
+            PatientProfileRepository.database.query(PatientProfile).filter(PatientProfile.user_id == user_id).update(
+                user_profile_details)
             PatientProfileRepository.database.commit()
         except Exception as e:
             raise BaseException(e)
