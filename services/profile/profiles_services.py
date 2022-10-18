@@ -1,7 +1,6 @@
-from collections import defaultdict
 from databases.repository.profiles import PatientProfileRepository, DoctorProfileRepository, InsurerProfileRepository
-from databases.repository.users import UserLoginRepository, UserProfileRepository
-from data_models.Schemas.logging import logger
+from databases.repository.users import UserLoginRepository
+from models.logging import logger
 from databases.db_models.profiles import InsurerProfile
 
 class ProfileServices:
@@ -47,6 +46,7 @@ class ProfileServices:
             raise Exception(f'unable to find user {user_id}')
         return user_details[0]
         # elif user_role == ''
+
     def update_user_profile(self, user_id, user_role, user_profile_details):
         filterd_user_details = {}
         user_login = UserLoginRepository.get_user_login(user_id, user_id)

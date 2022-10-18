@@ -1,16 +1,19 @@
+import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-from data_models.Schemas.users import UserRegistration, UserRegistrationResponse, UserLoginResponse, UserLoginRequest
-from data_models.Schemas.profiles import UserProfileResponse, UserProfileRequests
-from app.config import engine 
+from app.config import engine
+from models.profiles import UserProfileRequests, SearchDoctorRequest
+from models.users import UserRegistration, UserRegistrationResponse, UserLoginRequest
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
-from services.Profile.profiles_services import ProfileServices
-from data_models.Schemas.profiles import PatientProfileResponse
-from data_models.Schemas.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, get_http_response, StandardHttpResponse
-# from data_models.Schemas.logging import logger
+from services.doctor_services import DoctorService
+from services.profile.profiles_services import ProfileServices
+from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
+    get_http_response, StandardHttpResponse
+# from models.schemas.logging import logger
 import logging
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
@@ -20,8 +23,8 @@ formatter = logging.Formatter(
 )
 ch.setFormatter(formatter)
 fh.setFormatter(formatter)
-logger.addHandler(ch) #Exporting logs to the screen
-logger.addHandler(fh) #Exporting logs to a file
+logger.addHandler(ch)  # Exporting logs to the screen
+logger.addHandler(fh)  # Exporting logs to a file
 
 
 def create_tables():  # new
@@ -34,16 +37,22 @@ def start_application():
     # create_tables()
     return app
 
+
 # logger.info('****************** Starting Server *****************')
 
 app = start_application()
 
+if __name__ == '__main__':
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        reload=True,
+        port=8000,
+    )
+
+
 @app.on_event('startup')
 def create_all_tables():
-    logger = logging.getLogger("uvicorn.access")
-    handler = logging.handlers.RotatingFileHandler("api.log",mode="a",maxBytes = 100*1024, backupCount = 3)
-    handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-    logger.addHandler(handler)
     create_tables()
 
 
@@ -52,7 +61,9 @@ async def root():
     # return check_db_connected()
     return {"message": "Hello World"}
 
-@app.post("/user_registration", response_model=StandardHttpResponse, tags=['User Registration and Login'], response_model_exclude_none=True)
+
+@app.post("/user_registration", response_model=StandardHttpResponse, tags=['User Registration and Login'],
+          response_model_exclude_none=True)
 def create_user(user_details: UserRegistration):
     auth_service = BaseAuthentication.get_auth_service()
     error_message, data = None, None
@@ -65,10 +76,12 @@ def create_user(user_details: UserRegistration):
         status = 200
     except Exception as e:
         error_message = f'failed to register user: {str(e)}'
-        
+
     return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 
-@app.post("/login", response_model=StandardHttpResponse, tags=['User Registration and Login'], response_model_exclude_none=True)
+
+@app.post("/login", response_model=StandardHttpResponse, tags=['User Registration and Login'],
+          response_model_exclude_none=True)
 def login_user(user_login_req: UserLoginRequest):
     auth_service = BaseAuthentication.get_auth_service()
     error_message, data = None, None
@@ -78,7 +91,8 @@ def login_user(user_login_req: UserLoginRequest):
     except Exception as e:
         error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
         status = 500
-    return JSONResponse(content = get_http_response(data, status, error_message), status_code=status)
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
+
 
 # @app.post('/login/google', response_model=UserLoginResponse, tags=['User Registration and Login'])
 # async def login_user1(request: Request):
@@ -89,7 +103,7 @@ def login_user(user_login_req: UserLoginRequest):
 # def
 
 @app.post("/profile", response_model=StandardHttpResponse, tags=['User Profiles'], response_model_exclude_none=True)
-def update_user_profile(user_id, user_role, user_profile : UserProfileRequests):
+def update_user_profile(user_id, user_role, user_profile: UserProfileRequests):
     profile_service = ProfileServices()
     error_message, data = None, None
     try:
@@ -109,12 +123,12 @@ def update_user_profile(user_id, user_role, user_profile : UserProfileRequests):
             error_message = f'unsupported user_role: {user_role}'
             status = 500
     except Exception as e:
-        error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
+        error_message = f'error while authenticating user {user_id}: {str(e)}'
         status = 500
     return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 
-    
-@app.get("/profile", response_model=StandardHttpResponse, tags=['User Profiles'], response_model_exclude_none=True)      
+
+@app.get("/profile", response_model=StandardHttpResponse, tags=['User Profiles'], response_model_exclude_none=True)
 def get_user_profiles(user_id, user_role):
     logger.info("please tell me i am here")
     profile_service = ProfileServices()
@@ -137,8 +151,31 @@ def get_user_profiles(user_id, user_role):
             status = 500
     except Exception as e:
         error_message = f'error while authenticating user {user_id}: {str(e)}'
-        print(error_message)
+        logger.error(error_message)
         status = 500
+
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
-    
+
+@app.post("/doctor/search", response_model=StandardHttpResponse, tags=['Search Doctor'],
+          response_model_exclude_none=True)
+def search_doctor(search_doctor_request: SearchDoctorRequest):
+    # if user_role not in ['patient', 'doctor', 'insurer']:
+    #     status = 400
+    #     error_message = f'unsupported role: {user_role}'
+    #     return JSONResponse(content=get_http_response(None, status, error_message), status_code=status)
+
+    data, error_message = None, None
+    try:
+        data = DoctorService.search_doctor(search_doctor_request.search_by, search_doctor_request.search_string,
+                                           search_doctor_request.covid_support)
+        status = 200
+    except BaseException as e:
+        error_message = f'error while searching doctors: {str(e)}'
+        logger.error(error_message)
+        status = 500
+    except BaseException as e:
+        error_message = f'error while searching doctors: {str(e)}'
+        logger.error(error_message)
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)

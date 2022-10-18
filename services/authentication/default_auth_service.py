@@ -3,11 +3,10 @@ import hashlib
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
-from data_models.Schemas.users import UserRegistration, UserLoginResponse
+from models.users import UserRegistration, UserLoginResponse
 from app.config import get_db_actual
 from databases.db_models.users import UserLogin
-from databases.repository.users import UserLoginRepository, UserProfileRepository
-from services.Profile.profiles_services import *
+from services.profile.profiles_services import *
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
