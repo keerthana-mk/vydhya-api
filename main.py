@@ -7,7 +7,7 @@ from data_models.Schemas.users import UserRegistration, UserRegistrationResponse
 from databases.db_connection import engine, get_db
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
-from vydhya_api.data_models.Schemas.users import ResetPassword, ResetPasswordResponse
+from data_models.Schemas.users import ResetPassword, ResetPasswordResponse
 
 
 def create_tables():  # new

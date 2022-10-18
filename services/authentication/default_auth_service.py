@@ -8,8 +8,8 @@ from data_models.Schemas.users import UserRegistration, UserLoginResponse
 from databases.db_connection import get_db, get_db_actual
 from databases.db_models.users import UserLogin
 from databases.repository.users import UserLoginRepository, UserProfileRepository
-from vydhya_api.data_models.Schemas.users import ResetPassword
-from vydhya_api.databases.repository.users import UpdatePassword
+from data_models.Schemas.users import ResetPassword
+from databases.repository.users import UpdatePassword
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
