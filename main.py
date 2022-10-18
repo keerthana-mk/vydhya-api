@@ -1,15 +1,34 @@
+import uvicorn
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 
 from app.config import engine
-from data_models.Schemas.profiles import UserProfileResponse, UserProfileRequests, PatientProfileResponse
-from data_models.Schemas.users import UserRegistration, UserRegistrationResponse, UserLoginResponse, UserLoginRequest
+from models.profiles import UserProfileRequests, SearchDoctorRequest
+from models.users import UserRegistration, UserRegistrationResponse, UserLoginRequest
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
-from services.authentication.profiles_services import ProfileServices
+from services.doctor_services import DoctorService
+from services.profile.profiles_services import ProfileServices
+from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
+    get_http_response, StandardHttpResponse
+# from models.schemas.logging import logger
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+ch = logging.StreamHandler()
+fh = logging.FileHandler(filename='./server.log')
+formatter = logging.Formatter(
+    "%(asctime)s - %(module)s - %(funcName)s - line:%(lineno)d - %(levelname)s - %(message)s"
+)
+ch.setFormatter(formatter)
+fh.setFormatter(formatter)
+logger.addHandler(ch)  # Exporting logs to the screen
+logger.addHandler(fh)  # Exporting logs to a file
 
 
 def create_tables():  # new
-    print("Creating tables")
+    logger.error("Creating tables...")
     Base.metadata.create_all(bind=engine)
 
 
@@ -19,7 +38,17 @@ def start_application():
     return app
 
 
+# logger.info('****************** Starting Server *****************')
+
 app = start_application()
+
+if __name__ == '__main__':
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        reload=True,
+        port=8000,
+    )
 
 
 @app.on_event('startup')
@@ -33,27 +62,36 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.post("/user_registration", response_model=UserRegistrationResponse, tags=['User Registration and Login'])
+@app.post("/user_registration", response_model=StandardHttpResponse, tags=['User Registration and Login'],
+          response_model_exclude_none=True)
 def create_user(user_details: UserRegistration):
     auth_service = BaseAuthentication.get_auth_service()
+    error_message, data = None, None
     try:
         auth_service.add_user(user_details)
-        response = UserRegistrationResponse(
+        data = UserRegistrationResponse(
             message=f'successfully created user {user_details.user_id}',
             status_code=200
         )
+        status = 200
     except Exception as e:
-        response = UserRegistrationResponse(
-            message=f'failed to register user: {str(e)}',
-            status_code=500
-        )
-    return response
+        error_message = f'failed to register user: {str(e)}'
+
+    return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 
 
-@app.post("/login", response_model=UserLoginResponse, tags=['User Registration and Login'])
+@app.post("/login", response_model=StandardHttpResponse, tags=['User Registration and Login'],
+          response_model_exclude_none=True)
 def login_user(user_login_req: UserLoginRequest):
     auth_service = BaseAuthentication.get_auth_service()
-    return auth_service.verify_user(user_login_req.user_id, user_login_req.user_password)
+    error_message, data = None, None
+    try:
+        data = auth_service.verify_user(user_login_req.user_id, user_login_req.user_password)
+        status = 200
+    except Exception as e:
+        error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
 # @app.post('/login/google', response_model=UserLoginResponse, tags=['User Registration and Login'])
@@ -64,24 +102,80 @@ def login_user(user_login_req: UserLoginRequest):
 # @app.post('/token', response_model= Token)
 # def
 
-@app.post("/profile", response_model=UserProfileResponse, tags=['User Profiles'])
-def update_patient_profile(user_id, user_role, user_profile: UserProfileRequests):
+@app.post("/profile", response_model=StandardHttpResponse, tags=['User Profiles'], response_model_exclude_none=True)
+def update_user_profile(user_id, user_role, user_profile: UserProfileRequests):
     profile_service = ProfileServices()
-    if user_role == 'patient':
-        updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile['patient'])
-        return UserProfileResponse(patient=PatientProfileResponse(user_id=updated_user_profile.user_id,
-                                                                  user_name=updated_user_profile.user_name,
-                                                                  user_email=updated_user_profile.user_email,
-                                                                  theme=updated_user_profile.theme,
-                                                                  gender=updated_user_profile.gender,
-                                                                  dob=updated_user_profile.dob,
-                                                                  height=updated_user_profile.height,
-                                                                  weight=updated_user_profile.weight,
-                                                                  vaccinations=updated_user_profile.vaccinations,
-                                                                  blood_type=updated_user_profile.blood_type,
-                                                                  allergies=updated_user_profile.allergies,
-                                                                  medications=updated_user_profile.medications,
-                                                                  blood_pressure=updated_user_profile.blood_pressure,
-                                                                  preexist_conditions=updated_user_profile.preexist_conditions,
-                                                                  health_plan_id=updated_user_profile.health_plan_id,
-                                                                  monthly_medical_expense=updated_user_profile.monthly_medical_expense))
+    error_message, data = None, None
+    try:
+        if user_role == 'patient':
+            updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.patient)
+            data = convert_patient_reponse(updated_user_profile)
+            status = 200
+        elif user_role == 'doctor':
+            updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.doctor)
+            data = convert_doctor_response(updated_user_profile)
+            status = 200
+        elif user_role == 'insurer':
+            updated_user_profile = profile_service.update_user_profile(user_id, user_role, user_profile.insurer)
+            data = convert_insurer_response(updated_user_profile)
+            status = 200
+        else:
+            error_message = f'unsupported user_role: {user_role}'
+            status = 500
+    except Exception as e:
+        error_message = f'error while authenticating user {user_id}: {str(e)}'
+        status = 500
+    return JSONResponse(get_http_response(data, status, error_message), status_code=status)
+
+
+@app.get("/profile", response_model=StandardHttpResponse, tags=['User Profiles'], response_model_exclude_none=True)
+def get_user_profiles(user_id, user_role):
+    logger.info("please tell me i am here")
+    profile_service = ProfileServices()
+    error_message, data = None, None
+    try:
+        if user_role == 'patient':
+            user_profile_details = profile_service.get_user_profile(user_id, user_role)
+            data = convert_patient_reponse(user_profile_details)
+            status = 200
+        elif user_role == 'doctor':
+            user_profile_details = profile_service.get_user_profile(user_id, user_role)
+            data = convert_doctor_response(user_profile_details)
+            status = 200
+        elif user_role == 'insurer':
+            user_profile_details = profile_service.get_user_profile(user_id, user_role)
+            data = convert_insurer_response(user_profile_details)
+            status = 200
+        else:
+            error_message = f'unsupported user_role: {user_role}'
+            status = 500
+    except Exception as e:
+        error_message = f'error while authenticating user {user_id}: {str(e)}'
+        logger.error(error_message)
+        status = 500
+
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
+
+
+@app.post("/doctor/search", response_model=StandardHttpResponse, tags=['Search Doctor'],
+          response_model_exclude_none=True)
+def search_doctor(search_doctor_request: SearchDoctorRequest):
+    # if user_role not in ['patient', 'doctor', 'insurer']:
+    #     status = 400
+    #     error_message = f'unsupported role: {user_role}'
+    #     return JSONResponse(content=get_http_response(None, status, error_message), status_code=status)
+
+    data, error_message = None, None
+    try:
+        data = DoctorService.search_doctor(search_doctor_request.search_by, search_doctor_request.search_string,
+                                           search_doctor_request.covid_support)
+        status = 200
+    except BaseException as e:
+        error_message = f'error while searching doctors: {str(e)}'
+        logger.error(error_message)
+        status = 500
+    except BaseException as e:
+        error_message = f'error while searching doctors: {str(e)}'
+        logger.error(error_message)
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)

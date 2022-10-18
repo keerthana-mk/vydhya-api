@@ -4,20 +4,17 @@ from databases.repository.profiles import PatientProfileRepository
 
 
 class ProfileServices:
-    # def __init__():
-    #     pass
-    
+
     def validate_user_role(self, user_role):
         if user_role not in ['patient', 'doctor', 'insurer']:
             raise Exception(f'invalid user role: {user_role}')
-        
+
     def create_user_profile(self, user_id, user_name, user_email, user_role, theme="primary"):
         self.validate_user_role(user_role)
         if user_role == 'patient':
-            PatientProfileRepository.create_user_profie(user_id,user_name, user_email, theme)
+            PatientProfileRepository.create_user_profie(user_id, user_name, user_email, theme)
         # elif user_role == 'doctor':
         #     DoctorProfileRepository...
-
 
     def get_user_profile(self, user_id, user_role):
         if user_role not in ['patient', 'doctor', 'insurer']:
@@ -26,6 +23,7 @@ class ProfileServices:
             patient_details = PatientProfileRepository.get_patient_profile(user_id)
         return patient_details
         # elif user_role == ''
+
     def update_user_profile(self, user_id, user_role, user_profile_details):
         filterd_user_details = defaultdict()
         for key, val in user_profile_details.items():

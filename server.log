@@ -1,0 +1,774 @@
+2022-10-18 01:24:47,564 - server - serve - line:75 - INFO - Started server process [36404]
+2022-10-18 01:24:47,564 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 01:24:47,564 - main - create_tables - line:28 - ERROR - Creating tables...
+2022-10-18 01:26:28,114 - server - serve - line:75 - INFO - Started server process [36523]
+2022-10-18 01:26:28,114 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 01:26:28,114 - main - create_tables - line:28 - ERROR - Creating tables...
+2022-10-18 01:26:28,601 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 01:26:42,098 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 01:26:42,205 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 01:26:42,212 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 01:26:42,212 - server - serve - line:85 - INFO - Finished server process [36523]
+2022-10-18 03:08:53,398 - config - __init__ - line:359 - INFO - Will watch for changes in these directories: ['/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api']
+2022-10-18 03:08:53,398 - config - bind_socket - line:585 - INFO - Uvicorn running on http://0.0.0.0:3001 (Press CTRL+C to quit)
+2022-10-18 03:08:53,398 - basereload - startup - line:72 - INFO - Started reloader process [39798] using WatchFiles
+2022-10-18 03:08:53,787 - server - serve - line:75 - INFO - Started server process [39801]
+2022-10-18 03:08:53,787 - server - serve - line:75 - INFO - Started server process [39801]
+2022-10-18 03:08:53,788 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:08:53,788 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:08:53,788 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:08:53,788 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:08:54,397 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:08:54,397 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:10:21,831 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 03:10:21,836 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'main.py'. Reloading...
+2022-10-18 03:10:21,941 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:10:21,941 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:10:22,045 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:10:22,045 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:10:22,045 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:10:22,045 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:10:22,046 - server - serve - line:85 - INFO - Finished server process [39801]
+2022-10-18 03:10:22,046 - server - serve - line:85 - INFO - Finished server process [39801]
+2022-10-18 03:10:22,237 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 03:10:22,669 - server - serve - line:75 - INFO - Started server process [39852]
+2022-10-18 03:10:22,669 - server - serve - line:75 - INFO - Started server process [39852]
+2022-10-18 03:10:22,669 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:10:22,669 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:10:22,669 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:10:22,669 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:10:23,144 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:10:23,144 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:10:30,797 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:10:30,797 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:10:30,903 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:10:30,903 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:10:30,906 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:10:30,906 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:10:30,906 - server - serve - line:85 - INFO - Finished server process [39852]
+2022-10-18 03:10:30,906 - server - serve - line:85 - INFO - Finished server process [39852]
+2022-10-18 03:10:30,992 - basereload - shutdown - line:103 - INFO - Stopping reloader process [39798]
+2022-10-18 03:10:32,672 - config - __init__ - line:359 - INFO - Will watch for changes in these directories: ['/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api']
+2022-10-18 03:10:32,672 - config - bind_socket - line:585 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2022-10-18 03:10:32,672 - basereload - startup - line:72 - INFO - Started reloader process [39875] using WatchFiles
+2022-10-18 03:10:33,076 - server - serve - line:75 - INFO - Started server process [39878]
+2022-10-18 03:10:33,076 - server - serve - line:75 - INFO - Started server process [39878]
+2022-10-18 03:10:33,076 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:10:33,076 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:10:33,076 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:10:33,076 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:10:33,539 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:10:33,539 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:17:31,157 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 03:17:31,160 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'main.py'. Reloading...
+2022-10-18 03:17:31,202 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:17:31,202 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:17:31,311 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:17:31,311 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:17:31,312 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:17:31,312 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:17:31,312 - server - serve - line:85 - INFO - Finished server process [39878]
+2022-10-18 03:17:31,312 - server - serve - line:85 - INFO - Finished server process [39878]
+2022-10-18 03:17:31,524 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 03:17:31,967 - server - serve - line:75 - INFO - Started server process [40062]
+2022-10-18 03:17:31,967 - server - serve - line:75 - INFO - Started server process [40062]
+2022-10-18 03:17:31,967 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:17:31,967 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:17:31,967 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:17:31,967 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:17:32,435 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:17:32,435 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:18:09,368 - httptools_impl - run_asgi - line:409 - ERROR - Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 78, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/fastapi/applications.py", line 270, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/applications.py", line 124, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 64, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/routing.py", line 680, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/routing.py", line 275, in handle
+    await self.app(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/routing.py", line 65, in app
+    response = await func(request)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/fastapi/routing.py", line 231, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/fastapi/routing.py", line 162, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/anyio/to_thread.py", line 31, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/anyio/_backends/_asyncio.py", line 937, in run_sync_in_worker_thread
+    return await future
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/anyio/_backends/_asyncio.py", line 867, in run
+    result = context.run(func, *args)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/main.py", line 168, in search_doctor
+    data = DoctorService.search_doctor(search_doctor_request.search_by, search_doctor_request.search_string,
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/services/doctor_services.py", line 12, in search_doctor
+    raise BaseException(error_message)
+BaseException: unsupported search filter: name1
+2022-10-18 03:18:09,368 - httptools_impl - run_asgi - line:409 - ERROR - Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 404, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 78, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/fastapi/applications.py", line 270, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/applications.py", line 124, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 64, in __call__
+    await self.app(scope, receive, sender)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/routing.py", line 680, in __call__
+    await route.handle(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/routing.py", line 275, in handle
+    await self.app(scope, receive, send)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/routing.py", line 65, in app
+    response = await func(request)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/fastapi/routing.py", line 231, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/fastapi/routing.py", line 162, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/starlette/concurrency.py", line 41, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/anyio/to_thread.py", line 31, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/anyio/_backends/_asyncio.py", line 937, in run_sync_in_worker_thread
+    return await future
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/venv/lib/python3.8/site-packages/anyio/_backends/_asyncio.py", line 867, in run
+    result = context.run(func, *args)
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/main.py", line 168, in search_doctor
+    data = DoctorService.search_doctor(search_doctor_request.search_by, search_doctor_request.search_string,
+  File "/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api/services/doctor_services.py", line 12, in search_doctor
+    raise BaseException(error_message)
+BaseException: unsupported search filter: name1
+2022-10-18 03:18:56,757 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 03:18:56,758 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'main.py'. Reloading...
+2022-10-18 03:18:56,864 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:18:56,864 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:18:56,970 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:18:56,970 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:18:56,970 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:18:56,970 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:18:56,971 - server - serve - line:85 - INFO - Finished server process [40062]
+2022-10-18 03:18:56,971 - server - serve - line:85 - INFO - Finished server process [40062]
+2022-10-18 03:18:57,209 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 03:18:57,621 - server - serve - line:75 - INFO - Started server process [40099]
+2022-10-18 03:18:57,621 - server - serve - line:75 - INFO - Started server process [40099]
+2022-10-18 03:18:57,621 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:18:57,621 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:18:57,622 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:18:57,622 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:18:58,087 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:18:58,087 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:19:15,169 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 03:19:15,171 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'main.py'. Reloading...
+2022-10-18 03:19:15,184 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:19:15,184 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 03:19:15,290 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:19:15,290 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 03:19:15,291 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:19:15,291 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 03:19:15,291 - server - serve - line:85 - INFO - Finished server process [40099]
+2022-10-18 03:19:15,291 - server - serve - line:85 - INFO - Finished server process [40099]
+2022-10-18 03:19:15,487 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 03:19:15,908 - server - serve - line:75 - INFO - Started server process [40116]
+2022-10-18 03:19:15,908 - server - serve - line:75 - INFO - Started server process [40116]
+2022-10-18 03:19:15,908 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:19:15,908 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 03:19:15,909 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:19:15,909 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 03:19:16,343 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 03:19:16,343 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:14:29,346 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:14:29,356 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'main.py'. Reloading...
+2022-10-18 12:14:29,456 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:14:29,456 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:14:29,565 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:14:29,565 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:14:29,566 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:14:29,566 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:14:29,567 - server - serve - line:85 - INFO - Finished server process [40116]
+2022-10-18 12:14:29,567 - server - serve - line:85 - INFO - Finished server process [40116]
+2022-10-18 12:14:29,814 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:14:30,541 - server - serve - line:75 - INFO - Started server process [43582]
+2022-10-18 12:14:30,541 - server - serve - line:75 - INFO - Started server process [43582]
+2022-10-18 12:14:30,541 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:14:30,541 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:14:30,542 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:14:30,542 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:15:12,959 - config - __init__ - line:359 - INFO - Will watch for changes in these directories: ['/Users/keerthanamadhavan/Documents/python-workspace/vydhya_api']
+2022-10-18 12:15:12,959 - config - bind_socket - line:585 - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2022-10-18 12:15:12,959 - basereload - startup - line:72 - INFO - Started reloader process [43608] using WatchFiles
+2022-10-18 12:15:13,356 - server - serve - line:75 - INFO - Started server process [43611]
+2022-10-18 12:15:13,356 - server - serve - line:75 - INFO - Started server process [43611]
+2022-10-18 12:15:13,356 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:15:13,356 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:15:13,356 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:15:13,356 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:15:13,830 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:15:13,830 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:19:31,779 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:19:31,781 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:19:31,872 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:19:31,872 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:19:31,978 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:19:31,978 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:19:31,983 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:19:31,983 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:19:31,984 - server - serve - line:85 - INFO - Finished server process [43611]
+2022-10-18 12:19:31,984 - server - serve - line:85 - INFO - Finished server process [43611]
+2022-10-18 12:19:32,179 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:19:32,747 - server - serve - line:75 - INFO - Started server process [43708]
+2022-10-18 12:19:32,747 - server - serve - line:75 - INFO - Started server process [43708]
+2022-10-18 12:19:32,747 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:19:32,747 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:19:32,747 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:19:32,747 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:19:33,248 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:19:33,248 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:19:42,024 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:19:42,024 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:20:15,948 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:20:15,950 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:20:16,052 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:20:16,052 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:20:16,154 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:20:16,154 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:20:16,155 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:20:16,155 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:20:16,155 - server - serve - line:85 - INFO - Finished server process [43708]
+2022-10-18 12:20:16,155 - server - serve - line:85 - INFO - Finished server process [43708]
+2022-10-18 12:20:16,445 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:20:16,948 - server - serve - line:75 - INFO - Started server process [43743]
+2022-10-18 12:20:16,948 - server - serve - line:75 - INFO - Started server process [43743]
+2022-10-18 12:20:16,948 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:20:16,948 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:20:16,948 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:20:16,948 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:20:17,427 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:20:17,427 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:20:21,332 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:20:21,332 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:20:42,320 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:20:42,321 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:20:42,370 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:20:42,370 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:20:42,473 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:20:42,473 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:20:42,474 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:20:42,474 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:20:42,474 - server - serve - line:85 - INFO - Finished server process [43743]
+2022-10-18 12:20:42,474 - server - serve - line:85 - INFO - Finished server process [43743]
+2022-10-18 12:20:42,679 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:20:43,065 - server - serve - line:75 - INFO - Started server process [43764]
+2022-10-18 12:20:43,065 - server - serve - line:75 - INFO - Started server process [43764]
+2022-10-18 12:20:43,065 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:20:43,065 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:20:43,065 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:20:43,065 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:20:43,758 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:20:43,758 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:20:47,037 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:20:47,037 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:21:06,905 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:21:06,906 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'main.py'. Reloading...
+2022-10-18 12:21:07,010 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:21:07,010 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:21:07,119 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:21:07,119 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:21:07,120 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:21:07,120 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:21:07,121 - server - serve - line:85 - INFO - Finished server process [43764]
+2022-10-18 12:21:07,121 - server - serve - line:85 - INFO - Finished server process [43764]
+2022-10-18 12:21:07,380 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:21:07,767 - server - serve - line:75 - INFO - Started server process [43789]
+2022-10-18 12:21:07,767 - server - serve - line:75 - INFO - Started server process [43789]
+2022-10-18 12:21:07,767 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:21:07,767 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:21:07,767 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:21:07,767 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:21:08,217 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:21:08,217 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:21:10,938 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:21:10,938 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:21:39,081 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:21:39,083 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'main.py'. Reloading...
+2022-10-18 12:21:39,142 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:21:39,142 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:21:39,249 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:21:39,249 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:21:39,251 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:21:39,251 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:21:39,251 - server - serve - line:85 - INFO - Finished server process [43789]
+2022-10-18 12:21:39,251 - server - serve - line:85 - INFO - Finished server process [43789]
+2022-10-18 12:21:39,485 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:21:39,887 - server - serve - line:75 - INFO - Started server process [43817]
+2022-10-18 12:21:39,887 - server - serve - line:75 - INFO - Started server process [43817]
+2022-10-18 12:21:39,888 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:21:39,888 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:21:39,888 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:21:39,888 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:21:40,342 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:21:40,342 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:21:46,077 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:21:46,077 - doctor_services - search_doctor - line:18 - INFO - searching dcotor by speciality
+2022-10-18 12:21:46,127 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:21:46,127 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:23:10,301 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:23:10,305 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:23:10,358 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:23:10,358 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:23:10,459 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:23:10,459 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:23:10,464 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:23:10,464 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:23:10,464 - server - serve - line:85 - INFO - Finished server process [43817]
+2022-10-18 12:23:10,464 - server - serve - line:85 - INFO - Finished server process [43817]
+2022-10-18 12:23:10,667 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:23:11,089 - server - serve - line:75 - INFO - Started server process [43871]
+2022-10-18 12:23:11,089 - server - serve - line:75 - INFO - Started server process [43871]
+2022-10-18 12:23:11,104 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:23:11,104 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:23:11,105 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:23:11,105 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:23:11,568 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:23:11,568 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:23:38,453 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:23:38,454 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:23:38,524 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:23:38,524 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:23:38,627 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:23:38,627 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:23:38,627 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:23:38,627 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:23:38,628 - server - serve - line:85 - INFO - Finished server process [43871]
+2022-10-18 12:23:38,628 - server - serve - line:85 - INFO - Finished server process [43871]
+2022-10-18 12:23:38,819 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:23:39,195 - server - serve - line:75 - INFO - Started server process [43899]
+2022-10-18 12:23:39,195 - server - serve - line:75 - INFO - Started server process [43899]
+2022-10-18 12:23:39,195 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:23:39,195 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:23:39,195 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:23:39,195 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:23:39,636 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:23:39,636 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:23:44,194 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 12:23:44,194 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 12:23:44,195 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'sqlalchemy.engine.row.Row'>
+2022-10-18 12:23:44,195 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'sqlalchemy.engine.row.Row'>
+2022-10-18 12:23:44,196 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:23:44,196 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:25:39,110 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:25:39,111 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:25:39,187 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:25:39,187 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:25:39,290 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:25:39,290 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:25:39,291 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:25:39,291 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:25:39,291 - server - serve - line:85 - INFO - Finished server process [43899]
+2022-10-18 12:25:39,291 - server - serve - line:85 - INFO - Finished server process [43899]
+2022-10-18 12:25:39,485 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:25:39,900 - server - serve - line:75 - INFO - Started server process [43943]
+2022-10-18 12:25:39,900 - server - serve - line:75 - INFO - Started server process [43943]
+2022-10-18 12:25:39,900 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:25:39,900 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:25:39,901 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:25:39,901 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:25:40,342 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:25:40,342 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:25:43,317 - doctor_services - search_doctor - line:20 - INFO - found 4 doctors
+2022-10-18 12:25:43,317 - doctor_services - search_doctor - line:20 - INFO - found 4 doctors
+2022-10-18 12:25:43,317 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'sqlalchemy.engine.row.Row'>
+2022-10-18 12:25:43,317 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'sqlalchemy.engine.row.Row'>
+2022-10-18 12:25:43,317 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:25:43,317 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:26:15,157 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:26:15,168 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:26:15,201 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:26:15,201 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:26:15,305 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:26:15,305 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:26:15,307 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:26:15,307 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:26:15,308 - server - serve - line:85 - INFO - Finished server process [43943]
+2022-10-18 12:26:15,308 - server - serve - line:85 - INFO - Finished server process [43943]
+2022-10-18 12:26:15,530 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:26:15,951 - server - serve - line:75 - INFO - Started server process [43967]
+2022-10-18 12:26:15,951 - server - serve - line:75 - INFO - Started server process [43967]
+2022-10-18 12:26:15,951 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:26:15,951 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:26:15,952 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:26:15,952 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:26:16,392 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:26:16,392 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:26:18,239 - doctor_services - search_doctor - line:20 - INFO - found 4 doctors
+2022-10-18 12:26:18,239 - doctor_services - search_doctor - line:20 - INFO - found 4 doctors
+2022-10-18 12:26:18,240 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'sqlalchemy.engine.row.Row'>
+2022-10-18 12:26:18,240 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'sqlalchemy.engine.row.Row'>
+2022-10-18 12:26:18,240 - doctor_services - search_doctor - line:23 - INFO - doctor_profile: (False,)
+2022-10-18 12:26:18,240 - doctor_services - search_doctor - line:23 - INFO - doctor_profile: (False,)
+2022-10-18 12:26:18,240 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:26:18,240 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:28:52,126 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:28:52,128 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:28:52,136 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:28:52,136 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:28:52,242 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:28:52,242 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:28:52,243 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:28:52,243 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:28:52,260 - server - serve - line:85 - INFO - Finished server process [43967]
+2022-10-18 12:28:52,260 - server - serve - line:85 - INFO - Finished server process [43967]
+2022-10-18 12:28:52,526 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:28:53,134 - server - serve - line:75 - INFO - Started server process [44022]
+2022-10-18 12:28:53,134 - server - serve - line:75 - INFO - Started server process [44022]
+2022-10-18 12:28:53,134 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:28:53,134 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:28:53,135 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:28:53,135 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:28:53,594 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:28:53,594 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:28:57,021 - doctor_services - search_doctor - line:20 - INFO - found 4 doctors
+2022-10-18 12:28:57,021 - doctor_services - search_doctor - line:20 - INFO - found 4 doctors
+2022-10-18 12:28:57,021 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'sqlalchemy.engine.row.Row'>
+2022-10-18 12:28:57,021 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'sqlalchemy.engine.row.Row'>
+2022-10-18 12:28:57,021 - doctor_services - search_doctor - line:23 - INFO - doctor_profile: (False,), 1
+2022-10-18 12:28:57,021 - doctor_services - search_doctor - line:23 - INFO - doctor_profile: (False,), 1
+2022-10-18 12:28:57,021 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:28:57,021 - main - search_doctor - line:175 - ERROR - error while searching doctors: Could not locate column in row for column 'full_name'
+2022-10-18 12:29:23,585 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:29:23,591 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:29:23,644 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:29:23,644 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:29:23,746 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:29:23,746 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:29:23,747 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:29:23,747 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:29:23,747 - server - serve - line:85 - INFO - Finished server process [44022]
+2022-10-18 12:29:23,747 - server - serve - line:85 - INFO - Finished server process [44022]
+2022-10-18 12:29:23,931 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:29:24,321 - server - serve - line:75 - INFO - Started server process [44051]
+2022-10-18 12:29:24,321 - server - serve - line:75 - INFO - Started server process [44051]
+2022-10-18 12:29:24,321 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:29:24,321 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:29:24,321 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:29:24,321 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:29:24,756 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:29:24,756 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:29:37,384 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:29:37,386 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:29:37,430 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:29:37,430 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:29:37,535 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:29:37,535 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:29:37,536 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:29:37,536 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:29:37,536 - server - serve - line:85 - INFO - Finished server process [44051]
+2022-10-18 12:29:37,536 - server - serve - line:85 - INFO - Finished server process [44051]
+2022-10-18 12:29:37,723 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:29:38,153 - server - serve - line:75 - INFO - Started server process [44067]
+2022-10-18 12:29:38,153 - server - serve - line:75 - INFO - Started server process [44067]
+2022-10-18 12:29:38,153 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:29:38,153 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:29:38,153 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:29:38,153 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:29:38,565 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:29:38,565 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:29:41,426 - main - search_doctor - line:175 - ERROR - error while searching doctors: object of type 'Query' has no len()
+2022-10-18 12:29:41,426 - main - search_doctor - line:175 - ERROR - error while searching doctors: object of type 'Query' has no len()
+2022-10-18 12:29:58,515 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:29:58,516 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:29:58,579 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:29:58,579 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:29:58,685 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:29:58,685 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:29:58,686 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:29:58,686 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:29:58,693 - server - serve - line:85 - INFO - Finished server process [44067]
+2022-10-18 12:29:58,693 - server - serve - line:85 - INFO - Finished server process [44067]
+2022-10-18 12:29:58,910 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:29:59,348 - server - serve - line:75 - INFO - Started server process [44079]
+2022-10-18 12:29:59,348 - server - serve - line:75 - INFO - Started server process [44079]
+2022-10-18 12:29:59,348 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:29:59,348 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:29:59,348 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:29:59,348 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:29:59,882 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:29:59,882 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:30:00,489 - profiles - get_doctor_by_speciality - line:87 - ERROR - 'Query' object has no attribute '_from_objects'
+2022-10-18 12:30:00,489 - profiles - get_doctor_by_speciality - line:87 - ERROR - 'Query' object has no attribute '_from_objects'
+2022-10-18 12:30:00,490 - main - search_doctor - line:175 - ERROR - error while searching doctors: 'Query' object has no attribute '_from_objects'
+2022-10-18 12:30:00,490 - main - search_doctor - line:175 - ERROR - error while searching doctors: 'Query' object has no attribute '_from_objects'
+2022-10-18 12:30:08,630 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:30:08,632 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:30:08,700 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:30:08,700 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:30:08,809 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:30:08,809 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:30:08,810 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:30:08,810 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:30:08,810 - server - serve - line:85 - INFO - Finished server process [44079]
+2022-10-18 12:30:08,810 - server - serve - line:85 - INFO - Finished server process [44079]
+2022-10-18 12:30:09,001 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:30:09,448 - server - serve - line:75 - INFO - Started server process [44089]
+2022-10-18 12:30:09,448 - server - serve - line:75 - INFO - Started server process [44089]
+2022-10-18 12:30:09,448 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:30:09,448 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:30:09,448 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:30:09,448 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:30:09,879 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:30:09,879 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:31:04,567 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:31:04,569 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:31:04,658 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:31:04,658 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:31:04,765 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:31:04,765 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:31:04,766 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:31:04,766 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:31:04,767 - server - serve - line:85 - INFO - Finished server process [44089]
+2022-10-18 12:31:04,767 - server - serve - line:85 - INFO - Finished server process [44089]
+2022-10-18 12:31:05,019 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:31:05,431 - server - serve - line:75 - INFO - Started server process [44116]
+2022-10-18 12:31:05,431 - server - serve - line:75 - INFO - Started server process [44116]
+2022-10-18 12:31:05,431 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:31:05,431 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:31:05,431 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:31:05,431 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:31:05,905 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:31:05,905 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:31:33,895 - main - search_doctor - line:175 - ERROR - error while searching doctors: object of type 'Query' has no len()
+2022-10-18 12:31:33,895 - main - search_doctor - line:175 - ERROR - error while searching doctors: object of type 'Query' has no len()
+2022-10-18 12:31:45,320 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:31:45,321 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:31:45,382 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:31:45,382 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:31:45,489 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:31:45,489 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:31:45,492 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:31:45,492 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:31:45,492 - server - serve - line:85 - INFO - Finished server process [44116]
+2022-10-18 12:31:45,492 - server - serve - line:85 - INFO - Finished server process [44116]
+2022-10-18 12:31:45,724 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:31:46,156 - server - serve - line:75 - INFO - Started server process [44146]
+2022-10-18 12:31:46,156 - server - serve - line:75 - INFO - Started server process [44146]
+2022-10-18 12:31:46,157 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:31:46,157 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:31:46,157 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:31:46,157 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:31:46,609 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:31:46,609 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:31:49,185 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 12:31:49,185 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 12:32:05,025 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:32:05,029 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:32:05,038 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:32:05,038 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:32:05,150 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:32:05,150 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:32:05,152 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:32:05,152 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:32:05,152 - server - serve - line:85 - INFO - Finished server process [44146]
+2022-10-18 12:32:05,152 - server - serve - line:85 - INFO - Finished server process [44146]
+2022-10-18 12:32:05,376 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:32:05,795 - server - serve - line:75 - INFO - Started server process [44165]
+2022-10-18 12:32:05,795 - server - serve - line:75 - INFO - Started server process [44165]
+2022-10-18 12:32:05,795 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:32:05,795 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:32:05,795 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:32:05,795 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:32:06,259 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:32:06,259 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:32:53,207 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 12:32:53,207 - doctor_services - search_doctor - line:20 - INFO - found 0 doctors
+2022-10-18 12:33:01,689 - doctor_services - search_doctor - line:20 - INFO - found 2 doctors
+2022-10-18 12:33:01,689 - doctor_services - search_doctor - line:20 - INFO - found 2 doctors
+2022-10-18 12:33:01,689 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'databases.db_models.profiles.DoctorProfile'>
+2022-10-18 12:33:01,689 - doctor_services - search_doctor - line:22 - INFO - type(doctor_profile)=<class 'databases.db_models.profiles.DoctorProfile'>
+2022-10-18 12:33:01,689 - main - search_doctor - line:175 - ERROR - error while searching doctors: object of type 'DoctorProfile' has no len()
+2022-10-18 12:33:01,689 - main - search_doctor - line:175 - ERROR - error while searching doctors: object of type 'DoctorProfile' has no len()
+2022-10-18 12:34:40,830 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:34:40,831 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'databases/repository/profiles.py'. Reloading...
+2022-10-18 12:34:40,918 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:34:40,918 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:34:41,022 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:34:41,022 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:34:41,023 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:34:41,023 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:34:41,023 - server - serve - line:85 - INFO - Finished server process [44165]
+2022-10-18 12:34:41,023 - server - serve - line:85 - INFO - Finished server process [44165]
+2022-10-18 12:34:41,222 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:34:41,687 - server - serve - line:75 - INFO - Started server process [44228]
+2022-10-18 12:34:41,687 - server - serve - line:75 - INFO - Started server process [44228]
+2022-10-18 12:34:41,687 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:34:41,687 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:34:41,687 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:34:41,687 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:34:42,125 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:34:42,125 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:35:04,400 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:35:04,403 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:35:04,453 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:35:04,453 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:35:04,560 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:35:04,560 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:35:04,563 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:35:04,563 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:35:04,563 - server - serve - line:85 - INFO - Finished server process [44228]
+2022-10-18 12:35:04,563 - server - serve - line:85 - INFO - Finished server process [44228]
+2022-10-18 12:35:04,775 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:35:05,165 - server - serve - line:75 - INFO - Started server process [44248]
+2022-10-18 12:35:05,165 - server - serve - line:75 - INFO - Started server process [44248]
+2022-10-18 12:35:05,165 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:35:05,165 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:35:05,166 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:35:05,166 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:35:05,609 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:35:05,609 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:39:47,056 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:39:47,060 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:39:47,154 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:39:47,154 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:39:47,261 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:39:47,261 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:39:47,263 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:39:47,263 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:39:47,264 - server - serve - line:85 - INFO - Finished server process [44248]
+2022-10-18 12:39:47,264 - server - serve - line:85 - INFO - Finished server process [44248]
+2022-10-18 12:39:47,537 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:39:47,986 - server - serve - line:75 - INFO - Started server process [44428]
+2022-10-18 12:39:47,986 - server - serve - line:75 - INFO - Started server process [44428]
+2022-10-18 12:39:47,987 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:39:47,987 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:39:47,987 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:39:47,987 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:39:48,474 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:39:48,474 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:41:01,956 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:41:01,958 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:41:01,969 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:41:01,969 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:41:02,075 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:41:02,075 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:41:02,076 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:41:02,076 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:41:02,076 - server - serve - line:85 - INFO - Finished server process [44428]
+2022-10-18 12:41:02,076 - server - serve - line:85 - INFO - Finished server process [44428]
+2022-10-18 12:41:02,292 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:41:02,783 - server - serve - line:75 - INFO - Started server process [44508]
+2022-10-18 12:41:02,783 - server - serve - line:75 - INFO - Started server process [44508]
+2022-10-18 12:41:02,783 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:41:02,783 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:41:02,784 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:41:02,784 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:41:03,244 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:41:03,244 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:43:23,480 - doctor_services - search_doctor - line:22 - INFO - 1
+2022-10-18 12:43:23,480 - doctor_services - search_doctor - line:22 - INFO - 1
+2022-10-18 12:43:56,691 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:43:56,692 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:43:56,719 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:43:56,719 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:43:56,825 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:43:56,825 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:43:56,826 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:43:56,826 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:43:56,826 - server - serve - line:85 - INFO - Finished server process [44508]
+2022-10-18 12:43:56,826 - server - serve - line:85 - INFO - Finished server process [44508]
+2022-10-18 12:43:57,032 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:43:59,602 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:43:59,603 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:44:00,043 - server - serve - line:75 - INFO - Started server process [44577]
+2022-10-18 12:44:00,043 - server - serve - line:75 - INFO - Started server process [44577]
+2022-10-18 12:44:00,043 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:44:00,043 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:44:00,043 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:44:00,043 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:44:00,475 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:44:00,475 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:44:56,079 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:44:56,082 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:44:56,138 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:44:56,138 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:44:56,249 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:44:56,249 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:44:56,250 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:44:56,250 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:44:56,251 - server - serve - line:85 - INFO - Finished server process [44577]
+2022-10-18 12:44:56,251 - server - serve - line:85 - INFO - Finished server process [44577]
+2022-10-18 12:44:56,445 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:44:56,862 - server - serve - line:75 - INFO - Started server process [44601]
+2022-10-18 12:44:56,862 - server - serve - line:75 - INFO - Started server process [44601]
+2022-10-18 12:44:56,862 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:44:56,862 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:44:56,862 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:44:56,862 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:44:57,327 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:44:57,327 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:45:42,070 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:45:42,071 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:45:42,153 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:45:42,153 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:45:42,259 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:45:42,259 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:45:42,261 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:45:42,261 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:45:42,262 - server - serve - line:85 - INFO - Finished server process [44601]
+2022-10-18 12:45:42,262 - server - serve - line:85 - INFO - Finished server process [44601]
+2022-10-18 12:45:42,484 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:45:42,909 - server - serve - line:75 - INFO - Started server process [44627]
+2022-10-18 12:45:42,909 - server - serve - line:75 - INFO - Started server process [44627]
+2022-10-18 12:45:42,909 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:45:42,909 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:45:42,909 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:45:42,909 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:45:43,376 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:45:43,376 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:45:50,701 - doctor_services - search_doctor - line:22 - INFO - <class 'int'>
+2022-10-18 12:45:50,701 - doctor_services - search_doctor - line:22 - INFO - <class 'int'>
+2022-10-18 12:45:50,702 - doctor_services - search_doctor - line:23 - INFO - 1
+2022-10-18 12:45:50,702 - doctor_services - search_doctor - line:23 - INFO - 1
+2022-10-18 12:46:24,902 - main - _log_changes - line:276 - INFO - 3 changes detected
+2022-10-18 12:46:24,904 - basereload - run - line:47 - WARNING - WatchFiles detected changes in 'services/doctor_services.py'. Reloading...
+2022-10-18 12:46:24,926 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:46:24,926 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:46:25,029 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:46:25,029 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:46:25,035 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:46:25,035 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:46:25,035 - server - serve - line:85 - INFO - Finished server process [44627]
+2022-10-18 12:46:25,035 - server - serve - line:85 - INFO - Finished server process [44627]
+2022-10-18 12:46:25,224 - main - _log_changes - line:276 - INFO - 1 change detected
+2022-10-18 12:46:25,646 - server - serve - line:75 - INFO - Started server process [44654]
+2022-10-18 12:46:25,646 - server - serve - line:75 - INFO - Started server process [44654]
+2022-10-18 12:46:25,646 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:46:25,646 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-10-18 12:46:25,646 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:46:25,646 - main - create_tables - line:31 - ERROR - Creating tables...
+2022-10-18 12:46:26,158 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:46:26,158 - on - startup - line:61 - INFO - Application startup complete.
+2022-10-18 12:50:39,219 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:50:39,219 - server - shutdown - line:253 - INFO - Shutting down
+2022-10-18 12:50:39,327 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:50:39,327 - on - shutdown - line:66 - INFO - Waiting for application shutdown.
+2022-10-18 12:50:39,330 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:50:39,330 - on - shutdown - line:77 - INFO - Application shutdown complete.
+2022-10-18 12:50:39,331 - server - serve - line:85 - INFO - Finished server process [44654]
+2022-10-18 12:50:39,331 - server - serve - line:85 - INFO - Finished server process [44654]
+2022-10-18 12:50:39,435 - basereload - shutdown - line:103 - INFO - Stopping reloader process [43608]

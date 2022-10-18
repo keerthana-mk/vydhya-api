@@ -2,18 +2,19 @@ from datetime import datetime
 
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.postgresql import ARRAY
-
+from sqlalchemy.dialects.postgresql import ARRAY, FLOAT
 
 from databases.base_class import Base
 from databases.db_models.users import UserLogin
 
+
 class PatientProfile(Base):
-    user_id = Column(String, primary_key=True, index=True)
-    user_name = Column(String, default = UserLogin.first_name+" "+UserLogin.last_name, nullable=False)
-    user_email = Column(String)
+    user_id = Column(String, primary_key=True, foreign_key=ForeignKey(UserLogin.user_id), index=True)
+    # full_name = Column(String, default = UserLogin.first_name+" "+UserLogin.last_name, nullable=False)
+    full_name = Column(String, nullable=True)
+    contact_email = Column(String)
     theme = Column(String, default='primary')
-    gender = Column(String, nullable=False)
+    gender = Column(String)
     dob = Column(String)
     height = Column(String)
     weight = Column(String)
@@ -28,25 +29,26 @@ class PatientProfile(Base):
 
 
 class DoctorProfile(Base):
-    user_id = Column(String, primary_key=True, index=True)
-    user_name = Column(String, default = UserLogin.first_name+" "+UserLogin.last_name, nullable=False)
-    user_email = Column(String)
+    user_id = Column(String, primary_key=True, foreign_key=ForeignKey(UserLogin.user_id), index=True)
+    full_name = Column(String, nullable=True)
+    contact_email = Column(String)
+    contact_phone = Column(String)
     theme = Column(String, default='primary')
-    experience = Column(Integer, nullable=False)
+    gender = Column(String)
+    dob = Column(String)
+    experience = Column(FLOAT, default=0, nullable=False)
     hospital_name = Column(String)
+    hospital_address = Column(String)
     speciality = Column(String)
-    is_hosp_covid_supported = Column(Boolean, default=False)
+    is_hosp_covid_supported = Column(Integer, default=0)
     num_covid_beds_available = Column(Integer, default=0)
-    insurance_accepted = Column(Boolean)
+    insurance_accepted = Column(Integer, default=0)
+
 
 class InsurerProfile(Base):
-    insurer_id = Column(String, primary_key=True)
-    user_id = Column(String, ForeignKey(UserLogin.user_id))
-    user_email = Column(String)
+    insurer_id = Column(String)
+    user_id = Column(String, primary_key=True, foreign_key=ForeignKey(UserLogin.user_id))
+    contact_email = Column(String)
     theme = Column(String, default='primary')
     insurance_name = Column(String)
     plan_id = Column(String)
-
-
-
-
