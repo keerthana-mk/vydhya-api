@@ -7,8 +7,9 @@ from databases.base_class import Base
 
 
 class UserLogin(Base):
+    
     user_id = Column(String, primary_key=True, index=True)
-    user_email = Column(String, nullable=False)
+    user_name = Column(String, nullable=False)
     user_password = Column(String, nullable=False)
     first_name = Column(String)
     last_name = Column(String)
@@ -27,6 +28,6 @@ class UserProfile(Base):
     user_role = Column(String)
     user_phone = Column(String)
     user_address = Column(String)
-    user_email = Column(String)
     theme = Column(String)
     # user_login = relationship('UserLogin', foreign_keys='UserLogin.user_id')
+

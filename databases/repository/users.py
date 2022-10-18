@@ -1,7 +1,7 @@
 from sqlalchemy import or_
-from sqlalchemy.orm import Session, Query
-
-from databases.db_connection import get_db_actual
+from sqlalchemy.orm import Session
+from datetime import datetime
+from app.config import get_db_actual
 from databases.db_models.users import UserLogin, UserProfile
 
 
@@ -11,7 +11,7 @@ class UserLoginRepository:
     @staticmethod
     def get_user_login(user_id, user_email):
         query_result = UserLoginRepository.database.query(UserLogin).filter(
-            or_(UserLogin.user_id == user_id, UserLogin.user_email == user_email))
+            or_(UserLogin.user_id == user_id, UserLogin.user_name == user_email))
         query_result = query_result.all()
         return query_result[0] if len(query_result) == 1 else None
 
@@ -22,7 +22,7 @@ class UserLoginRepository:
         return query_result[len(query_result) - 1] if len(query_result) > 0 else None
 
     @staticmethod
-    def add_user_login(user_email, user_password, first_name, last_name, user_role, created_at, updated_at):
+    def add_user_login(user_email, user_password, first_name, last_name, user_role):
         last_user = UserLoginRepository.get_last_user()
         if last_user is None:
             last_user_num = 0
@@ -31,13 +31,13 @@ class UserLoginRepository:
         new_user_id = f'{user_role}_{last_user_num + 1}'
         new_user_login = UserLogin(
             user_id=new_user_id,
-            user_email=user_email,
+            user_name=user_email,
             user_password=user_password,
             first_name=first_name,
             last_name=last_name,
             user_role=user_role,
-            created_at=created_at,
-            updated_at=updated_at,
+            created_at=datetime.now(),
+            updated_at=datetime.now(),
             is_first_login="yes"
         )
         UserLoginRepository.database.add(new_user_login)
