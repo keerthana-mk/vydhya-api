@@ -82,7 +82,7 @@ class DoctorProfileRepository:
         try:
             speciality_like = f'%{speciality}%'
             query_result = DoctorProfileRepository.database.query(DoctorProfile)\
-                .filter(DoctorProfile.speciality.like(speciality_like)).all()
+                .filter(DoctorProfile.speciality.ilike(speciality_like)).all()
             return query_result
         except Exception as e:
             logging.error(e)
