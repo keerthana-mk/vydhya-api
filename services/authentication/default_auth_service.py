@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from models.users import UserRegistration, UserLoginResponse
 from app.config import get_db_actual
 from databases.db_models.users import UserLogin
-from services.Profile.profiles_services import *
+from services.Profile.profiles_services import ProfileServices
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
