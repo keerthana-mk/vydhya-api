@@ -1,14 +1,58 @@
-
 from fastapi import FastAPI
-from email import message
-from urllib import response
-from fastapi import FastAPI, Depends
+from fastapi.responses import JSONResponse
 
-from data_models.Schemas.users import UserRegistration, UserRegistrationResponse, UserLoginResponse, UserLoginRequest
-from databases.db_connection import engine, get_db
+from app.config import engine
+from models.profiles import UserProfileRequests, SearchDoctorRequest
+from models.users import UserRegistration, UserRegistrationResponse, UserLoginRequest
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
-from data_models.Schemas.users import ResetPassword, ResetPasswordResponse
+from services.doctor_services import DoctorService
+from services.Profile.profiles_services import ProfileServices
+from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
+    get_http_response, StandardHttpResponse
+
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+ch = logging.StreamHandler()
+fh = logging.FileHandler(filename='./server.log')
+formatter = logging.Formatter(
+    "%(asctime)s - %(module)s - %(funcName)s - line:%(lineno)d - %(levelname)s - %(message)s"
+)
+ch.setFormatter(formatter)
+fh.setFormatter(formatter)
+logger.addHandler(ch)  # Exporting logs to the screen
+logger.addHandler(fh)  # Exporting logs to a file
+
+
+def create_tables():  # new
+    logger.error("Creating tables...")
+    Base.metadata.create_all(bind=engine)
+
+
+def start_application():
+    app = FastAPI(title="Vydhya", version="v1")
+    # create_tables()
+    return app
+
+
+# logger.info('****************** Starting Server *****************')
+
+app = start_application()
+
+if __name__ == '__main__':
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        reload=True,
+        port=8000,
+    )
+
+
+@app.on_event('startup')
+def create_all_tables():
+    create_tables()
 
 
 def create_tables():  # new
@@ -26,52 +70,4 @@ app = start_application()
 
 @app.get("/")
 async def root():
-    # return check_db_connected()
     return {"message": "Hello World"}
-
-
-@app.post("/login", response_model=UserLoginResponse, tags='User Login')
-def login_user(user_login_req: UserLoginRequest):
-    auth_service = BaseAuthentication.get_auth_service()
-    return auth_service.verify_user(user_login_req.user_id, user_login_req.user_password)
-
-
-@app.post("/user_registration", response_model=UserRegistrationResponse, tags='User Registration and Login')
-def create_user(user_details: UserRegistration):
-    auth_service = BaseAuthentication.get_auth_service()
-    try:
-        auth_service.add_user(user_details)
-        response = UserRegistrationResponse(
-            message=f'successfully created user {user_details.user_id}',
-            status_code=200
-        )
-    except Exception as e:
-        response = UserRegistrationResponse(
-            message=f'failed to register user: {str(e)}',
-            status_code=500
-        )
-    return response
-
-@app.post("/reset_password", response_model=ResetPasswordResponse, tags="Reset Password")
-def update_password(user_password: ResetPassword):
-    auth_service= BaseAuthentication.get_auth_service()
-    try:
-        auth_service.reset_password(user_password)
-        response = ResetPasswordResponse(
-            status=200,
-            error= NULL,
-            data= {
-                message:'Reset successful for '+str(user_password.user_id)
-            }
-        )
-    except Exception as e:
-        response= ResetPasswordResponse(
-            status=500,
-            error="Failed to reset password"+ str(e),
-            data={
-                message: "Reset unsuccessful "+str(e)
-            }
-        )
-
-    return response
-
