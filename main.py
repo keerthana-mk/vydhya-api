@@ -8,7 +8,7 @@ from models.users import UserRegistration, UserRegistrationResponse, UserLoginRe
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
 from services.doctor_services import DoctorService
-from services.Profile.profiles_services import ProfileServices
+from services.profiles_services import ProfileServices
 from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
     get_http_response, StandardHttpResponse
 from fastapi.middleware.cors import CORSMiddleware
