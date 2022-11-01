@@ -10,7 +10,7 @@ from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
 from services.doctor_services import DoctorService
 from services.insurer_services import InsurerServices
-from services.profile.profiles_services import ProfileServices
+from services.profiles_services import ProfileServices
 from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
     get_http_response, StandardHttpResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -163,7 +163,7 @@ def get_user_profiles(user_id, user_role):
 
 @app.post("/doctor/search", response_model=StandardHttpResponse, tags=['Search Doctor'],
           response_model_exclude_none=True)
-def search_doctor(search_doctor_request: SearchDoctorRequest):
+def search_doctor(search_by, search_string, covid_support):
     # if user_role not in ['patient', 'doctor', 'insurer']:
     #     status = 400
     #     error_message = f'unsupported role: {user_role}'
@@ -171,8 +171,7 @@ def search_doctor(search_doctor_request: SearchDoctorRequest):
 
     data, error_message = None, None
     try:
-        data = DoctorService.search_doctor(search_doctor_request.search_by, search_doctor_request.search_string,
-                                           search_doctor_request.covid_support)
+        data = DoctorService.search_doctor(search_by, search_string, covid_support)
         status = 200
     except BaseException as e:
         error_message = f'error while searching doctors: {str(e)}'
