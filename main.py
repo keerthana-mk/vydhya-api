@@ -212,10 +212,14 @@ def create_insurer_plans(add_plan_request: AddHealthcarePlanRequest):
 def update_insurer_plans(insurer_id, plan_name, update_plan_request: UpdateHealthcarePlanRequest):
     data, error_message = None, None
     try:
+        if not InsurerServices.plan_exists(insurer_id, plan_name):
+            error_message = f'plan {plan_name} does not exist for insurer {insurer_id}'
+            logging.error(error_message)
+            raise BaseException(error_message)
         data = InsurerServices.update_healthcare_plan(insurer_id, plan_name, update_plan_request)
         status = 200
     except BaseException as e:
-        error_message = f'error while deleting plans: {str(e)}'
+        error_message = f'error while updating plans: {str(e)}'
         logger.error(error_message)
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)

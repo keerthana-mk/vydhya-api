@@ -7,6 +7,18 @@ from models.mappers.healthcare_plan_mappers import *
 class InsurerServices:
 
     @staticmethod
+    def plan_exists(insurer_id, plan_name):
+        try:
+            plans = HealthcarePlanRepository.get_plans_by_insurer_and_plan_name(insurer_id, plan_name)
+            return len(plans) > 1
+        except Exception as e:
+            error_message = f'error while fetching insurance plan {plan_name} for {insurer_id}: {str(e)}'
+            logging.error(error_message)
+            logging.exception(e)
+            raise BaseException(e)
+
+
+    @staticmethod
     def get_healthcare_plans(insurer_id):
         try:
             plan_details_list = HealthcarePlanRepository.get_plans_by_insurer(insurer_id)

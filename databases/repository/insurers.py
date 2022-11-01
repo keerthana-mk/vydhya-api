@@ -28,6 +28,12 @@ class HealthcarePlanRepository:
         return query_result
 
     @staticmethod
+    def get_plans_by_insurer_and_plan_name(insurer_id, plan_name):
+        query_result = HealthcarePlanRepository.database.query(HealthcarePlan). \
+            filter(and_(HealthcarePlan.insurer_id == insurer_id, HealthcarePlan.plan_name == plan_name)).all()
+        return query_result
+
+    @staticmethod
     def generate_plan_id(insurer_id):
         plan_num = HealthcarePlanRepository.get_last_plan_number(insurer_id) + 1
         return f'plan_{insurer_id}_{plan_num}'
@@ -70,7 +76,7 @@ class HealthcarePlanRepository:
     def delete_by_plan_name_and_insurer(insurer_id, plan_name):
         try:
             HealthcarePlanRepository.database.query(HealthcarePlan).filter(
-                    and_(HealthcarePlan.insurer_id == insurer_id, HealthcarePlan.plan_name == plan_name)).delete()
+                and_(HealthcarePlan.insurer_id == insurer_id, HealthcarePlan.plan_name == plan_name)).delete()
             HealthcarePlanRepository.database.commit()
         except Exception as e:
             raise BaseException(e)
