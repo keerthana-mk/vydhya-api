@@ -88,7 +88,7 @@ def create_user(user_details: UserRegistration):
         status = 200
     except Exception as e:
         error_message = f'failed to register user: {str(e)}'
-
+        status = 500
     return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 
 
@@ -169,9 +169,9 @@ def get_user_profiles(user_id, user_role):
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.post("/doctor/search", response_model=StandardHttpResponse, tags=['Search Doctor'],
+@app.get("/doctor/search", response_model=StandardHttpResponse, tags=['Search Doctor'],
           response_model_exclude_none=True)
-def search_doctor(search_doctor_request: SearchDoctorRequest):
+def search_doctor(search_by, search_string, covid_support):
     # if user_role not in ['patient', 'doctor', 'insurer']:
     #     status = 400
     #     error_message = f'unsupported role: {user_role}'
@@ -179,8 +179,7 @@ def search_doctor(search_doctor_request: SearchDoctorRequest):
 
     data, error_message = None, None
     try:
-        data = DoctorService.search_doctor(search_doctor_request.search_by, search_doctor_request.search_string,
-                                           search_doctor_request.covid_support)
+        data = DoctorService.search_doctor(search_by, search_string, covid_support)
         status = 200
     except BaseException as e:
         error_message = f'error while searching doctors: {str(e)}'
