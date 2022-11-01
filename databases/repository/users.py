@@ -4,7 +4,6 @@ from datetime import datetime
 from app.config import get_db_actual
 from databases.db_models.users import UserLogin, UserProfile
 
-
 class UserLoginRepository:
     database: Session = get_db_actual()
 
@@ -39,11 +38,10 @@ class UserLoginRepository:
             created_at=datetime.now(),
             updated_at=datetime.now(),
             is_first_login="yes"
-        )
+            )
         UserLoginRepository.database.add(new_user_login)
         UserLoginRepository.database.commit()
         return new_user_id
-
 
 class UserProfileRepository:
     database: Session = get_db_actual()
@@ -56,13 +54,13 @@ class UserProfileRepository:
             user_email=user_email,
             user_role=user_role,
             theme=theme
-        )
+            )
         UserProfileRepository.database.add(new_user_profile)
         UserProfileRepository.database.commit()
 
     @staticmethod
     def get_user_profile(user_id):
-        query_result = UserProfileRepository.database.query(UserProfile)\
+        query_result = UserProfileRepository.database.query(UserProfile) \
             .filter(or_(UserProfile.user_id == user_id, UserProfile.user_email == user_id))
         query_result = query_result.all()
         return query_result[0] if len(query_result) == 1 else None
