@@ -10,7 +10,7 @@ class InsurerServices:
     def plan_exists(insurer_id, plan_name):
         try:
             plans = HealthcarePlanRepository.get_plans_by_insurer_and_plan_name(insurer_id, plan_name)
-            return len(plans) > 1
+            return len(plans) > 0
         except Exception as e:
             error_message = f'error while fetching insurance plan {plan_name} for {insurer_id}: {str(e)}'
             logging.error(error_message)
