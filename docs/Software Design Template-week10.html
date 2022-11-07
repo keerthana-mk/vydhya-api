@@ -826,7 +826,7 @@ Please organize these into error cases. <br>
 
 <pre>{
   "status": 500,
-  "error": "Update Doctor Schedule: schedule for the slot  ",
+  "error": "Update Doctor Schedule: schedule for the slot already exists: Kindly delete and add the schedule for the day. ",
   "data": null
 }</pre></li>
 </ol>
@@ -835,6 +835,256 @@ Please organize these into error cases. <br>
   </li>
 </ul>
 <br>
+
+<ul>
+  <li><span style="font-weight: bold;">Component Name</span><br>
+Insurance Plans Upload<br>
+  </li>
+  <li><span style="font-weight: bold;">Component Description</span><br>
+    The component is provides an option to the insurance providers to create their healthcare plans on the insurer view. The insurer user should be able to create a list of healthcare plans which is later chosen by the patients. The insurance company should also be able to update the plan or even delete the plan when necessary. 
+<br>
+  </li>
+  <li><span style="font-weight: bold;"></span><span
+ style="font-weight: bold;">Responsible Development Team Member</span><br>
+Backend : Keerthana Sugasi
+ <br>
+  </li>
+  <!-- <li><span style="font-weight: bold;">Component Diagram</span><br>
+<b>Figma design:</b>
+
+  </li> -->
+  <li><span style="font-weight: bold;">Component User Interface</span><br>
+    The UI component opens up a modal where all the details for the new healthcare plan is added and clicked on save button. Also there is a edit button on the top right corner which allows to edit the field for that plans. And again on save button it updates the table. Similarly the insurer can delete the plan entirely by clicking on the delete button. The planid has a foreign key relationship with  the patients plan_id field in patient profile.
+    <br>
+    <span style="font-weight: bold;"></span></li>
+  <li><span style="font-weight: bold;">Component Objects</span><br>
+    The component consists of 3 major API:<br>
+  <ol>
+    <li><b>Adding of plan</b>
+     This is POST API which takes the below body and updates the database by creating an entry in database for that plan. <br>
+     <b> Request URL:</b> <br>
+     https://vydhya-api.herokuapp.com/insurer/plans <br>
+
+     <b>Sample Request Body:</b> <br>
+     <pre>
+      {
+        "insurer_id": "insurer_5",
+        "plan_name": "new_plan_1",
+        "plan_display_name": "New Plan 1",
+        "plan_description": "This is a new plan",
+        "plan_exceptions": [
+          "exception 1"
+        ],
+        "premium": 0,
+        "coverage": 0,
+        "duration_years": 0,
+        "deductible_amt": 0,
+        "is_monthly": true
+      }
+     </pre>
+     <b>Sample Response Body:</b> <br>
+     Returns New Plan ID generated
+     <pre>
+      { "status": 200,
+      "error": null,
+      "data": {
+        "plan_id": "plan_insurer_5_5"
+      }
+    }
+    </pre>
+    </li>
+     <li><b>Updating the plan for that plain id:</b>
+    This is a POST API which is used to change any of the editable fields of the plan details
+    
+    <b>Request URL:</b> <br>
+      https://vydhya-api.herokuapp.com/insurer/plans/update?insurer_id=insurer_5&plan_name=new_plan_10
+<br>
+<b>Sample Request body:</b>
+<pre>
+  {
+    "plan_display_name": "new plans updated 1"
+   
+  }
+  <b>Sample Response body:</b>
+  <pre>
+    {
+      "status": 200,
+      "error": null,
+      "data": {
+        "plan_id": "plan_insurer_5_5",
+        "insurer_id": "insurer_5",
+        "plan_name": "new_plan_10",
+        "plan_display_name": "new plans updated- heartcare",
+        "plan_description": null,
+        "plan_exceptions": [
+          "exception 1"
+        ],
+        "premium": 0,
+        "coverage": 0,
+        "duration_years": 0,
+        "deductible_amt": 0,
+        "is_monthly": true
+      }
+    }
+    }
+  </pre>
+</pre>
+
+
+    </li>
+    <li><b>Deleting a plan:</b>
+    This would again be a GET call which takes the plan id or plan name as input and deletes the plan from the table.
+<b>Request URL:</b> <br>
+    
+https://vydhya-api.herokuapp.com/insurer/plans?insurer_id=insurer_5&plan_name=new_plan_15 <br>
+
+<b> Sample Response Body:</b>
+<pre>
+{
+  "status": 200,
+  "error": null,
+  "data": {
+    "message": "successfully deleted plan new_plan_15 for insurer insurer_5"
+  }
+} 
+</pre>
+    </li>
+    <li><b>Display all the plan for that insurer</b>: This is GET call which fetches the uploaded plans associated with that insurer id.
+<b>Request URL:</b> <br>
+      
+      https://vydhya-api.herokuapp.com/insurer/plans?insurer_id=insurer_5 <br>
+  
+ <b> Sample Response Body:</b>
+ <pre>
+  {
+    "status": 200,
+    "error": null,
+    "data": {
+      "num_plans": 3,
+      "message": "found 3 plans for insurer insurer_5",
+      "plans": [
+        {
+          "plan_id": "plan_insurer_5_1",
+          "insurer_id": "insurer_5",
+          "plan_name": "HeartCare Plan-1",
+          "plan_display_name": "Heart Care Plan",
+          "plan_description": "for heart patients",
+          "plan_exceptions": [
+            "exception1"
+          ],
+          "premium": 5000,
+          "coverage": 1000,
+          "duration_years": 1,
+          "deductible_amt": 500,
+          "is_monthly": true
+        },
+        {
+          "plan_id": "plan_insurer_5_4",
+          "insurer_id": "insurer_5",
+          "plan_name": "new_plan_2",
+          "plan_display_name": "new display name 1",
+          "plan_description": null,
+          "plan_exceptions": [
+            "exception 2"
+          ],
+          "premium": 1000,
+          "coverage": 0,
+          "duration_years": 0,
+          "deductible_amt": 0,
+          "is_monthly": true
+        },
+        {
+          "plan_id": "plan_insurer_5_5",
+          "insurer_id": "insurer_5",
+          "plan_name": "new_plan_10",
+          "plan_display_name": "New Plan 10",
+          "plan_description": null,
+          "plan_exceptions": [
+            "exception 1"
+          ],
+          "premium": 0,
+          "coverage": 0,
+          "duration_years": 0,
+          "deductible_amt": 0,
+          "is_monthly": true
+        }
+      ]
+    }
+  } 
+ </pre>
+
+    </li>
+  </ol>
+</li>
+  <li><span style="font-weight: bold;">Component Interfaces (internal
+and external)</span><br>
+This component is interfaced with the following services:<br>
+Database Postgres running on Kunbernetes in Google Cloud Platform<br>
+Swagger UI for API documentation<br>
+Heroku for hosting<br>
+This component is in-house built and does not use any external 3rd party functionality or integrations.<br></li>
+  <li><span style="font-weight: bold;">Component Error Handling</span><br>
+Describe the steps taken in the design to incorporate fault tolerance,
+data corruption prevention, and incorrect operation avoidance.&nbsp;
+Please organize these into error cases. <br>
+    <span style="font-weight: bold; text-decoration: underline;">Example:</span><br>
+    The services in the component will raise appropriate HTTP error responses if any unnatural behavior is encountered.
+    <br>
+    <ol>
+      <li><b>Error 1: Insurer id doesnt exist </b><br>
+        The error response format:<br>
+     
+       <pre>{
+         "status": 500,
+         "error": "Invalid Insurer id",
+         "data": null
+ }</pre>
+ </li>
+      <li><b>Error 1: Plan for the date doesnt exist </b><br>
+       The error response format:<br>
+    
+      <pre>{
+        "status": 500,
+        "error": "Delete Plan: requested plan doesnt exist for the insurer id",
+        "data": null
+}</pre>
+</li>
+<li><b>Error 2: Duplicate Plan exists</b><br>
+ The error response format:<br>
+
+<pre>{
+  "status": 500,
+  "error": "Duplicate Plan: plan already exists",
+  "data": null
+}</pre>
+</li>
+<li><b>Error 2: Updation failed due to insufficient data</b><br>
+ 
+ The error response format:<br>
+
+<pre>{
+  "status": 500,
+  "error": "Updation Failed: Incorrect field or incorrect number of fields",
+  "data": null
+}</pre>
+</li>
+</ol>
+      </li>
+  </li>
+</ul>
+<ul>
+  <li><span style="font-weight: bold;">Component Name</span><br>
+    Figma Designs for frontend<br>
+  </li>
+  <li><span style="font-weight: bold;">Component Description</span><br>
+    Created various figma design for visualization of the dashboard.
+    <br>
+    Here are some of the designs: <br>
+    </li>
+    <b>https://www.figma.com/file/t0KtF42pxxul40cceco44e/Style-Guide-%7C-Ui-Kit-(Community)?node-id=4220%3A1810</b>
+    </ul>
+  
+
     <ul>
       <li><span style="font-weight: bold;">Component Name</span><br>
         Custom Dashboards<br>
@@ -931,19 +1181,27 @@ Please organize these into error cases. <br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">Figma Designs<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">11/1/2022<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">Created Figma designs<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">Doctor Schedule<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">11/1/2022<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">Creating the schedule for doctors<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Insurer Plan management<br>
+      </td>
+      <td style="vertical-align: top;">11/1/2022<br>
+      </td>
+      <td style="vertical-align: top;"> CRUD operation for healthcare plans<br>
       </td>
     </tr>
     <tr>
@@ -989,7 +1247,7 @@ Please organize these into error cases. <br>
 Author/Creator:</span> <a
  href="">Keerthana Sugasi</a><span
  style="font-weight: bold;"><br><p>
-Last Modified:10/18/2022</span></div>
+Last Modified:11/1/2022</span></div>
 
 <br>
 </body>

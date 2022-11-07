@@ -7,3 +7,4 @@ INSERT INTO doctorprofile VALUES
 ('doctor_3', 'NP3', 'np@gmail.com', '43560054', 'primary', 'Female', '27-apr-85', '15', 'San Jose hospitals' , 'San Jose, California', 'Nurse Practioner', 0, 0, 0);
 ('doctor_4', 'Doctor4', 'doctor4@gmail.com', '4356005413', 'primary', 'Male', '27-jun-85', '15', 'San Jose hospitals' , 'San Jose, California', 'Interventional Cardiology', 0, 0, 0);
 
+insert into healthcareplan values('plan1','insurer_5','HeartCare Plan-1','Heart Care Plan','for heart patients','{"exception1"}', 5000, 1000,1,500,true);
