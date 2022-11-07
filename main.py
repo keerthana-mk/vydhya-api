@@ -11,6 +11,7 @@ from services.authentication.default_auth_service import BaseAuthentication
 from services.doctor_services import DoctorService
 from services.insurer_services import InsurerServices
 from services.profiles_services import ProfileServices
+from services.authentication.reset_password_service import ResetPasswordServices
 from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
     get_http_response, StandardHttpResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -238,3 +239,8 @@ def delete_insurer_plans(insurer_id, plan_name):
         logger.error(error_message)
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
+
+@app.get('/resetpassword', response_model=StandardHttpResponse, tags=['User Login'])
+def reset_password(user_id, role, email):
+    otp = ResetPasswordServices.generate_otp(user_id, role)
+    return otp

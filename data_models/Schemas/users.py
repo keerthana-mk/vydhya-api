@@ -31,6 +31,7 @@ class UserRegistration(BaseModel):
     is_first_login: str
     created_at: str
     updated_at: str
+    reset_code :Union[str, None]
 
     # class UserDetails(BaseModel, UsersRegistration):
 

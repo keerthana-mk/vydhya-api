@@ -10,6 +10,8 @@ from starlette.config import Config
 from httpx import AsyncClient, Auth, Client, Request, Response
 import logging
 from logging.config import dictConfig
+from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
+
 
 # env_path = Path('../') / '.env'
 env_path = Path('.env')
@@ -79,3 +81,24 @@ async def check_db_connected():
     except Exception as e:
         print("Looks like there is some problem in connection,see below traceback")
         raise e
+    
+######################################Email settings##################################
+MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+MAIL_FROM = os.getenv('MAIL_FROM')
+MAIL_PORT = int(os.getenv('MAIL_PORT'))
+MAIL_SERVER = os.getenv('MAIL_SERVER')
+MAIL_FROM_NAME = os.getenv('MAIN_FROM_NAME')
+
+mail_config = ConnectionConfig(
+    MAIL_USERNAME=MAIL_USERNAME,
+    MAIL_PASSWORD=MAIL_PASSWORD,
+    MAIL_FROM=MAIL_FROM,
+    MAIL_PORT=MAIL_PORT,
+    MAIL_SERVER=MAIL_SERVER,
+    MAIL_FROM_NAME=MAIL_FROM_NAME,
+    MAIL_TLS=True,
+    MAIL_SSL=False,
+    USE_CREDENTIALS=True,
+    TEMPLATE_FOLDER='../templates/reset_password.html'
+)
