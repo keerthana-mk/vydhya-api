@@ -27,7 +27,6 @@ class ProfileServices:
     def get_user_profile(self, user_id, user_role):
         logger.info("here??")
         user_login = UserLoginRepository.get_user_login(user_id, user_id)
-        logger.info('am i coming here?')
         if user_role not in ['patient', 'doctor', 'insurer']:
             raise Exception(f'invalid user role: {user_role}')
         user_details = None
