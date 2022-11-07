@@ -25,7 +25,6 @@ class StandardHttpResponse(BaseModel):
     error: Union[str, None]
     data: Union[dict, None]
 
-
 def convert_patient_reponse(patient_data_obj):
     return UserProfileResponse(patient=PatientProfileResponse(user_id=patient_data_obj.user_id,
                                                               contact_email=patient_data_obj.contact_email,

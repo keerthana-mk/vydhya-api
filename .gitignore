@@ -3,3 +3,4 @@
 .gitignore
 server.log
 api.log
+__pycache__/
