@@ -46,7 +46,7 @@ class DoctorProfile(Base):
 
 
 class InsurerProfile(Base):
-    insurer_id = Column(String)
+    insurer_id = Column(String, primary_key=True,)
     user_id = Column(String, primary_key=True, foreign_key=ForeignKey(UserLogin.user_id))
     contact_email = Column(String)
     theme = Column(String, default='primary')

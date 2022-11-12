@@ -16,6 +16,8 @@ class UserLogin(Base):
     user_role = Column(String)
     created_at = Column(String, default=datetime.now().strftime('%y-%m-%d %H:%M:%S'))
     updated_at = Column(String, default=datetime.now().strftime('%y-%m-%d %H:%M:%S'))
+    reset_code = Column(String, default= None)
+    reset_expiry = Column(String, default= None)
     is_first_login = Column(String, default="yes")
 
     # user_profile = relationship('userprofile', backref='UserProfile.user_id',
