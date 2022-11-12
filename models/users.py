@@ -19,7 +19,10 @@ class UserLoginResponse(BaseModel):
 class UserLoginRequest(BaseModel):
     user_id: str
     user_password: str
-
+class ResetPasswordRequest(BaseModel):
+    reset_code: str
+    user_password: str
+    updated_at: str
 
 class UserRegistration(BaseModel):
     user_id: Union[str, None]

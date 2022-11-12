@@ -37,7 +37,7 @@ class DefaultAuthentication(BaseAuthentication):
 
     def verify_user(self, user_id, password, user_login=None):
         hashed_password = DefaultAuthentication.generate_hash(password)
-        user_login = UserLoginRepository.get_user_login(user_id, user_id)
+        user_login = UserLoginRepository.get_user_login(user_id)
         if user_login is None:
             raise Exception(error=f'user not found')
         elif user_login.user_password != hashed_password:
@@ -53,7 +53,7 @@ class DefaultAuthentication(BaseAuthentication):
 
     def add_user(self, user_details: UserRegistration):
         profile_service = ProfileServices()
-        if UserLoginRepository.get_user_login(user_details.user_id, user_details.user_email) is not None:
+        if UserLoginRepository.get_user_login(user_details.user_id) is not None:
             error_message = f'user_id {user_details.user_id} or user_email {user_details.user_email} already exists'
             logger.error(error_message)
             raise Exception(error_message)
