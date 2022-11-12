@@ -33,21 +33,8 @@ class UserRegistration(BaseModel):
     updated_at: str
     reset_code :Union[str, None]
 
-    # class UserDetails(BaseModel, UsersRegistration):
+
 
     class Config():  # to convert non dict obj to json
         orm_mode = True
 
-class ResetPassword(BaseModel):
-    user_id: str
-    user_email: EmailStr
-    user_password: str
-    updated_at: str
-
-class ResetPasswordResponseMessage(BaseModel):
-    message: str
-
-class ResetPasswordResponse(BaseModel):
-    status: int
-    error: str
-    data: ResetPasswordResponseMessage
