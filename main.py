@@ -1,16 +1,19 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.responses import JSONResponse
+from fastapi.templating import Jinja2Templates
 
-from app.config import engine
+from app.config import engine, get_db
+from databases.repository.users import UserLoginRepository
 from models.healthcare_plans import AddHealthcarePlanRequest, AddHealthcarePlanResponse, UpdateHealthcarePlanRequest
 from models.profiles import UserProfileRequests, SearchDoctorRequest
-from models.users import UserRegistration, UserRegistrationResponse, UserLoginRequest
+from models.users import UserRegistration, UserRegistrationResponse, UserLoginRequest, ResetPasswordRequest
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
 from services.doctor_services import DoctorService
 from services.insurer_services import InsurerServices
 from services.profiles_services import ProfileServices
+from services.authentication.reset_password_service import ResetPasswordServices
 from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
     get_http_response, StandardHttpResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -71,7 +74,7 @@ async def root():
     return {"message": "Hello World"}
 
 @app.post("/user_registration", response_model=StandardHttpResponse, tags=['User Registration and Login'],
-          response_model_exclude_none=True)
+          response_model_exclude_none=True )
 def create_user(user_details: UserRegistration):
     auth_service = BaseAuthentication.get_auth_service()
     error_message, data = None, None
@@ -238,3 +241,29 @@ def delete_insurer_plans(insurer_id, plan_name):
         logger.error(error_message)
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
+
+@app.get('/sendresetcode', response_model=StandardHttpResponse, tags=['User Registration and Login'])
+async def send_reset_code(user_id):
+    # query = 
+    data, error_message = None, None
+    user = UserLoginRepository.get_user_login(user_id)
+    email = user.user_name
+    try:
+        await ResetPasswordServices.generate_reset_password_email(user_id, email)
+        data = {'message' : 'Reset code sent to registered email {} successfully'.format(email)}
+        status = 200
+    except BaseException as e:
+        error_message = "Error while sending reset code to {}".format(email) 
+        status = 500
+    return JSONResponse(content= get_http_response(data, status, error_message), status_code=status)
+@app.post('/resetpassword', response_model=StandardHttpResponse, tags=['User Registration and Login'])
+def reset_verify_password(user_id, reset_code_details: ResetPasswordRequest):
+    data, error_message = None, None
+    try:
+        data = ResetPasswordServices.verify_update_password(user_id, reset_code_details)
+        logger.info("data",data)
+        status = 200
+    except BaseException as e:
+        error_message = f' Error while password reset. Try Again : {str(e)}'
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
