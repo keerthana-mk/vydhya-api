@@ -16,9 +16,14 @@ class PatientProfileRepository:
             contact_email=user_email,
             theme=theme
         )
-        PatientProfileRepository.database.add(new_user_profile)
-        PatientProfileRepository.database.commit()
-
+        try:
+            PatientProfileRepository.database.add(new_user_profile)
+            PatientProfileRepository.database.commit()
+        except Exception as e:
+            PatientProfileRepository.database.rollback()
+            error_message = f'error while inserting to database: {str(e)}'
+            raise Exception(error_message)
+        
     @staticmethod
     def get_patient_profile(user_id):
         patient_query = PatientProfileRepository.database.query(PatientProfile).filter(
@@ -34,6 +39,7 @@ class PatientProfileRepository:
                 user_profile_details)
             PatientProfileRepository.database.commit()
         except Exception as e:
+            PatientProfileRepository.database.rollback()
             raise BaseException(e)
 
 
@@ -42,6 +48,7 @@ class DoctorProfileRepository:
 
     @staticmethod
     def create_user_profile(user_id, user_email, user_role, theme):
+        
         new_user_profile = DoctorProfile(
             user_id=user_id,
             contact_email=user_email,
