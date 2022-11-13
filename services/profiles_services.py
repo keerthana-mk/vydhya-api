@@ -26,7 +26,7 @@ class ProfileServices:
 
     def get_user_profile(self, user_id, user_role):
         logger.info("here??")
-        user_login = UserLoginRepository.get_user_login(user_id, user_id)
+        user_login = UserLoginRepository.get_user_login(user_id)
         if user_role not in ['patient', 'doctor', 'insurer']:
             raise Exception(f'invalid user role: {user_role}')
         user_details = None
@@ -48,7 +48,7 @@ class ProfileServices:
 
     def update_user_profile(self, user_id, user_role, user_profile_details):
         filterd_user_details = {}
-        user_login = UserLoginRepository.get_user_login(user_id, user_id)
+        user_login = UserLoginRepository.get_user_login(user_id)
         if user_login is None:
             raise Exception(f'unable to find user {user_id}')
         for key, val in user_profile_details.__dict__.items():

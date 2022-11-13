@@ -1,4 +1,4 @@
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, validator, EmailStr
 from datetime import datetime
 
 
@@ -12,3 +12,6 @@ class DateTimeModel(BaseModel):
             value: datetime,
     ) -> datetime:
         return value or datetime.now().strftime('%y-%m-%d %H:%M:%S')
+
+class EmailSchema(BaseModel):
+    email: List[EmailStr]
