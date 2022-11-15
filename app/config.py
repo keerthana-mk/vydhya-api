@@ -104,5 +104,5 @@ mail_config = ConnectionConfig(
     MAIL_SSL_TLS=False,
     USE_CREDENTIALS=True,
     # SUPPRESS_SEND = 0,
-    TEMPLATE_FOLDER='.\\templates'
+    TEMPLATE_FOLDER='./templates'
 )
