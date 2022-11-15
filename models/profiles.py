@@ -61,9 +61,9 @@ class DoctorProfileResponse(BaseModel):
     hospital_name: Union[str, None]
     hospital_address: Union[str, None]
     speciality: Union[str, None]
-    is_hosp_covid_supported: Union[int, None]
+    is_hosp_covid_supported: Union[int, None] #1 or 0
     num_covid_beds_available: Union[int, None]
-    insurance_accepted: Union[int, None]
+    insurance_accepted: Union[int, None] # 1or 0
 
 
 class InsurerProfileResponse(BaseModel):
