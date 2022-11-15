@@ -57,6 +57,7 @@ class HealthcarePlanRepository:
             HealthcarePlanRepository.database.commit()
             return plan_id
         except Exception as e:
+            HealthcarePlanRepository.database.rollback()
             error_message = f'error while inserting to database: {str(e)}'
             raise Exception(error_message)
 
@@ -70,6 +71,7 @@ class HealthcarePlanRepository:
                 and_(HealthcarePlan.insurer_id == insurer_id, HealthcarePlan.plan_name == plan_name)).update(update_plan_details)
             HealthcarePlanRepository.database.commit()
         except Exception as e:
+            HealthcarePlanRepository.database.rollback()
             raise BaseException(e)
 
     @staticmethod
@@ -79,4 +81,5 @@ class HealthcarePlanRepository:
                 and_(HealthcarePlan.insurer_id == insurer_id, HealthcarePlan.plan_name == plan_name)).delete()
             HealthcarePlanRepository.database.commit()
         except Exception as e:
+            HealthcarePlanRepository.database.rollback()
             raise BaseException(e)
