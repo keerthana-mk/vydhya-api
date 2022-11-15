@@ -16,9 +16,14 @@ class PatientProfileRepository:
             contact_email=user_email,
             theme=theme
         )
-        PatientProfileRepository.database.add(new_user_profile)
-        PatientProfileRepository.database.commit()
-
+        try:
+            PatientProfileRepository.database.add(new_user_profile)
+            PatientProfileRepository.database.commit()
+        except Exception as e:
+            PatientProfileRepository.database.rollback()
+            error_message = f'error while inserting to database: {str(e)}'
+            raise Exception(error_message)
+        
     @staticmethod
     def get_patient_profile(user_id):
         patient_query = PatientProfileRepository.database.query(PatientProfile).filter(
@@ -34,6 +39,7 @@ class PatientProfileRepository:
                 user_profile_details)
             PatientProfileRepository.database.commit()
         except Exception as e:
+            PatientProfileRepository.database.rollback()
             raise BaseException(e)
 
 
@@ -42,14 +48,19 @@ class DoctorProfileRepository:
 
     @staticmethod
     def create_user_profile(user_id, user_email, user_role, theme):
-        new_user_profile = DoctorProfile(
-            user_id=user_id,
-            contact_email=user_email,
-            theme=theme
-        )
-        DoctorProfileRepository.database.add(new_user_profile)
-        DoctorProfileRepository.database.commit()
-
+        try:
+            new_user_profile = DoctorProfile(
+                user_id=user_id,
+                contact_email=user_email,
+                theme=theme
+            )
+            DoctorProfileRepository.database.add(new_user_profile)
+            DoctorProfileRepository.database.commit()
+        except Exception as e:
+            DoctorProfileRepository.database.rollback()
+            error_message = "Error while creating doctor profile :{}".format(e)
+            raise(error_message)
+        
     @staticmethod
     def get_doctor_profile(user_id):
         doctor_query = DoctorProfileRepository.database.query(DoctorProfile).filter((DoctorProfile.user_id == user_id))
@@ -64,6 +75,7 @@ class DoctorProfileRepository:
                 user_profile_details)
             DoctorProfileRepository.database.commit()
         except Exception as e:
+            DoctorProfileRepository.database.rollback()
             raise BaseException(e)
 
     @staticmethod
@@ -94,15 +106,20 @@ class InsurerProfileRepository:
 
     @staticmethod
     def create_user_profile(insurer_id, user_id, user_email, user_role, theme):
-        new_user_profile = InsurerProfile(
-            insurer_id=insurer_id,
-            user_id=user_id,
-            contact_email=user_email,
-            theme=theme
-        )
-        InsurerProfileRepository.database.add(new_user_profile)
-        InsurerProfileRepository.database.commit()
-
+        try:
+            new_user_profile = InsurerProfile(
+                insurer_id=insurer_id,
+                user_id=user_id,
+                contact_email=user_email,
+                theme=theme
+            )
+            InsurerProfileRepository.database.add(new_user_profile)
+            InsurerProfileRepository.database.commit()
+        except Exception as e:
+            InsurerProfileRepository.database.rollback()
+            error_message = "Error while creating Insurer Profile: {}".format(e)
+            raise(error_message)
+        
     @staticmethod
     def get_insurer_profile(user_id):
         insurer_query = InsurerProfileRepository.database.query(InsurerProfile).filter(
@@ -118,4 +135,5 @@ class InsurerProfileRepository:
                 user_profile_details)
             InsurerProfileRepository.database.commit()
         except Exception as e:
+            InsurerProfileRepository.database.rollback()
             raise BaseException(e)

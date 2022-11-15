@@ -22,26 +22,31 @@ class UserLoginRepository:
 
     @staticmethod
     def add_user_login(user_email, user_password, first_name, last_name, user_role):
-        last_user = UserLoginRepository.get_last_user()
-        if last_user is None:
-            last_user_num = 0
-        else:
-            last_user_num = int(last_user.user_id.split('_')[1])
-        new_user_id = f'{user_role}_{last_user_num + 1}'
-        new_user_login = UserLogin(
-            user_id=new_user_id,
-            user_name=user_email,
-            user_password=user_password,
-            first_name=first_name,
-            last_name=last_name,
-            user_role=user_role,
-            created_at=datetime.now(),
-            updated_at=datetime.now(),
-            is_first_login="yes"
-            )
-        UserLoginRepository.database.add(new_user_login)
-        UserLoginRepository.database.commit()
-        return new_user_id
+        try:
+            last_user = UserLoginRepository.get_last_user()
+            if last_user is None:
+                last_user_num = 0
+            else:
+                last_user_num = int(last_user.user_id.split('_')[1])
+            new_user_id = f'{user_role}_{last_user_num + 1}'
+            new_user_login = UserLogin(
+                user_id=new_user_id,
+                user_name=user_email,
+                user_password=user_password,
+                first_name=first_name,
+                last_name=last_name,
+                user_role=user_role,
+                created_at=datetime.now(),
+                updated_at=datetime.now(),
+                is_first_login="yes"
+                )
+            UserLoginRepository.database.add(new_user_login)
+            UserLoginRepository.database.commit()
+            return new_user_id
+        except Exception as e:
+            UserLoginRepository.database.rollback()
+            error_message = "Error while creating user for user: {}".format(e)
+            raise(e)
 
     @staticmethod
     def update_reset_code(user_id, reset_details):
