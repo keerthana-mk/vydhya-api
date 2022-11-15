@@ -45,9 +45,9 @@ class UpdateDoctorProfileRequest(BaseModel):
     experience: Union[float, None]
     hospital_name: Union[str]
     speciality: Union[str]
-    is_hosp_covid_supported: Union[str, None]
+    is_hosp_covid_supported: Union[int, None]
     num_covid_beds_available: Union[int, None]
-    insurance_accepted: Union[str, None]
+    insurance_accepted: Union[int, None]
 
 
 class DoctorProfileResponse(BaseModel):
@@ -61,9 +61,9 @@ class DoctorProfileResponse(BaseModel):
     hospital_name: Union[str, None]
     hospital_address: Union[str, None]
     speciality: Union[str, None]
-    is_hosp_covid_supported: Union[str, None]
+    is_hosp_covid_supported: Union[int, None] #1 or 0
     num_covid_beds_available: Union[int, None]
-    insurance_accepted: Union[str, None]
+    insurance_accepted: Union[int, None] # 1or 0
 
 
 class InsurerProfileResponse(BaseModel):
@@ -102,12 +102,12 @@ class SearchDoctorRequest(BaseModel):
 
 class DoctorDetails(BaseModel):
     name: str
-    is_hosp_covid_supported: str
+    is_hosp_covid_supported: int
     contact_email: str
     contact_phone: str
     experience: float
     hospital_name: str
     hospital_address: str
     speciality: str
-    insurance_accepted: str
+    insurance_accepted: int
     gender: str
