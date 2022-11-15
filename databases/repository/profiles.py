@@ -64,7 +64,10 @@ class DoctorProfileRepository:
                 user_profile_details)
             DoctorProfileRepository.database.commit()
         except Exception as e:
-            raise BaseException(e)
+            DoctorProfileRepository.database.rollback()
+            error_message = "Error while updating doctor profile : {}".format(e)
+            logger.info(error_message)
+            raise BaseException(error_message)
 
     @staticmethod
     def get_doctor_by_name(name):
