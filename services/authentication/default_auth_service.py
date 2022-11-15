@@ -2,13 +2,17 @@ import hashlib
 
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
+from databases.repository.users import UpdatePassword, UserLoginRepository
 
-from models.users import UserRegistration, UserLoginResponse
+from models.users import ResetPassword, UserRegistration, UserLoginResponse
 from app.config import get_db_actual
 from databases.db_models.users import UserLogin
-from services.profile.profiles_services import *
+from services.Profile.profiles_services import ProfileServices
+# from services.profiles_services import *
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+import logging
 
+logger = logging.getLogger()
 
 class BaseAuthentication:
 
@@ -19,6 +23,9 @@ class BaseAuthentication:
         pass
 
     def add_user(self, user_details: UserRegistration):
+        pass
+
+    def reset_password(self, password_details: ResetPassword):
         pass
 
     @staticmethod
@@ -69,6 +76,23 @@ class DefaultAuthentication(BaseAuthentication):
             error_message = f'error while inserting to database: {str(e)}'
             logger.error(error_message)
             raise Exception(error_message)
+
+    def reset_password(self,password_details: ResetPassword):
+
+        hashed_password= DefaultAuthentication.generate_hash(password_details.user_password)
+
+        try:
+            UpdatePassword.update_password(password_details.user_id,hashed_password,password_details.updated_at)
+
+        except Exception as e:
+            error_message = f'Error while reseting password: {str(e)}'
+            logger.error(error_message)
+            raise Exception(error_message)
+
+        return "Reset successful"
+
+        
+
 
     @staticmethod
     def generate_hash(password):

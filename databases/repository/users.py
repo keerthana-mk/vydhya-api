@@ -66,3 +66,12 @@ class UserProfileRepository:
             .filter(or_(UserProfile.user_id == user_id, UserProfile.user_email == user_id))
         query_result = query_result.all()
         return query_result[0] if len(query_result) == 1 else None
+
+class UpdatePassword:
+    database: Session = get_db_actual()
+
+    @staticmethod
+    def update_password(user_id, password, updated_at):
+
+        UpdatePassword.database.query(UserLogin).filter(UserLogin.user_id==user_id).update({"password":password,"updated_at":datetime.now()})
+
