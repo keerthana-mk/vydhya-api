@@ -13,17 +13,17 @@ class AddHealthcarePlanRequest(BaseModel):
     coverage: float
     duration_years: float
     deductible_amt: float
-    is_monthly = True
+    is_monthly : bool
 
 class UpdateHealthcarePlanRequest(BaseModel):
     plan_display_name: Union[str, None]
     plan_description: Union[str, None]
     plan_exceptions: Union[List[str], None]
-    premium: Union[str, None]
-    coverage: Union[str, None]
-    duration_years: Union[str, None]
-    deductible_amt: Union[str, None]
-    is_monthly: Union[str, None]
+    premium: Union[float, None]
+    coverage: Union[float, None]
+    duration_years: Union[float, None]
+    deductible_amt: Union[float, None]
+    is_monthly: Union[bool, None]
 
 class AddHealthcarePlanResponse(BaseModel):
     plan_id: str
@@ -39,7 +39,7 @@ class HealthcarePlanResponse(BaseModel):
     coverage: float
     duration_years: float
     deductible_amt: float
-    is_monthly = True
+    is_monthly : bool
 
 class InsurerPlanDetails(BaseModel):
     num_plans: int
