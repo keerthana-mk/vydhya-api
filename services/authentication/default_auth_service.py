@@ -64,9 +64,9 @@ class DefaultAuthentication(BaseAuthentication):
                                                          user_details.first_name, user_details.last_name,
                                                          user_details.user_role)
             user_name = f'{user_details.first_name} {user_details.last_name}'
-            profile_service.create_user_profile(user_id, user_details.user_email, user_details.user_role,
+            profile_service.create_user_profile(user_id, user_name, user_details.user_email, user_details.user_role,
                                                       "primary")
-            return True
+            return user_id
         except Exception as e:
             error_message = f'error while inserting to database: {str(e)}'
             logger.error(error_message)

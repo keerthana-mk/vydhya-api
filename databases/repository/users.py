@@ -89,5 +89,19 @@ class UserProfileRepository:
         query_result = query_result.all()
         return query_result[0] if len(query_result) == 1 else None
     
+    @staticmethod
+    def store_profile_pic_database(user_id, base64_encode):
+        try:
+            profile_pic_details ={"profile_pic": base64_encode}
+            query = UserLoginRepository.database.query(UserLogin).filter(or_(UserLogin.user_id == user_id, UserLogin.user_name == user_id))\
+            .update(profile_pic_details)
+            UserLoginRepository.database.commit()
+        except Exception as e:
+            UserLoginRepository().database.rollback()
+            raise BaseException(e)
+    @staticmethod
+    def fetch_profile_image(user_id):
+        query_result =  UserLoginRepository.database.query(UserLogin).filter(or_(UserLogin.user_id == user_id, UserLogin.user_name == user_id))
+        query_result = query_result.all()
+        return query_result[0].profile_pic
     
-            
