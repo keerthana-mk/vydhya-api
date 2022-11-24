@@ -12,14 +12,15 @@ class ProfileServices:
     def generate_insurer_id(self):
         query_result = InsurerProfileRepository.database.query(InsurerProfile.user_id).order_by(InsurerProfile.insurer_id)
         query_result = query_result.all()
+        logging.info("query from generate_insurer_id={}".format(query_result[len(query_result)-1]))
         return query_result[len(query_result) - 1] if len(query_result) > 0 else 0
         
-    def create_user_profile(self, user_id, user_email, user_role, theme="primary"):
+    def create_user_profile(self, user_id, fullname, user_email, user_role, theme="primary"):
         self.validate_user_role(user_role)
         if user_role == 'patient':
             PatientProfileRepository.create_user_profile(user_id, user_email, user_role, theme)
         if user_role == 'doctor':
-            DoctorProfileRepository.create_user_profile(user_id, user_email, user_role, theme)
+            DoctorProfileRepository.create_user_profile(user_id, fullname, user_email, user_role, theme)
         if user_role == 'insurer':
             insurer_id = self.generate_insurer_id()
             InsurerProfileRepository.create_user_profile('insurance_id_'+str(insurer_id), user_id, user_email, user_role, theme)
