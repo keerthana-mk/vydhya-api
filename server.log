@@ -1,0 +1,3 @@
+2022-11-22 00:37:53,654 - server - serve - line:75 - INFO - Started server process [18492]
+2022-11-22 00:37:53,655 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-11-22 00:37:53,655 - main - create_tables - line:31 - ERROR - Creating tables...

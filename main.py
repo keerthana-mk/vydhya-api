@@ -1,10 +1,10 @@
 import uvicorn
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, File, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 
 from app.config import engine, get_db
-from databases.repository.users import UserLoginRepository
+from databases.repository.users import UserLoginRepository, UserProfileRepository
 from models.healthcare_plans import AddHealthcarePlanRequest, AddHealthcarePlanResponse, UpdateHealthcarePlanRequest
 from models.profiles import UserProfileRequests, SearchDoctorRequest
 from models.users import UserRegistration, UserRegistrationResponse, UserLoginRequest, ResetPasswordRequest
@@ -17,7 +17,9 @@ from services.authentication.reset_password_service import ResetPasswordServices
 from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
     get_http_response, StandardHttpResponse
 from fastapi.middleware.cors import CORSMiddleware
+
 import logging
+import base64
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -79,9 +81,9 @@ def create_user(user_details: UserRegistration):
     auth_service = BaseAuthentication.get_auth_service()
     error_message, data = None, None
     try:
-        auth_service.add_user(user_details)
+        user_id = auth_service.add_user(user_details)
         data = UserRegistrationResponse(
-            message=f'successfully created user {user_details.user_id}',
+            message=f'successfully created user {user_id}',
             status_code=200
             )
         status = 200
@@ -166,7 +168,7 @@ def get_user_profiles(user_id, user_role):
 
 @app.post("/doctor/search", response_model=StandardHttpResponse, tags=['Search Doctor'],
           response_model_exclude_none=True)
-def search_doctor(search_by, search_string, covid_support):
+def search_doctor(search_by, search_string, covid_support: bool):
     # if user_role not in ['patient', 'doctor', 'insurer']:
     #     status = 400
     #     error_message = f'unsupported role: {user_role}'
@@ -175,6 +177,7 @@ def search_doctor(search_by, search_string, covid_support):
     data, error_message = None, None
     try:
         data = DoctorService.search_doctor(search_by, search_string, covid_support)
+        print(f'data in doctor search ={data}')
         status = 200
     except BaseException as e:
         error_message = f'error while searching doctors: {str(e)}'
@@ -267,3 +270,28 @@ def reset_verify_password(user_id, reset_code_details: ResetPasswordRequest):
         error_message = f' Error while password reset. Try Again : {str(e)}'
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
+
+@app.post('/upload/profilepic',response_model=StandardHttpResponse, tags=['User Profiles'])
+def upload_profile_pic(user_id, file:UploadFile = File(...)):
+    data, error_message = None, None
+    try:
+        contents = file.file.read()
+        with open(f"profileimages\\{user_id}_"+file.filename,"wb") as f:
+            f.write(contents)
+        base64_encoded_image = base64.b64encode(contents).decode("utf-8")
+        UserProfileRepository.store_profile_pic_database(user_id, base64_encoded_image)
+        status = 200
+        data = {"message":f"profile picture uploaded successfully for user = {user_id}"}
+    except Exception as e:
+        error_message = f'Error while uploading profile pic = {str(e)}'
+        status = 500
+        
+    finally:
+        file.file.close()
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
+    
+@app.get('/profilepic', tags=['User Profiles'])
+def fetch_profile_pic(user_id):
+    # base64_encode_data 
+    result = UserProfileRepository.fetch_profile_image(user_id)
+    return result
