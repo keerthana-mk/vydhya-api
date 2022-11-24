@@ -4,7 +4,7 @@ from databases.db_models.profiles import PatientProfile, DoctorProfile, InsurerP
 from app.config import get_db_actual
 from sqlalchemy.orm import Session
 from models.logging import logger
-
+from databases.db_models.users import UserLogin
 
 class PatientProfileRepository:
     database: Session = get_db_actual()
@@ -47,10 +47,11 @@ class DoctorProfileRepository:
     database: Session = get_db_actual()
 
     @staticmethod
-    def create_user_profile(user_id, user_email, user_role, theme):
+    def create_user_profile(user_id, fullname, user_email, user_role, theme):
         try:
             new_user_profile = DoctorProfile(
                 user_id=user_id,
+                full_name = fullname,
                 contact_email=user_email,
                 theme=theme
             )
@@ -60,7 +61,8 @@ class DoctorProfileRepository:
             DoctorProfileRepository.database.rollback()
             error_message = "Error while creating doctor profile :{}".format(e)
             raise(error_message)
-        
+    
+            
     @staticmethod
     def get_doctor_profile(user_id):
         doctor_query = DoctorProfileRepository.database.query(DoctorProfile).filter((DoctorProfile.user_id == user_id))
@@ -86,6 +88,7 @@ class DoctorProfileRepository:
             name_like = f'%{name}%'
             query_result = DoctorProfileRepository.database.query(DoctorProfile).\
                 filter(DoctorProfile.full_name.ilike(name_like)).all()
+            logging.info("doctor search =={}".format(query_result[0]))
             return query_result
         except Exception as e:
             logging.error(e)
