@@ -5,9 +5,11 @@ from fastapi.templating import Jinja2Templates
 
 from app.config import engine, get_db
 from databases.repository.users import UserLoginRepository, UserProfileRepository
+from databases.repository.feedback_repo import AppointmentFeedbackRepository
 from models.healthcare_plans import AddHealthcarePlanRequest, AddHealthcarePlanResponse, UpdateHealthcarePlanRequest
 from models.profiles import UserProfileRequests, SearchDoctorRequest
 from models.users import UserRegistration, UserRegistrationResponse, UserLoginRequest, ResetPasswordRequest
+from models.feedback import FeedbackRequest
 from databases.db_models.base_tables import Base
 from services.authentication.default_auth_service import BaseAuthentication
 from services.doctor_services import DoctorService
@@ -264,7 +266,6 @@ def reset_verify_password(user_id, reset_code_details: ResetPasswordRequest):
     data, error_message = None, None
     try:
         data = ResetPasswordServices.verify_update_password(user_id, reset_code_details)
-        logger.info("data",data)
         status = 200
     except BaseException as e:
         error_message = f' Error while password reset. Try Again : {str(e)}'
@@ -295,3 +296,25 @@ def fetch_profile_pic(user_id):
     # base64_encode_data 
     result = UserProfileRepository.fetch_profile_image(user_id)
     return result
+
+@app.post('/addFeedback', response_model=StandardHttpResponse, tags=['Doctor Feedback'])
+def add_doctor_feedback(doctor_id: str, patient_id: str, feedback_request: FeedbackRequest):
+    data, error_message = None, None
+    try:
+        data = AppointmentFeedbackRepository.create_feedback(doctor_id, patient_id, feedback_request)
+        status = 200
+    except BaseException as e:
+        error_message = f' Error while adding Feedback : {str(e)}'
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
+
+@app.get("/get_feedback_by_doctor", response_model=StandardHttpResponse, tags=['Doctor Feedback'])
+def get_feedbacks_by_doctor(doctor_id):
+    data, error_message = None, None
+    try:
+        data = AppointmentFeedbackRepository.fetch_feedback_by_doctor(doctor_id)
+        status = 200
+    except BaseException as e:
+        error_message = f' Error while fetching Feedback for doctor {doctor_id} : {str(e)}'
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
