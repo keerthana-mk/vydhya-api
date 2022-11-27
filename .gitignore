@@ -1,6 +1,6 @@
 .env
 .idea/
 .gitignore
-server.log
+.server.log
 api.log
 __pycache__/

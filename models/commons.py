@@ -2,6 +2,8 @@ from pydantic import BaseModel, validator
 from datetime import datetime
 
 from databases.db_models.profiles import DoctorProfile
+from databases.db_models.appointment_feedback import AppointmentFeedback
+from databases.db_models.appointments import Appointments
 from .profiles import UserProfileResponse, PatientProfileResponse, DoctorProfileResponse, InsurerProfileResponse, \
     DoctorDetails
 from typing import Union, List, Dict
@@ -84,6 +86,20 @@ def generate_doctor_details(doctor_profile: DoctorProfile):
         hospital_name=doctor_profile.hospital_name,
         is_hosp_covid_supported=doctor_profile.is_hosp_covid_supported,
         insurance_accepted=doctor_profile.insurance_accepted
+    )
+    
+def generate_feedback_response(feedback_details: AppointmentFeedback):
+    return AppointmentFeedback(
+        patient_id = feedback_details.patient_id,
+        feedback = feedback_details.feedback,
+        rating = feedback_details.rating,
+        submitted_at = feedback_details.submitted_at
+    )
+
+def generate_feedback_by_appointment(feedback :Appointments):
+    return Appointments(
+        feedback = feedback.feedback,
+        rating = feedback.rating
     )
 
 
