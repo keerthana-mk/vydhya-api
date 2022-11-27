@@ -3708,3 +3708,7 @@ DETAIL:  Key (appointment_id)=(1000) already exists.
 2022-11-27 02:11:59,808 - on - startup - line:47 - INFO - Waiting for application startup.
 2022-11-27 02:11:59,811 - main - create_tables - line:35 - ERROR - Creating tables...
 2022-11-27 02:12:01,185 - on - startup - line:61 - INFO - Application startup complete.
+2022-11-27 02:12:08,331 - server - serve - line:75 - INFO - Started server process [14912]
+2022-11-27 02:12:08,333 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-11-27 02:12:08,336 - main - create_tables - line:35 - ERROR - Creating tables...
+2022-11-27 02:12:09,983 - on - startup - line:61 - INFO - Application startup complete.
