@@ -5,7 +5,7 @@ from sqlalchemy.dialects.postgresql import ARRAY, FLOAT
 from databases.base_class import Base
 from databases.db_models.profiles import DoctorProfile, PatientProfile
 
-class Appointemnts(Base): #Add appointment ID.
+class Appointments(Base): #Add appointment ID.
     appointment_id=Column(String, primary_key=True)
     doctor_id=Column(String, foreign_key=ForeignKey(DoctorProfile.user_id))
     patient_id=Column(String, foreign_key=ForeignKey(PatientProfile.user_id))
