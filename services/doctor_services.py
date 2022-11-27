@@ -1,5 +1,6 @@
 from databases.repository.profiles import DoctorProfileRepository
 from models import commons
+
 import logging
 
 class DoctorService:
@@ -21,7 +22,7 @@ class DoctorService:
         doctor_details_list = []
         logging.info(f'found {len(doctor_profiles)} doctors')
         for doctor_profile in doctor_profiles:
-            logging.info(f'doctor profiles = {doctor_profile.full_name}')
+            # logging.info(f'doctor profiles = {doctor_profile.full_name}')
             if covid_support:
                 if (doctor_profile.is_hosp_covid_supported) or doctor_profile.is_hosp_covid_supported == 1:
                     print("am i coming here in if block")
