@@ -39,5 +39,17 @@ class AppointmentFeedbackRepository:
             doctor_feedbacks.append(commons.generate_feedback_response(f))
         return {doctor_id : doctor_feedbacks, "total rating " : feedback_query_sum}
             
-
+    @staticmethod
+    def add_feedback_by_appointment(doctor_id, patient_id, feedback_time, feedback_response):
+        try:
+            AppointmentFeedbackRepository.database.query(AppointmentFeedback).filter(and_(AppointmentFeedback.doctor_id == doctor_id,
+                                                                                          AppointmentFeedback.patient_id==patient_id,
+                                                                                          AppointmentFeedback.submitted_at == feedback_time))\
+            .update(commons.generate_feedback_by_appointment(feedback_response))
+            AppointmentFeedbackRepository.database.commit()
+            return {"message" : f'updated feedback for doctor {doctor_id} for appointment attended on {feedback_time}'}
+        except Exception as e:
+            error_message = f'error while adding feedback for appoinment attended on {feedback_time}: {e}'
+            logging.info(e)
+            raise BaseException(error_message)
             

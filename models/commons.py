@@ -95,6 +95,12 @@ def generate_feedback_response(feedback_details: AppointmentFeedback):
         submitted_at = feedback_details.submitted_at
     )
 
+def generate_feedback_by_appointment(feedback :AppointmentFeedback):
+    return AppointmentFeedback(
+        feedback = feedback.feedback,
+        rating = feedback.rating
+    )
+
 
 def get_http_response(data, status, error=None):
     if error is not None:

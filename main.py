@@ -297,7 +297,7 @@ def fetch_profile_pic(user_id):
     result = UserProfileRepository.fetch_profile_image(user_id)
     return result
 
-@app.post('/addFeedback', response_model=StandardHttpResponse, tags=['Doctor Feedback'])
+@app.post('/addFeedback', response_model=StandardHttpResponse, tags=['General Doctor Feedback'])
 def add_doctor_feedback(doctor_id: str, patient_id: str, feedback_request: FeedbackRequest):
     data, error_message = None, None
     try:
@@ -308,7 +308,7 @@ def add_doctor_feedback(doctor_id: str, patient_id: str, feedback_request: Feedb
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
 
-@app.get("/get_feedback_by_doctor", response_model=StandardHttpResponse, tags=['Doctor Feedback'])
+@app.get("/get_feedback_by_doctor", response_model=StandardHttpResponse, tags=['General Doctor Feedback'])
 def get_feedbacks_by_doctor(doctor_id):
     data, error_message = None, None
     try:
@@ -316,5 +316,16 @@ def get_feedbacks_by_doctor(doctor_id):
         status = 200
     except BaseException as e:
         error_message = f' Error while fetching Feedback for doctor {doctor_id} : {str(e)}'
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
+
+@app.post("/update_feedback_by_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
+def update_feedback_by_appointment(doctor_id, patient_id, feedback_time, feedback_response: FeedbackRequest):
+    data, error_message = None, None
+    try:
+        data = AppointmentFeedbackRepository.add_feedback_by_appointment(doctor_id, patient_id, feedback_time,feedback_response)
+        status = 200
+    except BaseException as e:
+        error_message = f' Error while adding feedback for doctor {doctor_id} for appointment on {feedback_time} : {str(e)}'
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
