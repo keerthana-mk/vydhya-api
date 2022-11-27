@@ -2,7 +2,7 @@ import logging
 from sqlalchemy import or_, and_
 from datetime import datetime
 from pytz import timezone
-from databases.db_models.appointments import Appointemnts, Schedule, CovidQuestionnaire
+from databases.db_models.appointments import Appointments, Schedule, CovidQuestionnaire
 from app.config import get_db_actual
 from sqlalchemy.orm import Session
 from models.appointments import UpdateAppointment

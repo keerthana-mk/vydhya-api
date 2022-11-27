@@ -185,24 +185,24 @@ def search_doctor(search_doctor_request: SearchDoctorRequest):
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
-@app.post("/reset_password", response_model=StandardHttpResponse, tags="Reset Password")
-def update_password(user_password: ResetPassword):
-    auth_service= BaseAuthentication.get_auth_service()
-    data, error_message = None, None
-    try:
-        data=auth_service.reset_password(user_password)
-        logger.info(data)
-        status=200
+# @app.post("/reset_password", response_model=StandardHttpResponse, tags="Reset Password")
+# def update_password(user_password: ResetPassword):
+#     auth_service= BaseAuthentication.get_auth_service()
+#     data, error_message = None, None
+#     try:
+#         data=auth_service.reset_password(user_password)
+#         logger.info(data)
+#         status=200
 
-    except BaseException as e:
-        error_message = f'Unable to Update Password: {str(e)}'
-        logger.error(error_message)
-        status = 500
+#     except BaseException as e:
+#         error_message = f'Unable to Update Password: {str(e)}'
+#         logger.error(error_message)
+#         status = 500
         
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
+#     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.post("/add_appointment", response_model=StandardHttpResponse, tags="Add Appointment")
+@app.post("/add_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
 def add_appointment(new_appointment: Appointments):
     logger.error("Creating Appointment...")
     data, error_message= None, None
@@ -224,7 +224,7 @@ def add_appointment(new_appointment: Appointments):
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.post("/update_appointment", response_model=StandardHttpResponse, tags="Update Appointment")
+@app.post("/update_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
 def update_appointment(new_appointment: UpdateAppointment):
     data, error_message= None, None
     try:
@@ -241,7 +241,7 @@ def update_appointment(new_appointment: UpdateAppointment):
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.delete("/delete_appointment", response_model=StandardHttpResponse, tags="Delete Appointment")
+@app.delete("/delete_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
 def update_appointment(new_appointment: DeleteAppointment):
     data, error_message= None, None
     try:
@@ -257,7 +257,7 @@ def update_appointment(new_appointment: DeleteAppointment):
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.post("/covid_questionnaire", response_model= StandardHttpResponse, tags="Covid Questionnaire")
+@app.post("/covid_questionnaire", response_model= StandardHttpResponse, tags=["Covid Questionnaire"])
 def add_covid_questionnaire(covid_details: CovidQuestionnaire):
     data, error_message=None, None
     time1=str(datetime.now())
@@ -287,7 +287,7 @@ def add_covid_questionnaire(covid_details: CovidQuestionnaire):
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.get("/get_covid_details", response_model=StandardHttpResponse, tags="Get COVID Details")
+@app.get("/get_covid_details", response_model=StandardHttpResponse, tags=["Covid Questionnaire"])
 def get_covid_details(user_id):
     data, error_message=None, None
     try:

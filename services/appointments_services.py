@@ -1,4 +1,4 @@
-from databases.db_models.appointments import Appointemnts
+from databases.db_models.appointments import Appointments
 from models.logging import logger
 from databases.repository.appointments import AppointmentsRepository
 
