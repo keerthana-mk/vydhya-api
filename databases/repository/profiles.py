@@ -41,7 +41,15 @@ class PatientProfileRepository:
         except Exception as e:
             PatientProfileRepository.database.rollback()
             raise BaseException(e)
-
+    @staticmethod
+    def enroll_in_healthcare_plan(patient_id, plan_id):
+        try:
+            DoctorProfileRepository.database.query(PatientProfile).filter(PatientProfile.user_id == patient_id).update({PatientProfile.health_plan_id : plan_id})
+            DoctorProfileRepository.database.commit()
+            return {"message" : f'Enrolled in plan {plan_id} successfully'}
+        except Exception as e:
+            PatientProfileRepository.database.rollback()
+            raise BaseException(e)
 
 class DoctorProfileRepository:
     database: Session = get_db_actual()
@@ -105,6 +113,7 @@ class DoctorProfileRepository:
             logging.error(e)
             raise BaseException(e)
 
+    
 
 class InsurerProfileRepository:
     database: Session = get_db_actual()

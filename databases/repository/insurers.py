@@ -83,3 +83,5 @@ class HealthcarePlanRepository:
         except Exception as e:
             HealthcarePlanRepository.database.rollback()
             raise BaseException(e)
+
+    
