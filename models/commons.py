@@ -3,6 +3,7 @@ from datetime import datetime
 
 from databases.db_models.profiles import DoctorProfile
 from databases.db_models.appointment_feedback import AppointmentFeedback
+from databases.db_models.appointments import Appointments
 from .profiles import UserProfileResponse, PatientProfileResponse, DoctorProfileResponse, InsurerProfileResponse, \
     DoctorDetails
 from typing import Union, List, Dict
@@ -95,8 +96,8 @@ def generate_feedback_response(feedback_details: AppointmentFeedback):
         submitted_at = feedback_details.submitted_at
     )
 
-def generate_feedback_by_appointment(feedback :AppointmentFeedback):
-    return AppointmentFeedback(
+def generate_feedback_by_appointment(feedback :Appointments):
+    return Appointments(
         feedback = feedback.feedback,
         rating = feedback.rating
     )

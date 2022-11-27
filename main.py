@@ -8,6 +8,7 @@ from fastapi.templating import Jinja2Templates
 from app.config import engine, get_db
 from databases.repository.users import UserLoginRepository, UserProfileRepository
 from databases.repository.feedback_repo import AppointmentFeedbackRepository
+from databases.repository.appointments import AppointmentsRepository
 from models.healthcare_plans import AddHealthcarePlanRequest, AddHealthcarePlanResponse, UpdateHealthcarePlanRequest
 from models.appointments import Appointments, CovidQuestionnaire, DeleteAppointment, UpdateAppointment
 from models.profiles import UserProfileRequests, SearchDoctorRequest
@@ -17,7 +18,7 @@ from databases.db_models.base_tables import Base
 from services.appointments_services import ManageAppointments
 from services.authentication.default_auth_service import BaseAuthentication
 from services.doctor_services import DoctorService
-from services.insurer_services imPort InsurerServices
+from services.insurer_services import InsurerServices
 from services.profiles_services import ProfileServices
 from services.authentication.reset_password_service import ResetPasswordServices
 from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
@@ -324,16 +325,6 @@ def get_feedbacks_by_doctor(doctor_id):
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
 
-@app.post("/update_feedback_by_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
-def update_feedback_by_appointment(doctor_id, patient_id, feedback_time, feedback_response: FeedbackRequest):
-    data, error_message = None, None
-    try:
-        data = AppointmentFeedbackRepository.add_feedback_by_appointment(doctor_id, patient_id, feedback_time,feedback_response)
-        status = 200
-    except BaseException as e:
-        error_message = f' Error while adding feedback for doctor {doctor_id} for appointment on {feedback_time} : {str(e)}'
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
 
 # @app.post("/reset_password", response_model=StandardHttpResponse, tags="Reset Password")
 # def update_password(user_password: ResetPassword):
@@ -357,7 +348,7 @@ def add_appointment(new_appointment: Appointments):
     logger.error("Creating Appointment...")
     data, error_message= None, None
     try:
-        data=ManageAppointments.add_appointment(new_appointment.appointement_id,
+        data=ManageAppointments.add_appointment(new_appointment.appointment_id,
         new_appointment.doctor_id,
         new_appointment.patient_id,
         new_appointment.appointment_start_time,
@@ -406,6 +397,17 @@ def update_appointment(new_appointment: DeleteAppointment):
             status= 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
+@app.post("/update_feedback_by_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
+def update_feedback_by_appointment(appoinment_id, feedback_response: FeedbackRequest):
+    data, error_message = None, None
+    try:
+        logging.info("from main:", feedback_response)
+        data = AppointmentsRepository.add_feedback_by_appointment(appoinment_id,feedback_response)
+        status = 200
+    except BaseException as e:
+        error_message = f' Error while adding feedback for appointment on {appoinment_id} : {str(e)}'
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
 
 @app.post("/covid_questionnaire", response_model= StandardHttpResponse, tags=["Covid Questionnaire"])
 def add_covid_questionnaire(covid_details: CovidQuestionnaire):

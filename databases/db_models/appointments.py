@@ -4,15 +4,15 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Boolean
 from sqlalchemy.dialects.postgresql import ARRAY, FLOAT
 from databases.base_class import Base
 from databases.db_models.profiles import DoctorProfile, PatientProfile
-
+from uuid import uuid4
 class Appointments(Base): #Add appointment ID.
     appointment_id=Column(String, primary_key=True)
     doctor_id=Column(String, foreign_key=ForeignKey(DoctorProfile.user_id))
     patient_id=Column(String, foreign_key=ForeignKey(PatientProfile.user_id))
     appointment_start_time=Column(String)
     duration= Column(String) #change it to duration. 
-    feedback= Column(String)
-    rating=Column(Integer, default=0)
+    feedback= Column(String, default=None)
+    rating=Column(FLOAT, default=0)
     appointment_attended= Column(Boolean, default=False) 
 
 

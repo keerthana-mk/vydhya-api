@@ -7,7 +7,7 @@ from app.config import get_db_actual
 from sqlalchemy.orm import Session
 from models.appointments import UpdateAppointment
 from models.logging import logger
-
+from models import commons
 
 class AppointmentsRepository:
     database: Session = get_db_actual()
@@ -39,7 +39,7 @@ class AppointmentsRepository:
                 id=id+1
 
             new_appointment_id=id
-            new_appointment=Appointemnts(
+            new_appointment=Appointments(
                 appointment_id=new_appointment_id,
                 doctor_id=doctor_id,
                 patient_id=patient_id,
@@ -49,8 +49,8 @@ class AppointmentsRepository:
                 rating=rating,
                 appointment_attended=appointment_attended
             )
-            query_result = AppointmentsRepository.database.query(Appointemnts).filter(
-                or_(Appointemnts.doctor_id == doctor_id, Appointemnts.patient_id == patient_id))
+            query_result = AppointmentsRepository.database.query(Appointments).filter(
+                or_(Appointments.doctor_id == doctor_id, Appointments.patient_id == patient_id))
             query_result=query_result.all()
             try: #Validation to check whether there is an appointment at same time
                 for i in range(0,len(query_result)):
@@ -70,7 +70,7 @@ class AppointmentsRepository:
 
     @staticmethod
     def get_last_appointmnet():
-        query_result = AppointmentsRepository.database.query(Appointemnts.appointment_id)
+        query_result = AppointmentsRepository.database.query(Appointments.appointment_id)
         query_result = query_result.all()
         # query_result=query_result.sort()
         print(query_result)
@@ -91,8 +91,8 @@ class AppointmentsRepository:
             current_time=current_time[:-16]
             current_time=datetime.strptime(current_time,'%Y-%m-%d %H:%M')
             if appointment_time>current_time:
-                query_result = AppointmentsRepository.database.query(Appointemnts).filter(
-                    or_(Appointemnts.doctor_id == doctor_id, Appointemnts.patient_id == patient_id))
+                query_result = AppointmentsRepository.database.query(Appointments).filter(
+                    or_(Appointments.doctor_id == doctor_id, Appointments.patient_id == patient_id))
                 query_result=query_result.all()
 
                 for i in range(0,len(query_result)):
@@ -100,8 +100,8 @@ class AppointmentsRepository:
                         print("There is an appointment shceduled at same time.")
                         raise BaseException("Doctor or patient has similar appointment scheduled.")
                 else:
-                    AppointmentsRepository.database.query(Appointemnts).filter(
-                        and_(Appointemnts.patient_id == patient_id,Appointemnts.appointment_start_time == old_time)
+                    AppointmentsRepository.database.query(Appointments).filter(
+                        and_(Appointments.patient_id == patient_id,Appointments.appointment_start_time == old_time)
                         ).update({"appointment_start_time":new_time})
                     print("Updating the Appointment")
                     AppointmentsRepository.database.commit()
@@ -116,8 +116,8 @@ class AppointmentsRepository:
     @staticmethod
     def delete_appointment(doctor_id, patient_id, appointment_time):
         try:
-            AppointmentsRepository.database.query(Appointemnts).filter(
-                and_(Appointemnts.doctor_id==doctor_id, Appointemnts.patient_id==patient_id, Appointemnts.appointment_start_time==appointment_time)
+            AppointmentsRepository.database.query(Appointments).filter(
+                and_(Appointments.doctor_id==doctor_id, Appointments.patient_id==patient_id, AppoAppointmentsintemnts.appointment_start_time==appointment_time)
                 ).delete()
             AppointmentsRepository.database.commit()
         except Exception as e:
@@ -158,5 +158,26 @@ class AppointmentsRepository:
             query_result=query_result.all()
             return query_result
         
+        except Exception as e:
+            raise BaseException(e)
+    @staticmethod
+    def add_feedback_by_appointment(appointment_id, feedback_response):
+        try:
+            logging.info("feedback response format:",feedback_response)
+            AppointmentsRepository.database.query(Appointments).filter(Appointments.appointment_id == appointment_id).update({"feedback": feedback_response.feedback,
+                                                                                                                               "rating" : feedback_response.rating})
+            AppointmentsRepository.database.commit()
+            return {"message" : f'updated feedback for doctor appointment id ={appointment_id}'}
+        except Exception as e:
+            AppointmentsRepository.database.rollback()
+            error_message = f'error while adding feedback for appoinment id ={appointment_id}  : {e}'
+            logging.info(e)
+            raise BaseException(error_message)
+        
+    @staticmethod
+    def get_all_appointmentsby_doctor_id(user_logged_id):
+        try:
+            query_result = AppointmentsRepository.database.query(Appointments).filter(or_(Appointments.doctor_id == user_logged_id, Appointments.patient_id == user_logged_id)).all()
+            return query_result
         except Exception as e:
             raise BaseException(e)

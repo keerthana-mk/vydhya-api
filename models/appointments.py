@@ -2,13 +2,13 @@ from pydantic import BaseModel
 from typing import Union, List
 
 class Appointments(BaseModel):
-    appointement_id: str
+    appointment_id: str
     doctor_id: str
     patient_id: str
     appointment_start_time: str
     duration: str
     feedback: Union[str, None]
-    rating: Union[int, None]
+    rating: Union[float, None]
     appointment_attended: Union[bool, None]
 
 class UpdateAppointment(BaseModel):
