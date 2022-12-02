@@ -26,7 +26,12 @@ class HealthcarePlanRepository:
     def get_plans_by_insurer(insurer_id):
         query_result = HealthcarePlanRepository.database.query(HealthcarePlan).filter(HealthcarePlan.insurer_id == insurer_id).all()
         return query_result
-
+    
+    @staticmethod
+    def get_all_plans():
+        query_result = HealthcarePlanRepository.database.query(HealthcarePlan).all()
+        return query_result
+    
     @staticmethod
     def get_plans_by_insurer_and_plan_name(insurer_id, plan_name):
         query_result = HealthcarePlanRepository.database.query(HealthcarePlan). \

@@ -34,6 +34,19 @@ class InsurerServices:
             raise BaseException(e)
 
     @staticmethod
+    def get_all_healthcare_plans():
+        try:
+            plans_query = HealthcarePlanRepository.get_all_plans()
+            all_plans =[]
+            for plan in plans_query:
+                all_plans.append(HealthcarePlanMapper.map_to_healthcare_plan(plan))
+            return InsurerPlanDetails(plans=all_plans, num_plans = len(all_plans), message=f'Found {len(all_plans)} plans')
+        except Exception as e:
+            error_message = f'error while fetching all insuerer details and their plans: {str(e)}'
+            logging.error(error_message)
+            logging.exception(e)
+            raise BaseException(e)
+    @staticmethod
     def create_healthcare_plan(plan_request: AddHealthcarePlanRequest):
         try:
             existing_plans = HealthcarePlanRepository.get_by_plan_name(plan_request.plan_name)
