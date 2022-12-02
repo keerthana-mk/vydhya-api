@@ -32,17 +32,17 @@ import base64
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
-fh = logging.FileHandler(filename='./server.log')
+# fh = logging.FileHandler(filename='./server.log')
 formatter = logging.Formatter(
     "%(asctime)s - %(module)s - %(funcName)s - line:%(lineno)d - %(levelname)s - %(message)s"
     )
 ch.setFormatter(formatter)
-fh.setFormatter(formatter)
-logger.addHandler(ch)  # Exporting logs to the screen
+# fh.setFormatter(formatter)
+# logger.addHandler(ch)  # Exporting logs to the screen
 # logger.addHandler(fh)  # Exporting logs to a file
 
 def create_tables():  # new
-    logger.error("Creating tables...")
+    logging.info("Creating tables...")
     Base.metadata.create_all(bind=engine)
 
 def start_application():
@@ -97,7 +97,6 @@ def create_user(user_details: UserRegistration):
         status = 200
     except Exception as e:
         error_message = f'failed to register user: {str(e)}'
-        status = 500
         status = 500
     return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 
@@ -200,6 +199,19 @@ def get_insurer_plans(insurer_id):
     data, error_message = None, None
     try:
         data = InsurerServices.get_healthcare_plans(insurer_id)
+        status = 200
+    except BaseException as e:
+        error_message = f'error while fetching plans: {str(e)}'
+        logger.error(error_message)
+        status = 500
+    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
+
+@app.get("/insurer/all_plans", response_model=StandardHttpResponse, tags=['Insurer Health Plans'],
+         response_model_exclude_none=True)
+def get_all_insurer_plans():
+    data, error_message = None, None
+    try:
+        data = InsurerServices.get_all_healthcare_plans()
         status = 200
     except BaseException as e:
         error_message = f'error while fetching plans: {str(e)}'

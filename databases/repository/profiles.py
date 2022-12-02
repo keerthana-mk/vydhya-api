@@ -3,7 +3,6 @@ import logging
 from databases.db_models.profiles import PatientProfile, DoctorProfile, InsurerProfile
 from app.config import get_db_actual
 from sqlalchemy.orm import Session
-from models.logging import logger
 from databases.db_models.users import UserLogin
 
 class PatientProfileRepository:
@@ -29,7 +28,7 @@ class PatientProfileRepository:
         patient_query = PatientProfileRepository.database.query(PatientProfile).filter(
             (PatientProfile.user_id == user_id))
         patient_query = patient_query.all()
-        logger.info(f'patient query in patient repository = {patient_query}')
+        logging.info(f'patient query in patient repository = {patient_query}')
         return patient_query
 
     @staticmethod
@@ -75,7 +74,7 @@ class DoctorProfileRepository:
     def get_doctor_profile(user_id):
         doctor_query = DoctorProfileRepository.database.query(DoctorProfile).filter((DoctorProfile.user_id == user_id))
         doctor_query = doctor_query.all()
-        logger.info(f'doctor query in patient repository = {doctor_query}')
+        logging.info(f'doctor query in patient repository = {doctor_query}')
         return doctor_query
 
     @staticmethod
@@ -87,7 +86,7 @@ class DoctorProfileRepository:
         except Exception as e:
             DoctorProfileRepository.database.rollback()
             error_message = "Error while updating doctor profile : {}".format(e)
-            logger.info(error_message)
+            logging.info(error_message)
             raise BaseException(error_message)
 
     @staticmethod
@@ -119,27 +118,30 @@ class InsurerProfileRepository:
     database: Session = get_db_actual()
 
     @staticmethod
-    def create_user_profile(insurer_id, user_id, user_email, user_role, theme):
+    def create_user_profile(user_id, name, user_email, role, theme):
         try:
             new_user_profile = InsurerProfile(
-                insurer_id=insurer_id,
                 user_id=user_id,
+                insurer_name=name,
                 contact_email=user_email,
-                theme=theme
+                theme=theme,
+                
             )
+            logging.info(f'insurer_profile: {new_user_profile}')
             InsurerProfileRepository.database.add(new_user_profile)
             InsurerProfileRepository.database.commit()
         except Exception as e:
             InsurerProfileRepository.database.rollback()
-            error_message = "Error while creating Insurer Profile: {}".format(e)
-            raise(error_message)
+            error_message = "error while creating insurer profile: {}".format(e)
+            logging.error(error_message)
+            raise Exception(error_message)
         
     @staticmethod
     def get_insurer_profile(user_id):
         insurer_query = InsurerProfileRepository.database.query(InsurerProfile).filter(
             (InsurerProfile.user_id == user_id))
         insurer_query = insurer_query.all()
-        logger.info(f'insurer query in insurer repository = {insurer_query}')
+        logging.info(f'insurer query in insurer repository = {insurer_query}')
         return insurer_query
 
     @staticmethod

@@ -9,7 +9,7 @@ from databases.base_class import Base
 class HealthcarePlans(Base):
     
     plan_id = Column(String, primary_key=True, index=True)
-    insurer_id = Column(String, foreign_key=ForeignKey(InsurerProfile.insurer_id))
+    insurer_id = Column(String, foreign_key=ForeignKey(InsurerProfile.user_id))
     plan_name = Column(String)
     premium = Column(FLOAT)
     coverage = Column(FLOAT)

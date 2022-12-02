@@ -67,16 +67,15 @@ class DoctorProfileResponse(BaseModel):
 
 
 class InsurerProfileResponse(BaseModel):
-    insurer_id: str
     user_id: str
     contact_email: Union[str, None]
     theme: Union[str, None]
     insurance_name: Union[str, None]
-    plan_id: Union[str, None]
+ 
 
 
 class UpdateInsurerProfileRequest(BaseModel):
-    insurer_id: str
+    user_id: str
     contact_email: Union[str, None]
     theme: Union[str, None]
     insurance_name: Union[str, None]
