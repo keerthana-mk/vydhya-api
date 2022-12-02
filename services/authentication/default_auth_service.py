@@ -1,5 +1,5 @@
 import hashlib
-
+import logging
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from databases.repository.users import UserLoginRepository
@@ -8,10 +8,11 @@ from models.users import ResetPassword, UserRegistration, UserLoginResponse
 from app.config import get_db_actual
 from databases.db_models.users import UserLogin
 from services.profiles_services import *
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-import logging
 
-logger = logging.getLogger()
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+
 
 class BaseAuthentication:
 
@@ -59,7 +60,7 @@ class DefaultAuthentication(BaseAuthentication):
         profile_service = ProfileServices()
         if UserLoginRepository.get_user_login(user_details.user_id) is not None:
             error_message = f'user_id {user_details.user_id} or user_email {user_details.user_email} already exists'
-            logger.error(error_message)
+            logging.error(error_message)
             raise Exception(error_message)
 
         hashed_password = DefaultAuthentication.generate_hash(user_details.user_password)
@@ -68,12 +69,12 @@ class DefaultAuthentication(BaseAuthentication):
                                                          user_details.first_name, user_details.last_name,
                                                          user_details.user_role)
             user_name = f'{user_details.first_name} {user_details.last_name}'
+            logging.info("successfully added userlogin details")
             profile_service.create_user_profile(user_id, user_name, user_details.user_email, user_details.user_role,
                                                       "primary")
             return user_id
         except Exception as e:
             error_message = f'error while inserting to database: {str(e)}'
-            logger.error(error_message)
             raise Exception(error_message)
 
     def reset_password(self,password_details: ResetPassword):
@@ -85,7 +86,6 @@ class DefaultAuthentication(BaseAuthentication):
 
         except Exception as e:
             error_message = f'Error while reseting password: {str(e)}'
-            logger.error(error_message)
             raise Exception(error_message)
 
         return "Reset successful"

@@ -5,7 +5,7 @@ from databases.db_models.profiles import InsurerProfile
 
 class HealthcarePlan(Base):
     plan_id = Column(String, primary_key=True, index=True)
-    insurer_id = Column(String, foreign_key=ForeignKey(InsurerProfile.insurer_id))
+    insurer_id = Column(String, foreign_key=ForeignKey(InsurerProfile.user_id))
     plan_name = Column(String)
     plan_display_name = Column(String)
     plan_description = Column(String)
