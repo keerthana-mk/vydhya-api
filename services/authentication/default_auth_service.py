@@ -41,21 +41,28 @@ class DefaultAuthentication(BaseAuthentication):
         self.profile_services = ProfileServices()
 
     def verify_user(self, user_id, password, user_login=None):
-        hashed_password = DefaultAuthentication.generate_hash(password)
-        user_login = UserLoginRepository.get_user_login(user_id)
-        if user_login is None:
-            raise Exception(error=f'user not found')
-        elif user_login.user_password != hashed_password:
-            raise Exception(error=f'user credentials invalid')
-        else:
-            user_profile = self.profile_services.get_user_profile(user_login.user_id, user_login.user_role)
-            return UserLoginResponse(
-                user_id=user_profile.user_id,
-                user_name=user_profile.contact_email,
-                theme=user_profile.theme,
-                user_role=user_login.user_role
-            )
-
+        try:
+            hashed_password = DefaultAuthentication.generate_hash(password)
+            user_login = UserLoginRepository.get_user_login(user_id)
+            if user_login is None:
+                return {"message": f"userid = {user_id} does not exist"}
+                raise Exception(error=f'user not found')
+            elif user_login.user_password != hashed_password:
+                return {"message" : f'username or password is incorrect!'}
+                raise Exception(error=f'user credentials invalid')
+            else:
+                user_profile = self.profile_services.get_user_profile(user_login.user_id, user_login.user_role)
+                return UserLoginResponse(
+                    user_id=user_profile.user_id,
+                    user_name=user_profile.contact_email,
+                    theme=user_profile.theme,
+                    user_role=user_login.user_role
+                )
+        except Exception as e:
+            error_message = f"could not fetch the user details for user = {user_id}"
+            return {"message" : error_message}
+            raise Exception(error_message)
+        
     def add_user(self, user_details: UserRegistration):
         profile_service = ProfileServices()
         if UserLoginRepository.get_user_login(user_details.user_id) is not None:

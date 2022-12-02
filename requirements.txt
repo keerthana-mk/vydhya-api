@@ -46,3 +46,5 @@ virtualenv==20.16.5
 watchfiles==0.17.0
 websockets==10.3
 fastapi_mail
+python-multipart
+pytz

@@ -7,6 +7,7 @@ from fastapi.templating import Jinja2Templates
 
 from app.config import engine, get_db
 from databases.repository.users import UserLoginRepository, UserProfileRepository
+from databases.repository.profiles import PatientProfileRepository
 from databases.repository.feedback_repo import AppointmentFeedbackRepository
 from databases.repository.appointments import AppointmentsRepository
 from models.healthcare_plans import AddHealthcarePlanRequest, AddHealthcarePlanResponse, UpdateHealthcarePlanRequest
@@ -460,6 +461,19 @@ def get_covid_details(user_id):
 
     except BaseException as e:
         error_message=f'Failed to get covid details {str(e)}'
+        status=500
+
+    return JSONResponse(content=get_http_response(data,status, error_message), status_code=status)
+
+@app.post('/enroll_health_plan', response_model=StandardHttpResponse, tags=['Enroll in Healthcare Plans'])
+def enroll_healthcare_plan(patient_id, plan_id):
+    data, error_message=None, None
+    try:
+        data= PatientProfileRepository.enroll_in_healthcare_plan(patient_id, plan_id)
+        status=200
+
+    except BaseException as e:
+        error_message=f'Failed to enroll healthcare plan: {str(e)}'
         status=500
 
     return JSONResponse(content=get_http_response(data,status, error_message), status_code=status)
