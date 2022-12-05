@@ -95,10 +95,10 @@ class DoctorProfileRepository:
             name_like = f'%{name}%'
             query_result = DoctorProfileRepository.database.query(DoctorProfile).\
                 filter(DoctorProfile.full_name.ilike(name_like)).all()
-            logging.info("doctor search =={}".format(query_result[0]))
+            logging.info("doctor search =={}".format(query_result))
             return query_result
         except Exception as e:
-            logging.error(e)
+            logging.error("Error while search name of doctor",e)
             raise BaseException(e)
 
     @staticmethod
