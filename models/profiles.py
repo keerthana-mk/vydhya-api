@@ -39,11 +39,13 @@ class PatientProfileResponse(BaseModel):
 
 class UpdateDoctorProfileRequest(BaseModel):
     contact_email: Union[str, None]
+    contact_phone : Union[str, None]
     theme: Union[str, None]
     gender: Union[str, None]
     dob: Union[str, None]
     experience: Union[float, None]
     hospital_name: Union[str]
+    hospital_address: Union[str, None]
     speciality: Union[str]
     is_hosp_covid_supported: Union[int, None]
     num_covid_beds_available: Union[int, None]

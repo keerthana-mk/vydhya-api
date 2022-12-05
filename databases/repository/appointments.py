@@ -6,7 +6,7 @@ from databases.db_models.appointments import Appointments, Schedule, CovidQuesti
 from app.config import get_db_actual
 from sqlalchemy.orm import Session
 from models.appointments import UpdateAppointment
-from models.logging import logger
+import logging
 from models import commons
 
 class AppointmentsRepository:
@@ -14,7 +14,7 @@ class AppointmentsRepository:
 
     @staticmethod
     def add_appointment(appointment_id,doctor_id, patient_id, start_time, duration, feedback, rating, appointment_attended):
-        logger.error("Creating Appointment - 3...")
+        logging.error("Creating Appointment - 3...")
 
         #Validation to check whether Appointment time is in future or not.
         appointment_time=datetime.strptime(start_time,'%Y-%m-%d %H:%M')
@@ -62,7 +62,7 @@ class AppointmentsRepository:
                     AppointmentsRepository.database.commit()
             except BaseException as e:
                 error_message= e
-                logger.error(error_message)
+                logging.error(error_message)
                 raise BaseException(error_message)
         else:
             raise BaseException("Appointment Time must be of Future Time")
@@ -109,7 +109,7 @@ class AppointmentsRepository:
                 raise BaseException("Appointment Time must be of Future Time")
         except Exception as e:
             error_message= e
-            logger.error(error_message)
+            logging.error(error_message)
             raise BaseException(error_message)
 
 
