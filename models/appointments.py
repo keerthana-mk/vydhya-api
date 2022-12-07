@@ -23,9 +23,10 @@ class DeleteAppointment(BaseModel):
     appointment_time: str
 
 class Schedule(BaseModel):
+    schedule_id: str
     doctor_id: str
-    day_of_week: str
-    slots: Union[List[str], None]
+    schedule_date_time: str
+    is_available: bool
 
 
 

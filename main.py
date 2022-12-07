@@ -1,66 +1,45 @@
 from dataclasses import dataclass
 from datetime import datetime
 import uvicorn
-from fastapi import FastAPI, Depends, File, UploadFile
+from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from fastapi.templating import Jinja2Templates
 
-from app.config import engine, get_db
-from databases.repository.users import UserLoginRepository, UserProfileRepository
-from databases.repository.profiles import PatientProfileRepository
-from databases.repository.feedback_repo import AppointmentFeedbackRepository
-from databases.repository.appointments import AppointmentsRepository
-from models.healthcare_plans import AddHealthcarePlanRequest, AddHealthcarePlanResponse, UpdateHealthcarePlanRequest
-from models.appointments import Appointments, CovidQuestionnaire, DeleteAppointment, UpdateAppointment
+from app.config import engine
+from models.appointments import Appointments, CovidQuestionnaire, DeleteAppointment, Schedule, UpdateAppointment
 from models.profiles import UserProfileRequests, SearchDoctorRequest
-from models.users import ResetPassword, ResetPasswordResponse, UserRegistration, UserRegistrationResponse, UserLoginRequest, ResetPasswordRequest
-from models.feedback import FeedbackRequest
+from models.users import ResetPassword, ResetPasswordResponse, UserRegistration, UserRegistrationResponse, UserLoginRequest
 from databases.db_models.base_tables import Base
 from services.appointments_services import ManageAppointments
 from services.authentication.default_auth_service import BaseAuthentication
 from services.doctor_services import DoctorService
-from services.insurer_services import InsurerServices
 from services.profiles_services import ProfileServices
-from services.authentication.reset_password_service import ResetPasswordServices
-from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, \
-    get_http_response, StandardHttpResponse
-from fastapi.middleware.cors import CORSMiddleware
-
+from models.commons import convert_patient_reponse, convert_doctor_response, convert_insurer_response, get_http_response, StandardHttpResponse
+# from models.schemas.logging import logger
 import logging
-import base64
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
-# fh = logging.FileHandler(filename='./server.log')
+fh = logging.FileHandler(filename='./server.log')
 formatter = logging.Formatter(
     "%(asctime)s - %(module)s - %(funcName)s - line:%(lineno)d - %(levelname)s - %(message)s"
-    )
+)
 ch.setFormatter(formatter)
-# fh.setFormatter(formatter)
-# logger.addHandler(ch)  # Exporting logs to the screen
-# logger.addHandler(fh)  # Exporting logs to a file
+fh.setFormatter(formatter)
+logger.addHandler(ch)  # Exporting logs to the screen
+logger.addHandler(fh)  # Exporting logs to a file
+
 
 def create_tables():  # new
-    logging.info("Creating tables...")
+    logger.error("Creating tables...")
     Base.metadata.create_all(bind=engine)
+
 
 def start_application():
     app = FastAPI(title="Vydhya", version="v1")
-    origins = [
-        "http://localhost:8000",
-        "http://localhost:3000",
-        "https://vydhya.netlify.app/",
-        "http://localhost",
-        "http://localhost:8080",
-        ]
-    app.add_middleware(CORSMiddleware,
-                       allow_origins=["*"],
-                       allow_credentials=True,
-                       allow_methods=["*"],
-                       allow_headers=["*"],
-                       )
+    # create_tables()
     return app
+
 
 # logger.info('****************** Starting Server *****************')
 
@@ -70,35 +49,40 @@ if __name__ == '__main__':
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        # reload=True,
+        reload=True,
         port=8000,
-        )
+    )
+
 
 @app.on_event('startup')
 def create_all_tables():
     create_tables()
+
 
 @app.get("/")
 async def root():
     # return check_db_connected()
     return {"message": "Hello World"}
 
+
 @app.post("/user_registration", response_model=StandardHttpResponse, tags=['User Registration and Login'],
-          response_model_exclude_none=True )
+          response_model_exclude_none=True)
 def create_user(user_details: UserRegistration):
     auth_service = BaseAuthentication.get_auth_service()
     error_message, data = None, None
     try:
-        user_id = auth_service.add_user(user_details)
+        auth_service.add_user(user_details)
         data = UserRegistrationResponse(
-            message=f'successfully created user {user_id}',
+            message=f'successfully created user {user_details.user_id}',
             status_code=200
-            )
+        )
         status = 200
     except Exception as e:
         error_message = f'failed to register user: {str(e)}'
         status = 500
+
     return JSONResponse(get_http_response(data, status, error_message), status_code=status)
+
 
 @app.post("/login", response_model=StandardHttpResponse, tags=['User Registration and Login'],
           response_model_exclude_none=True)
@@ -112,6 +96,7 @@ def login_user(user_login_req: UserLoginRequest):
         error_message = f'error while authenticating user {user_login_req.user_id}: {str(e)}'
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
+
 
 # @app.post('/login/google', response_model=UserLoginResponse, tags=['User Registration and Login'])
 # async def login_user1(request: Request):
@@ -146,6 +131,7 @@ def update_user_profile(user_id, user_role, user_profile: UserProfileRequests):
         status = 500
     return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 
+
 @app.get("/profile", response_model=StandardHttpResponse, tags=['User Profiles'], response_model_exclude_none=True)
 def get_user_profiles(user_id, user_role):
     logger.info("please tell me i am here")
@@ -174,9 +160,10 @@ def get_user_profiles(user_id, user_role):
 
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
+
 @app.post("/doctor/search", response_model=StandardHttpResponse, tags=['Search Doctor'],
           response_model_exclude_none=True)
-def search_doctor(search_by, search_string, covid_support: bool):
+def search_doctor(search_doctor_request: SearchDoctorRequest):
     # if user_role not in ['patient', 'doctor', 'insurer']:
     #     status = 400
     #     error_message = f'unsupported role: {user_role}'
@@ -184,179 +171,37 @@ def search_doctor(search_by, search_string, covid_support: bool):
 
     data, error_message = None, None
     try:
-        data = DoctorService.search_doctor(search_by, search_string, covid_support)
-        print(f'data in doctor search ={data}')
+        data = DoctorService.search_doctor(search_doctor_request.search_by, search_doctor_request.search_string,
+                                           search_doctor_request.covid_support)
         status = 200
+    except BaseException as e:
+        error_message = f'error while searching doctors: {str(e)}'
+        logger.error(error_message)
+        status = 500
     except BaseException as e:
         error_message = f'error while searching doctors: {str(e)}'
         logger.error(error_message)
         status = 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
-@app.get("/insurer/plans", response_model=StandardHttpResponse, tags=['Insurer Health Plans'],
-         response_model_exclude_none=True)
-def get_insurer_plans(insurer_id):
+@app.post("/reset_password", response_model=StandardHttpResponse, tags="Reset Password")
+def update_password(user_password: ResetPassword):
+    auth_service= BaseAuthentication.get_auth_service()
     data, error_message = None, None
     try:
-        data = InsurerServices.get_healthcare_plans(insurer_id)
-        status = 200
+        data=auth_service.reset_password(user_password)
+        logger.info(data)
+        status=200
+
     except BaseException as e:
-        error_message = f'error while fetching plans: {str(e)}'
+        error_message = f'Unable to Update Password: {str(e)}'
         logger.error(error_message)
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
-
-@app.get("/insurer/all_plans", response_model=StandardHttpResponse, tags=['Insurer Health Plans'],
-         response_model_exclude_none=True)
-def get_all_insurer_plans():
-    data, error_message = None, None
-    try:
-        data = InsurerServices.get_all_healthcare_plans()
-        status = 200
-    except BaseException as e:
-        error_message = f'error while fetching plans: {str(e)}'
-        logger.error(error_message)
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
-
-@app.post("/insurer/plans", response_model=StandardHttpResponse, tags=['Insurer Health Plans'],
-         response_model_exclude_none=True)
-def create_insurer_plans(add_plan_request: AddHealthcarePlanRequest):
-    data, error_message = None, None
-    try:
-        plan_id = InsurerServices.create_healthcare_plan(add_plan_request)
-        data = AddHealthcarePlanResponse(plan_id=plan_id)
-        status = 200
-    except BaseException as e:
-        error_message = f'error while creating plans: {str(e)}'
-        logger.error(error_message)
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
-
-
-@app.post("/insurer/plans/update", response_model=StandardHttpResponse, tags=['Insurer Health Plans'],
-         response_model_exclude_none=True)
-def update_insurer_plans(insurer_id, plan_name, update_plan_request: UpdateHealthcarePlanRequest):
-    data, error_message = None, None
-    try:
-        if not InsurerServices.plan_exists(insurer_id, plan_name):
-            error_message = f'plan {plan_name} does not exist for insurer {insurer_id}'
-            logging.error(error_message)
-            raise BaseException(error_message)
-        data = InsurerServices.update_healthcare_plan(insurer_id, plan_name, update_plan_request)
-        status = 200
-    except BaseException as e:
-        error_message = f'error while updating plans: {str(e)}'
-        logger.error(error_message)
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
-
-
-@app.delete("/insurer/plans", response_model=StandardHttpResponse, tags=['Insurer Health Plans'],
-         response_model_exclude_none=True)
-def delete_insurer_plans(insurer_id, plan_name):
-    data, error_message = None, None
-    try:
-        InsurerServices.delete_healthcare_plan(insurer_id, plan_name)
-        data = {'message': f'successfully deleted plan {plan_name} for insurer {insurer_id}'}
-        status = 200
-    except BaseException as e:
-        error_message = f'error while deleting plans: {str(e)}'
-        logger.error(error_message)
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
-
-@app.get('/sendresetcode', response_model=StandardHttpResponse, tags=['User Registration and Login'])
-async def send_reset_code(user_id):
-    # query = 
-    data, error_message = None, None
-    user = UserLoginRepository.get_user_login(user_id)
-    email = user.user_name
-    try:
-        await ResetPasswordServices.generate_reset_password_email(user_id, email)
-        data = {'message' : 'Reset code sent to registered email {} successfully'.format(email)}
-        status = 200
-    except BaseException as e:
-        error_message = "Error while sending reset code to {}".format(email) 
-        status = 500
-    return JSONResponse(content= get_http_response(data, status, error_message), status_code=status)
-@app.post('/resetpassword', response_model=StandardHttpResponse, tags=['User Registration and Login'])
-def reset_verify_password(user_id, reset_code_details: ResetPasswordRequest):
-    data, error_message = None, None
-    try:
-        data = ResetPasswordServices.verify_update_password(user_id, reset_code_details)
-        status = 200
-    except BaseException as e:
-        error_message = f' Error while password reset. Try Again : {str(e)}'
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
-
-@app.post('/upload/profilepic',response_model=StandardHttpResponse, tags=['User Profiles'])
-def upload_profile_pic(user_id, file:UploadFile = File(...)):
-    data, error_message = None, None
-    try:
-        contents = file.file.read()
-        with open(f"profileimages\\{user_id}_"+file.filename,"wb") as f:
-            f.write(contents)
-        base64_encoded_image = base64.b64encode(contents).decode("utf-8")
-        UserProfileRepository.store_profile_pic_database(user_id, base64_encoded_image)
-        status = 200
-        data = {"message":f"profile picture uploaded successfully for user = {user_id}"}
-    except Exception as e:
-        error_message = f'Error while uploading profile pic = {str(e)}'
         status = 500
         
-    finally:
-        file.file.close()
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
-    
-@app.get('/profilepic', tags=['User Profiles'])
-def fetch_profile_pic(user_id):
-    # base64_encode_data 
-    result = UserProfileRepository.fetch_profile_image(user_id)
-    return result
-
-@app.post('/addFeedback', response_model=StandardHttpResponse, tags=['General Doctor Feedback'])
-def add_doctor_feedback(doctor_id: str, patient_id: str, feedback_request: FeedbackRequest):
-    data, error_message = None, None
-    try:
-        data = AppointmentFeedbackRepository.create_feedback(doctor_id, patient_id, feedback_request)
-        status = 200
-    except BaseException as e:
-        error_message = f' Error while adding Feedback : {str(e)}'
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
-
-@app.get("/get_feedback_by_doctor", response_model=StandardHttpResponse, tags=['General Doctor Feedback'])
-def get_feedbacks_by_doctor(doctor_id):
-    data, error_message = None, None
-    try:
-        data = AppointmentFeedbackRepository.fetch_feedback_by_doctor(doctor_id)
-        status = 200
-    except BaseException as e:
-        error_message = f' Error while fetching Feedback for doctor {doctor_id} : {str(e)}'
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
 
 
-# @app.post("/reset_password", response_model=StandardHttpResponse, tags="Reset Password")
-# def update_password(user_password: ResetPassword):
-#     auth_service= BaseAuthentication.get_auth_service()
-#     data, error_message = None, None
-#     try:
-#         data=auth_service.reset_password(user_password)
-#         logger.info(data)
-#         status=200
-
-#     except BaseException as e:
-#         error_message = f'Unable to Update Password: {str(e)}'
-#         logger.error(error_message)
-#         status = 500
-        
-#     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
-
-
-@app.post("/add_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
+@app.post("/add_appointment", response_model=StandardHttpResponse, tags="Add Appointment")
 def add_appointment(new_appointment: Appointments):
     logger.error("Creating Appointment...")
     data, error_message= None, None
@@ -378,7 +223,7 @@ def add_appointment(new_appointment: Appointments):
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.post("/update_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
+@app.post("/update_appointment", response_model=StandardHttpResponse, tags="Update Appointment")
 def update_appointment(new_appointment: UpdateAppointment):
     data, error_message= None, None
     try:
@@ -395,7 +240,7 @@ def update_appointment(new_appointment: UpdateAppointment):
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.delete("/delete_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
+@app.delete("/delete_appointment", response_model=StandardHttpResponse, tags="Delete Appointment")
 def update_appointment(new_appointment: DeleteAppointment):
     data, error_message= None, None
     try:
@@ -410,19 +255,8 @@ def update_appointment(new_appointment: DeleteAppointment):
             status= 500
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
-@app.post("/update_feedback_by_appointment", response_model=StandardHttpResponse, tags=['Doctor Appointments'])
-def update_feedback_by_appointment(appoinment_id, feedback_response: FeedbackRequest):
-    data, error_message = None, None
-    try:
-        logging.info("from main:", feedback_response)
-        data = AppointmentsRepository.add_feedback_by_appointment(appoinment_id,feedback_response)
-        status = 200
-    except BaseException as e:
-        error_message = f' Error while adding feedback for appointment on {appoinment_id} : {str(e)}'
-        status = 500
-    return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
 
-@app.post("/covid_questionnaire", response_model= StandardHttpResponse, tags=["Covid Questionnaire"])
+@app.post("/covid_questionnaire", response_model= StandardHttpResponse, tags="Covid Questionnaire")
 def add_covid_questionnaire(covid_details: CovidQuestionnaire):
     data, error_message=None, None
     time1=str(datetime.now())
@@ -452,7 +286,7 @@ def add_covid_questionnaire(covid_details: CovidQuestionnaire):
     return JSONResponse(content=get_http_response(data, status, error_message), status_code=status)
 
 
-@app.get("/get_covid_details", response_model=StandardHttpResponse, tags=["Covid Questionnaire"])
+@app.get("/get_covid_details", response_model=StandardHttpResponse, tags="Get COVID Details")
 def get_covid_details(user_id):
     data, error_message=None, None
     try:
@@ -465,15 +299,55 @@ def get_covid_details(user_id):
 
     return JSONResponse(content=get_http_response(data,status, error_message), status_code=status)
 
-@app.post('/enroll_health_plan', response_model=StandardHttpResponse, tags=['Enroll in Healthcare Plans'])
-def enroll_healthcare_plan(patient_id, plan_id):
-    data, error_message=None, None
+
+
+@app.get("/upcoming_appointments", response_model=StandardHttpResponse, tags="Upcoming Appointments")
+def get_upcoming_appointments(user_id):
+    data, error_message=None,None
+
     try:
-        data= PatientProfileRepository.enroll_in_healthcare_plan(patient_id, plan_id)
+        data=ManageAppointments.get_upcoming_appointments(user_id)
         status=200
 
     except BaseException as e:
-        error_message=f'Failed to enroll healthcare plan: {str(e)}'
+        error_message=f'Failed to get upcoming appointments {str(e)}'
         status=500
 
-    return JSONResponse(content=get_http_response(data,status, error_message), status_code=status)
+    return JSONResponse(content=get_http_response(data,status,error_message), status_code=status)
+
+
+@app.post("/add_schedule", response_model=StandardHttpResponse, tags="Create Doctor Schedule")
+def add_schedule(new_schedule: Schedule):
+    data, error_message= None, None
+
+    try:
+        data=ManageAppointments.add_schedule(
+            doctor_id=new_schedule.doctor_id,
+            schedule_time=new_schedule.schedule_date_time,
+            is_available=new_schedule.is_available
+        )
+        status=200
+    
+    except BaseException as e:
+        error_message=f'Failed to add the Schedule {str(e)}'
+        status=500
+
+    return JSONResponse(content=get_http_response(data,status,error_message),status_code=status)
+
+
+
+
+@app.get("/get_schedule", response_model=StandardHttpResponse, tags="Get Doctor Schedule")
+def get_schedule(doctor_id):
+    data, error_message=None,None
+
+    try:
+        data=ManageAppointments.get_schedule(doctor_id)
+        status=200
+
+    except BaseException as e:
+        error_message=f'Failed to get Doctor Schedule {str(e)}'
+        status=500
+
+    return JSONResponse(content=get_http_response(data,status,error_message),status_code=status)
+    

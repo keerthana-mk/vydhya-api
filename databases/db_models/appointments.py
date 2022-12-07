@@ -17,10 +17,10 @@ class Appointments(Base): #Add appointment ID.
 
 
 class Schedule(Base):
-    doctor_id=Column(String, primary_key=True, foreign_key=ForeignKey(DoctorProfile.user_id), index=True)
-    schedule_date= Column(String) #11/01/2022 .time
-    start_time=Column(String) #9, 10 (24 hr format)
-    end_time= Column(String) #
+    schedule_id=Column(String, primary_key=True)
+    doctor_id=Column(String, foreign_key=ForeignKey(DoctorProfile.user_id))
+    schedule_date_time= Column(String)
+    is_available= Column(Boolean, default=False)
 
 
 class CovidQuestionnaire(Base):

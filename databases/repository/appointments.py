@@ -82,6 +82,20 @@ class AppointmentsRepository:
         else:
             return query_result[length-1]
 
+    @staticmethod
+    def get_schedule_id():
+        query_result = AppointmentsRepository.database.query(Schedule.schedule_id)
+        query_result = query_result.all()
+        # query_result=query_result.sort()
+        print(query_result)
+        length=len(query_result)
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        # print(query_result[length-1])
+        if length==0:
+            return None
+        else:
+            return query_result[length-1]
+
    
     @staticmethod
     def update_appointment(doctor_id, patient_id, old_time, new_time):
@@ -117,7 +131,7 @@ class AppointmentsRepository:
     def delete_appointment(doctor_id, patient_id, appointment_time):
         try:
             AppointmentsRepository.database.query(Appointments).filter(
-                and_(Appointments.doctor_id==doctor_id, Appointments.patient_id==patient_id, AppoAppointmentsintemnts.appointment_start_time==appointment_time)
+                and_(Appointments.doctor_id==doctor_id, Appointments.patient_id==patient_id, Appointments.appointment_start_time==appointment_time)
                 ).delete()
             AppointmentsRepository.database.commit()
         except Exception as e:
@@ -177,7 +191,100 @@ class AppointmentsRepository:
     @staticmethod
     def get_all_appointmentsby_doctor_id(user_logged_id):
         try:
-            query_result = AppointmentsRepository.database.query(Appointments).filter(or_(Appointments.doctor_id == user_logged_id, Appointments.patient_id == user_logged_id)).all()
+            user_id=str(user_logged_id)
+            print("###############################################################################")
+            query_result = AppointmentsRepository.database.query(Appointments).filter(Appointments.doctor_id == user_id)
+            query_result=query_result.all()
+            AppointmentsRepository.database.commit()
+            for i in query_result:
+                print(i)
             return query_result
         except Exception as e:
             raise BaseException(e)
+
+    @staticmethod
+    def get_upcoming_appointments(user_id):
+        try:
+            query_result = AppointmentsRepository.database.query(Appointments).filter(
+                    or_(Appointments.doctor_id == user_id, Appointments.patient_id == user_id))
+            query_result=query_result.all()
+
+            for i in query_result:
+                print(i.patient_id)
+            return query_result
+
+        except Exception as e:
+            raise BaseException(e)
+
+
+    @staticmethod
+    def add_schedule(doctor_id, schedule_time, is_available):
+
+        s_time=datetime.strptime(schedule_time,'%Y-%m-%d %H:%M')
+        current_time=str(datetime.now(timezone('US/Eastern')))
+        current_time=current_time[:-16]
+        current_time=datetime.strptime(current_time,'%Y-%m-%d %H:%M')
+
+        last_schedule_id=AppointmentsRepository.get_schedule_id()
+        print(last_schedule_id)
+        if last_schedule_id==None or last_schedule_id==[]:
+            id=1000
+        else:
+            last_schedule_id=str(last_schedule_id)
+            b=""
+            for i in last_schedule_id:
+                if i.isnumeric():
+                    b=b+i
+            print("######################################")
+            print(b)
+            id=int(b)
+            id=id+1
+
+        new_id=id
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        print(new_id)
+        if s_time>current_time:
+            new_schedule=Schedule(
+                schedule_id=new_id,
+                doctor_id=doctor_id,
+                schedule_date_time=schedule_time,
+                is_available=is_available
+            )
+            query_result = AppointmentsRepository.database.query(Schedule).filter(Schedule.doctor_id==doctor_id)
+            query_result=query_result.all()
+            print(query_result)
+            try: #Validation to check whether there is an existing entry at same time or not
+                if len(query_result)>0:
+                    for i in range(0,len(query_result)):
+                        print(query_result[i])
+                        if query_result[i].schedule_date_time==schedule_time:
+                            print("There is an existing slot at same time.")
+                            raise BaseException("There is an existing slot at same time.")
+
+                AppointmentsRepository.database.add(new_schedule)
+                print("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
+                AppointmentsRepository.database.commit()
+                return {'message': f'Added the new schedule for doctor {str(doctor_id)}'}
+            except Exception as e:
+                AppointmentsRepository.database.rollback()
+                raise BaseException(e)
+        else:
+            AppointmentsRepository.database.rollback()
+            raise BaseException("Schedule Time must be of Future Time")
+
+
+    @staticmethod
+    def get_schedule(doctor_id):
+        try:
+            query_result = AppointmentsRepository.database.query(Schedule).filter(Schedule.doctor_id==doctor_id)
+            query_result=query_result.all()
+            AppointmentsRepository.database.commit()
+            return query_result
+
+        except BaseException as e:
+            AppointmentsRepository.database.rollback()
+            error_message = f'error while getting schedule for doctor id ={doctor_id}  : {e}'
+            logging.info(e)
+            raise BaseException(error_message)
+        
+
