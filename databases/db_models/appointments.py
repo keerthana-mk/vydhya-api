@@ -19,7 +19,8 @@ class Appointments(Base): #Add appointment ID.
 class Schedule(Base):
     schedule_id=Column(String, primary_key=True)
     doctor_id=Column(String, foreign_key=ForeignKey(DoctorProfile.user_id))
-    schedule_date_time= Column(String)
+    schedule_start_date_time= Column(String)
+    schedule_end_date_time=Column(String)
     is_available= Column(Boolean, default=False)
 
 
