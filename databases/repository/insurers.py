@@ -36,6 +36,7 @@ class HealthcarePlanRepository:
     def get_plans_by_insurer_and_plan_name(insurer_id, plan_name):
         query_result = HealthcarePlanRepository.database.query(HealthcarePlan). \
             filter(and_(HealthcarePlan.insurer_id == insurer_id, HealthcarePlan.plan_name == plan_name)).all()
+        logging.info("getall plans")
         return query_result
 
     @staticmethod
