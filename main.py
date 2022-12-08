@@ -12,7 +12,7 @@ from databases.repository.profiles import PatientProfileRepository
 from databases.repository.feedback_repo import AppointmentFeedbackRepository
 from databases.repository.appointments import AppointmentsRepository
 from models.healthcare_plans import AddHealthcarePlanRequest, AddHealthcarePlanResponse, UpdateHealthcarePlanRequest
-from models.appointments import Appointments, CovidQuestionnaire, DeleteAppointment, UpdateAppointment
+from models.appointments import Appointments, CovidQuestionnaire, DeleteAppointment, Schedule, UpdateAppointment
 from models.profiles import UserProfileRequests, SearchDoctorRequest
 from models.users import ResetPassword, ResetPasswordResponse, UserRegistration, UserRegistrationResponse, UserLoginRequest, ResetPasswordRequest, Token, TokenData
 from models.feedback import FeedbackRequest
@@ -602,12 +602,12 @@ def add_appointment(new_appointment: Appointments, request:Request, current_user
     try:
         data=ManageAppointments.add_appointment(new_appointment.appointment_id,
         new_appointment.doctor_id,
-        new_appointment.patient_id,
+        current_user.user_id,
         new_appointment.appointment_start_time,
         new_appointment.duration,
         new_appointment.feedback,
         new_appointment.rating,
-        new_appointment.appointment_attended)
+        False)
         logging.error("Creating Appointment-1...")
         status=200
     except BaseException as e:
@@ -639,7 +639,7 @@ def update_appointment(new_appointment: UpdateAppointment,  request:Request, cur
     try:
         data=ManageAppointments.update_appointment(
             new_appointment.doctor_id,
-            new_appointment.patient_id,
+            current_user.user_id,
             new_appointment.old_time,
             new_appointment.new_time)
         status=200
@@ -670,7 +670,7 @@ def delete_appointment(new_appointment: DeleteAppointment, request:Request, curr
     try:
         data=ManageAppointments.delete_appointment(
             new_appointment.doctor_id,
-            new_appointment.patient_id,
+            current_user.user_id,
             new_appointment.appointment_time)
         status=200
     except BaseException as e:
@@ -739,7 +739,7 @@ def add_covid_questionnaire(covid_details: CovidQuestionnaire, request:Request, 
     covid_details.updated_at=time1
     try:
         data=ManageAppointments.add_covid_questionnaire(
-            covid_details.user_id,
+            current_user.user_id,
             covid_details.name,
             covid_details.email,
             covid_details.age,
@@ -831,3 +831,50 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     details['user_id'] = user.user_id
     access_token = create_access_token(data= details, expires=access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+@app.get("/get_schedule", response_model=StandardHttpResponse, tags=["Get Doctor Schedule"])
+def get_schedule(request:Request, current_user=Depends(get_current_user)):
+    data, error_message=None,None
+
+    try:
+        data=ManageAppointments.get_schedule(current_user.user_id)
+        status=200
+
+    except BaseException as e:
+        error_message=f'Failed to get Doctor Schedule {str(e)}'
+        status=500
+
+    return JSONResponse(content=get_http_response(data,status, error_message), status_code=status)
+
+@app.post("/add_schedule",response_model=StandardHttpResponse, tags=["Add Doctor Schedule"])
+def add_schedule(new_schedule: Schedule,request:Request, current_user=Depends(get_current_user)):
+    data, error_message=None,None
+
+    try:
+        data=ManageAppointments.add_schedule(current_user.user_id,
+        new_schedule.schedule_start_date_time,
+        new_schedule.schedule_end_date_time,
+        new_schedule.is_available)
+        status=200
+
+    except BaseException as e:
+        error_message=f'Failed to get Doctor Schedule {str(e)}'
+        status=500
+
+    return JSONResponse(content=get_http_response(data,status, error_message), status_code=status)
+
+
+@app.get("/get_appointments", response_model=StandardHttpResponse, tags=["Add Doctor Schedule"])
+def get_appointments(request:Request, current_user=Depends(get_current_user)):
+    data, error_message=None,None
+
+    try:
+        data=ManageAppointments.get_upcoming_appointments(current_user.user_id)
+        status=200
+    
+    except BaseException as e:
+        error_message=f'Failed to get Doctor Schedule {str(e)}'
+        status=500
+
+    return JSONResponse(content=get_http_response(data,status, error_message), status_code=status)

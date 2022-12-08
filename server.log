@@ -1,0 +1,191 @@
+2022-12-03 13:51:06,875 - server - serve - line:75 - INFO - Started server process [9900]
+2022-12-03 13:51:06,876 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 13:51:06,878 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 13:51:06,879 - on - send - line:121 - ERROR - Traceback (most recent call last):
+  File "C:\Python310\lib\site-packages\starlette\routing.py", line 671, in lifespan
+    async with self.lifespan_context(app):
+  File "C:\Python310\lib\site-packages\starlette\routing.py", line 566, in __aenter__
+    await self._router.startup()
+  File "C:\Python310\lib\site-packages\starlette\routing.py", line 650, in startup
+    handler()
+  File "C:\Users\Bhanu\SE Project\vydhya_api\.\main.py", line 59, in create_all_tables
+    create_tables()
+  File "C:\Users\Bhanu\SE Project\vydhya_api\.\main.py", line 35, in create_tables
+    Base.metadata.create_all(bind=engine)
+NameError: name 'engine' is not defined
+
+2022-12-03 13:51:06,885 - on - startup - line:58 - ERROR - Application startup failed. Exiting.
+2022-12-03 13:51:26,377 - server - serve - line:75 - INFO - Started server process [6620]
+2022-12-03 13:51:26,379 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 13:51:26,380 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 13:51:26,960 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:32:14,516 - server - serve - line:75 - INFO - Started server process [29532]
+2022-12-03 14:32:14,518 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:32:14,519 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:32:14,630 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:32:17,500 - server - serve - line:75 - INFO - Started server process [976]
+2022-12-03 14:32:17,502 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:32:17,504 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:32:17,597 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:35:25,899 - server - serve - line:75 - INFO - Started server process [28468]
+2022-12-03 14:35:25,901 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:35:25,902 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:35:25,997 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:35:28,911 - server - serve - line:75 - INFO - Started server process [20988]
+2022-12-03 14:35:28,912 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:35:28,913 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:35:29,000 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:37:29,191 - server - serve - line:75 - INFO - Started server process [13560]
+2022-12-03 14:37:29,192 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:37:29,193 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:37:29,300 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:39:01,147 - server - serve - line:75 - INFO - Started server process [24780]
+2022-12-03 14:39:01,148 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:39:01,149 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:39:01,243 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:40:26,046 - server - serve - line:75 - INFO - Started server process [520]
+2022-12-03 14:40:26,047 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:40:26,048 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:40:26,137 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:43:30,289 - server - serve - line:75 - INFO - Started server process [24744]
+2022-12-03 14:43:30,290 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:43:30,290 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:43:30,387 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 14:45:05,953 - server - serve - line:75 - INFO - Started server process [17780]
+2022-12-03 14:45:05,954 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 14:45:05,955 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 14:45:06,084 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:26:39,720 - server - serve - line:75 - INFO - Started server process [25816]
+2022-12-03 15:26:39,722 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 15:26:39,723 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 15:26:39,895 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:28:16,650 - server - serve - line:75 - INFO - Started server process [15952]
+2022-12-03 15:28:16,651 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 15:28:16,652 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 15:28:16,745 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:34:56,222 - server - serve - line:75 - INFO - Started server process [18956]
+2022-12-03 15:34:56,223 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 15:34:56,224 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 15:34:56,323 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:35:30,725 - server - serve - line:75 - INFO - Started server process [11804]
+2022-12-03 15:35:30,725 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 15:35:30,726 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 15:35:30,825 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:42:21,046 - server - serve - line:75 - INFO - Started server process [7428]
+2022-12-03 15:42:21,048 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 15:42:21,049 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 15:42:21,241 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:46:32,446 - server - shutdown - line:253 - INFO - Shutting down
+2022-12-03 15:47:34,664 - server - serve - line:75 - INFO - Started server process [18556]
+2022-12-03 15:47:34,665 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 15:47:34,666 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 15:47:35,520 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:48:40,978 - default_auth_service - add_user - line:79 - INFO - successfully added userlogin details
+2022-12-03 15:49:03,133 - default_auth_service - add_user - line:79 - INFO - successfully added userlogin details
+2022-12-03 15:49:38,379 - default_auth_service - add_user - line:79 - INFO - successfully added userlogin details
+2022-12-03 15:51:17,018 - main - add_appointment - line:206 - ERROR - Creating Appointment...
+2022-12-03 15:51:17,019 - main - add_appointment - line:221 - ERROR - Failed to Add Appointment 'Appointments' object has no attribute 'appointement_id'
+2022-12-03 15:52:49,292 - main - add_appointment - line:206 - ERROR - Creating Appointment...
+2022-12-03 15:52:49,293 - main - add_appointment - line:221 - ERROR - Failed to Add Appointment 'Appointments' object has no attribute 'appointement_id'
+2022-12-03 15:54:38,346 - server - serve - line:75 - INFO - Started server process [23700]
+2022-12-03 15:54:38,347 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 15:54:38,348 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 15:54:38,442 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:54:50,138 - main - add_appointment - line:206 - ERROR - Creating Appointment...
+2022-12-03 15:54:50,139 - main - add_appointment - line:221 - ERROR - Failed to Add Appointment 'Appointments' object has no attribute 'appointement_id'
+2022-12-03 15:55:51,874 - server - serve - line:75 - INFO - Started server process [8996]
+2022-12-03 15:55:51,875 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 15:55:51,876 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 15:55:51,983 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-03 15:55:58,551 - main - add_appointment - line:206 - ERROR - Creating Appointment...
+2022-12-03 15:55:58,551 - appointments_services - add_appointment - line:11 - ERROR - Creating Appointment - 2...
+2022-12-03 15:55:58,551 - appointments - add_appointment - line:17 - ERROR - Creating Appointment - 3...
+2022-12-03 15:56:04,903 - main - add_appointment - line:217 - ERROR - Creating Appointment-1...
+2022-12-03 19:15:52,698 - main - add_appointment - line:206 - ERROR - Creating Appointment...
+2022-12-03 19:15:52,698 - appointments_services - add_appointment - line:11 - ERROR - Creating Appointment - 2...
+2022-12-03 19:15:52,699 - appointments - add_appointment - line:17 - ERROR - Creating Appointment - 3...
+2022-12-03 19:15:52,768 - main - add_appointment - line:217 - ERROR - Creating Appointment-1...
+2022-12-03 19:16:11,249 - main - add_appointment - line:206 - ERROR - Creating Appointment...
+2022-12-03 19:16:11,250 - appointments_services - add_appointment - line:11 - ERROR - Creating Appointment - 2...
+2022-12-03 19:16:11,250 - appointments - add_appointment - line:17 - ERROR - Creating Appointment - 3...
+2022-12-03 19:16:11,256 - main - add_appointment - line:217 - ERROR - Creating Appointment-1...
+2022-12-03 19:17:13,308 - server - serve - line:75 - INFO - Started server process [14684]
+2022-12-03 19:17:13,309 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-03 19:17:13,310 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-03 19:17:13,403 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 13:03:54,595 - server - serve - line:75 - INFO - Started server process [17800]
+2022-12-05 13:03:54,597 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 13:03:54,598 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 13:03:54,689 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 13:06:20,387 - server - serve - line:75 - INFO - Started server process [8624]
+2022-12-05 13:06:20,389 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 13:06:20,390 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 13:06:20,584 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 22:11:45,779 - server - serve - line:75 - INFO - Started server process [12136]
+2022-12-05 22:11:45,780 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 22:11:45,781 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 22:11:47,700 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 22:16:42,929 - server - serve - line:75 - INFO - Started server process [24612]
+2022-12-05 22:16:42,930 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 22:16:42,931 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 22:16:43,158 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 22:55:44,658 - server - serve - line:75 - INFO - Started server process [10312]
+2022-12-05 22:55:44,659 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 22:55:44,660 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 22:55:44,992 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 22:59:12,937 - server - serve - line:75 - INFO - Started server process [23860]
+2022-12-05 22:59:12,939 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 22:59:12,940 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 22:59:13,030 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:01:07,004 - server - serve - line:75 - INFO - Started server process [24072]
+2022-12-05 23:01:07,005 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:01:07,006 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:01:07,096 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:03:08,862 - server - serve - line:75 - INFO - Started server process [8580]
+2022-12-05 23:03:08,863 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:03:08,864 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:03:08,949 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:04:41,585 - server - serve - line:75 - INFO - Started server process [13828]
+2022-12-05 23:04:41,585 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:04:41,586 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:04:41,679 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:05:08,784 - server - serve - line:75 - INFO - Started server process [21244]
+2022-12-05 23:05:08,785 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:05:08,786 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:05:08,982 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:07:08,230 - server - serve - line:75 - INFO - Started server process [29584]
+2022-12-05 23:07:08,230 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:07:08,231 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:07:08,319 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:12:10,960 - server - serve - line:75 - INFO - Started server process [8580]
+2022-12-05 23:12:10,961 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:12:10,962 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:12:11,044 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:12:47,708 - server - serve - line:75 - INFO - Started server process [17220]
+2022-12-05 23:12:47,709 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:12:47,710 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:12:47,794 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:17:55,435 - server - serve - line:75 - INFO - Started server process [10724]
+2022-12-05 23:17:55,437 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:17:55,438 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:17:55,536 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:20:47,777 - server - serve - line:75 - INFO - Started server process [20364]
+2022-12-05 23:20:47,779 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:20:47,780 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:20:47,863 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:28:50,023 - server - serve - line:75 - INFO - Started server process [23896]
+2022-12-05 23:28:50,024 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:28:50,025 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:28:50,114 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-05 23:32:37,842 - server - serve - line:75 - INFO - Started server process [16232]
+2022-12-05 23:32:37,842 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-05 23:32:37,842 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-05 23:32:38,046 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-06 00:02:05,352 - server - serve - line:75 - INFO - Started server process [12740]
+2022-12-06 00:02:05,360 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-06 00:02:05,360 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-06 00:02:05,655 - on - startup - line:61 - INFO - Application startup complete.
+2022-12-06 00:03:17,285 - server - serve - line:75 - INFO - Started server process [24892]
+2022-12-06 00:03:17,285 - on - startup - line:47 - INFO - Waiting for application startup.
+2022-12-06 00:03:17,290 - main - create_tables - line:34 - ERROR - Creating tables...
+2022-12-06 00:03:17,514 - on - startup - line:61 - INFO - Application startup complete.

@@ -4,7 +4,7 @@ from typing import Union, List
 class Appointments(BaseModel):
     appointment_id: str
     doctor_id: str
-    patient_id: str
+    # patient_id: str
     appointment_start_time: str
     duration: str
     feedback: Union[str, None]
@@ -13,24 +13,26 @@ class Appointments(BaseModel):
 
 class UpdateAppointment(BaseModel):
     doctor_id: str
-    patient_id: str
+    # patient_id: str
     old_time: str
     new_time: str
 
 class DeleteAppointment(BaseModel):
     doctor_id: str
-    patient_id: str
+    # patient_id: str
     appointment_time: str
 
 class Schedule(BaseModel):
-    doctor_id: str
-    day_of_week: str
-    slots: Union[List[str], None]
+    schedule_id: str
+    # doctor_id: str
+    schedule_start_date_time: str
+    schedule_end_date_time: str
+    is_available: bool
 
 
 
 class CovidQuestionnaire(BaseModel):
-    user_id: str
+    # user_id: str
     name: str
     email: str
     age: int

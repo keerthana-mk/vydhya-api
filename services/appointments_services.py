@@ -1,6 +1,7 @@
+from asyncio.log import logger
 from databases.db_models.appointments import Appointments
 import logging
-from databases.repository.appointments import AppointmentsRepository
+from databases.repository.appointments import AppointmentsRepository, ScheduleRepository
 
 
 class ManageAppointments:
@@ -63,4 +64,40 @@ class ManageAppointments:
             error_message=f'Failed to get Covid details {str(e)}'
             logging.error(error_message)
             raise BaseException(error_message)
+
+    
+    def get_upcoming_appointments(user_id):
+        try:
+            message=[]
+            data=AppointmentsRepository.get_upcoming_appointments(user_id)
+            for i in data:
+                message.append(i)
+            return {'message': data}
+
+        except BaseException as e:
+            error_message=f'Failed to get upcoming appointments {str(e)}'
+            logging.error(error_message)
+            raise BaseException(error_message)
+
+    def add_schedule(doctor_id, schedule_time, end_time,is_available):
+        try:
+            data=ScheduleRepository.add_schedule(
+                doctor_id, schedule_time, end_time,is_available
+            )
+
+            return {'message':data}
+
+        except BaseException as e:
+            error_message=f'Failed to add the Schedule {str(e)}'
+            raise BaseException(error_message)
+
+    def get_schedule(doctor_id):
+        try:
+            data=ScheduleRepository.get_schedule(doctor_id)
+            return {'message': data}
+
+        except BaseException as e:
+            error_message=f'Failed to get the Schedule {str(e)}'
+            raise BaseException(error_message)
+
 
