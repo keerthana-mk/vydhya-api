@@ -241,7 +241,7 @@ def search_doctor(search_by, search_string, covid_support: bool):
 def get_insurer_plans(insurer_id):
     data, error_message = None, None
     try:
-        data = InsurerServices.get_healthcare_plans(insurer_id)
+        data = InsurerServices.get_healthcare_plans(current_user.user_id)
         status = 200
     except BaseException as e:
         error_message = f'error while fetching plans: {str(e)}'
