@@ -5,7 +5,7 @@ import uvicorn
 from fastapi import FastAPI, Depends, File, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
-
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from app.config import engine, get_db
 from databases.repository.users import UserLoginRepository, UserProfileRepository
 from databases.repository.profiles import PatientProfileRepository

@@ -83,26 +83,26 @@ async def check_db_connected():
         print("Looks like there is some problem in connection,see below traceback")
         raise e
     
-# ######################################Email settings##################################
-# class EmailSettings:
-#     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
-#     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
-#     MAIL_FROM = os.getenv('MAIL_FROM')
-#     MAIL_PORT = int(os.getenv('MAIL_PORT'))
-#     MAIL_SERVER = os.getenv('MAIL_SERVER')
-#     MAIL_FROM_NAME = os.getenv('MAIN_FROM_NAME')
+######################################Email settings##################################
+class EmailSettings:
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+    MAIL_FROM = os.getenv('MAIL_FROM')
+    MAIL_PORT = int(os.getenv('MAIL_PORT'))
+    MAIL_SERVER = os.getenv('MAIL_SERVER')
+    MAIL_FROM_NAME = os.getenv('MAIN_FROM_NAME')
 
-# emailsettings = EmailSettings()
-# mail_config = ConnectionConfig(
-#     MAIL_USERNAME=emailsettings.MAIL_USERNAME,
-#     MAIL_PASSWORD=emailsettings.MAIL_PASSWORD,
-#     MAIL_FROM=emailsettings.MAIL_FROM,
-#     MAIL_PORT=emailsettings.MAIL_PORT,
-#     MAIL_SERVER=emailsettings.MAIL_SERVER,
-#     MAIL_FROM_NAME=emailsettings.MAIL_FROM_NAME,
-#     MAIL_STARTTLS=True,
-#     MAIL_SSL_TLS=False,
-#     USE_CREDENTIALS=True,
-#     # SUPPRESS_SEND = 0,
-#     TEMPLATE_FOLDER='./templates'
-# )
+emailsettings = EmailSettings()
+mail_config = ConnectionConfig(
+    MAIL_USERNAME=emailsettings.MAIL_USERNAME,
+    MAIL_PASSWORD=emailsettings.MAIL_PASSWORD,
+    MAIL_FROM=emailsettings.MAIL_FROM,
+    MAIL_PORT=emailsettings.MAIL_PORT,
+    MAIL_SERVER=emailsettings.MAIL_SERVER,
+    MAIL_FROM_NAME=emailsettings.MAIL_FROM_NAME,
+    MAIL_STARTTLS=True,
+    MAIL_SSL_TLS=False,
+    USE_CREDENTIALS=True,
+    # SUPPRESS_SEND = 0,
+    TEMPLATE_FOLDER='./templates'
+)
