@@ -82,8 +82,12 @@ class HealthcarePlanRepository:
     @staticmethod
     def delete_by_plan_name_and_insurer(insurer_id, plan_name):
         try:
-            HealthcarePlanRepository.database.query(HealthcarePlan).filter(
-                and_(HealthcarePlan.insurer_id == insurer_id, HealthcarePlan.plan_name == plan_name)).delete()
+            query_result = HealthcarePlanRepository.database.query(HealthcarePlan).filter(
+                and_(HealthcarePlan.insurer_id == insurer_id, HealthcarePlan.plan_name == plan_name)).first()
+
+            logging.info(f"logging from delete_by_plan_name_and_insurer ={query_result}")
+
+            HealthcarePlanRepository.database.delete(query_result)    
             HealthcarePlanRepository.database.commit()
         except Exception as e:
             HealthcarePlanRepository.database.rollback()
