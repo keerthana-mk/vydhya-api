@@ -289,7 +289,7 @@ def search_doctor( search_by, search_string, covid_support: bool, request:Reques
 def get_insurer_plans(request:Request, current_user=Depends(get_current_user)):
     data, error_message = None, None
     try:
-        data = InsurerServices.get_healthcare_plans(current_user.insurer_id)
+        data = InsurerServices.get_healthcare_plans(current_user.user_id)
         status = 200
     except BaseException as e:
         error_message = f'error while fetching plans: {str(e)}'
@@ -445,13 +445,13 @@ def delete_insurer_plans(plan_name, request:Request, current_user=Depends(get_cu
 #     return JSONResponse(content= get_http_response(data, status, error_message), status_code=status)
 
 @app.get('/sendresetcode', response_model=StandardHttpResponse, tags=['User Registration and Login'])
-async def send_reset_code(request:Request, current_user=Depends(get_current_user)):
+async def send_reset_code(user_id):
     # query = 
     data, error_message = None, None
-    user = UserLoginRepository.get_user_login(current_user.user_id)
+    user = UserLoginRepository.get_user_login(user_id)
     email = user.user_name
     try:
-        await ResetPasswordServices.generate_reset_password_email(current_user.user_id, email)
+        await ResetPasswordServices.generate_reset_password_email(user_id, email)
         data = {'message' : 'Reset code sent to registered email {} successfully'.format(email)}
         status = 200
     except BaseException as e:
@@ -471,10 +471,10 @@ async def send_reset_code(request:Request, current_user=Depends(get_current_user
 #     return JSONResponse(content=get_http_response(data, status, error_message), status_code = status)
 
 @app.post('/resetpassword', response_model=StandardHttpResponse, tags=['User Registration and Login'])
-def reset_verify_password(reset_code_details: ResetPasswordRequest, request:Request, current_user=Depends(get_current_user)):
+def reset_verify_password(user_id, reset_code_details: ResetPasswordRequest):
     data, error_message = None, None
     try:
-        data = ResetPasswordServices.verify_update_password(current_user.user_id, reset_code_details)
+        data = ResetPasswordServices.verify_update_password(user_id, reset_code_details)
         status = 200
     except BaseException as e:
         error_message = f' Error while password reset. Try Again : {str(e)}'
