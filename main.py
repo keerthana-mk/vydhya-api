@@ -341,6 +341,7 @@ def get_all_insurer_plans(request:Request, current_user=Depends(get_current_user
 def create_insurer_plans(add_plan_request: AddHealthcarePlanRequest, request:Request, current_user = Depends(get_current_user)):
     data, error_message = None, None
     try:
+        logging.info("add request_plan: ".format(add_plan_request))
         plan_id = InsurerServices.create_healthcare_plan(current_user.user_id,add_plan_request)
         data = AddHealthcarePlanResponse(plan_id=plan_id)
         status = 200
