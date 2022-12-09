@@ -52,11 +52,11 @@ class HealthcarePlanRepository:
         return int(query_result[len(query_result) - 1].plan_id.split('_')[-1]) if len(query_result) > 0 else 0
 
     @staticmethod
-    def create_insurance_plan(plan_name, plan_display_name, insurer_id, premium, coverage, deductible_amt, duration_years=1, is_monthly=True,
+    def create_insurance_plan(plan_name, plan_display_name, insurer_id, description, premium, coverage, deductible_amt, duration_years=1, is_monthly=True,
                               plan_exceptions=None):
         plan_id = HealthcarePlanRepository.generate_plan_id(insurer_id)
         new_healthcare_plan = HealthcarePlan(plan_id=plan_id, plan_name=plan_name, plan_display_name=plan_display_name, insurer_id=insurer_id,
-                                             plan_exceptions=plan_exceptions, premium=premium, coverage=coverage, deductible_amt=deductible_amt,
+                                             plan_exceptions=plan_exceptions,plan_description=description, premium=premium, coverage=coverage, deductible_amt=deductible_amt,
                                              duration_years=duration_years, is_monthly=is_monthly)
         try:
             HealthcarePlanRepository.database.add(new_healthcare_plan)

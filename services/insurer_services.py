@@ -55,7 +55,7 @@ class InsurerServices:
                 raise Exception(error_message)
 
             plan_id = HealthcarePlanRepository.create_insurance_plan(plan_request.plan_name, plan_request.plan_display_name,
-                                                                     insurer_id, plan_request.premium, plan_request.coverage,
+                                                                     insurer_id, plan_request.plan_description, plan_request.premium, plan_request.coverage,
                                                                      plan_request.deductible_amt, plan_request.duration_years,
                                                                      plan_request.is_monthly, plan_request.plan_exceptions)
             return plan_id
