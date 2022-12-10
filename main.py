@@ -173,6 +173,7 @@ def login_user(user_login_req: UserLoginRequest):
 #     return JSONResponse(get_http_response(data, status, error_message), status_code=status)
 @app.post("/profile", response_model=StandardHttpResponse, tags=['User Profiles'], response_model_exclude_none=True)
 def update_user_profile(user_profile: UserProfileRequests, request: Request, current_user = Depends(get_current_user)):
+    print('current_user: ', current_user)
     profile_service = ProfileServices()
     error_message, data = None, None
     try:
@@ -238,6 +239,7 @@ def get_user_profiles(request:Request, current_user = Depends(get_current_user))
             data = convert_doctor_response(user_profile_details)
             status = 200
         elif current_user.user_role == 'insurer':
+            logging.info(f'current_user role in insurance profile :{current_user.user_role}')
             user_profile_details = profile_service.get_user_profile(current_user.user_id, current_user.user_role)
             data = convert_insurer_response(user_profile_details)
             status = 200
@@ -245,6 +247,7 @@ def get_user_profiles(request:Request, current_user = Depends(get_current_user))
             error_message = f'unsupported user_role: {current_user.user_role}'
             status = 500
     except Exception as e:
+        logging.info(f"I am throwing error from here")
         error_message = f'error while authenticating user {current_user.user_id}: {str(e)}'
         logging.error(error_message)
         status = 500

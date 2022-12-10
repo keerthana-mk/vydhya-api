@@ -32,7 +32,7 @@ class ProfileServices:
         if user_role not in ['patient', 'doctor', 'insurer']:
             raise Exception(f'invalid user role: {user_role}')
         user_details = None
-        if user_login is None:
+        if user_login.user_id is None:
             logging.info('unable to find user')
             raise Exception(f'unable to find user {user_id}')
         if user_role == 'patient':
@@ -51,18 +51,22 @@ class ProfileServices:
     def update_user_profile(self, user_id, user_role, user_profile_details):
         filterd_user_details = {}
         user_login = UserLoginRepository.get_user_login(user_id)
+        print(f"in insurer profile :{user_login.user_id}")
         if user_login is None:
             raise Exception(f'unable to find user {user_id}')
         for key, val in user_profile_details.__dict__.items():
-            if val is not None:
+            if val is not None and key != 'user_id':
+                # logging.info(f'{key}: {val}')
                 filterd_user_details[key] = val
         try:
+            logging. info(f"filtered user details:{filterd_user_details}")
             if user_role == 'patient':
                 PatientProfileRepository.update_patient_profile(user_login.user_id, filterd_user_details)
             if user_role == 'doctor':
                 DoctorProfileRepository.update_doctor_profile(user_login.user_id, filterd_user_details)
             if user_role == "insurer":
-                InsurerProfileRepository.update_insurer_profile(user_login.user_id, filterd_user_details)
+                logging.info(" am i comming here in infrer profile update")
+                InsurerProfileRepository.update_insurer_profile(user_id, filterd_user_details)
             return self.get_user_profile(user_id, user_role)
         except BaseException as e:
             error_message = f'user profile updation failed for {user_id}: {str(e)}'

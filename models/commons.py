@@ -65,12 +65,13 @@ def convert_doctor_response(doctor_data_obj):
 
 def convert_insurer_response(insurer_data_obj):
     return UserProfileResponse(insurer=InsurerProfileResponse(
-        insurer_id=insurer_data_obj.insurer_id,
+        # insurer_id=insurer_data_obj.insurer_id
+        insurer_id=insurer_data_obj.user_id,
         user_id=insurer_data_obj.user_id,
         contact_email=insurer_data_obj.contact_email,
         theme=insurer_data_obj.theme,
-        insurance_name=insurer_data_obj.insurance_name,
-        plan_id=insurer_data_obj.plan_id
+        insurer_name=insurer_data_obj.insurer_name
+        # plan_id=insurer_data_obj.plan_id
     ))
 
 

@@ -72,15 +72,15 @@ class InsurerProfileResponse(BaseModel):
     user_id: str
     contact_email: Union[str, None]
     theme: Union[str, None]
-    insurance_name: Union[str, None]
+    insurer_name: Union[str, None]
  
 
 
 class UpdateInsurerProfileRequest(BaseModel):
-    user_id: str
+    user_id: Union[str, None]
     contact_email: Union[str, None]
     theme: Union[str, None]
-    insurance_name: Union[str, None]
+    insurer_name: Union[str, None]
 
 
 class UserProfileResponse(BaseModel):
