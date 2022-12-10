@@ -290,7 +290,9 @@ class ScheduleRepository:
             query_result = ScheduleRepository.database.query(Schedule).filter(Schedule.doctor_id==doctor_id)
             query_result=query_result.all()
             # ScheduleRepository.database.commit()
-            logging.info("##########  Get Scedule", query_result[0])
+            # logging.info("##########  Get Scedule", query_result[0])
+            if len(query_result)==0:
+                return f'There is no Schedule available for doctor id ={doctor_id}'
             return query_result
 
         except BaseException as e:
