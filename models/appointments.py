@@ -55,3 +55,7 @@ class AppointmentResponse(BaseModel):
     status: int
     error: str
     data: AppointmentResponseMessage
+
+class CovidTestScheduleRequest(BaseModel):
+    appointment_start_time: str
+    duration: str

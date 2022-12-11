@@ -24,6 +24,21 @@ class ManageAppointments:
             logging.error(error_message)
             raise BaseException(error_message)
 
+    def add_covid_appointment(appointment_id, doctor_id, patient_id, appointment_start_time, duration, appointment_attended):
+        try:
+            logging.error("Creating Appointment - 2...")
+            AppointmentsRepository.add_covid_appointment(appointment_id,
+            doctor_id,
+            patient_id,
+            appointment_start_time,
+            duration,
+            appointment_attended)
+            return {"message": f"Covid test scheduled on {appointment_start_time} Successfully"}
+        except BaseException as e:
+            error_message = f'Failed to schedule covid test: {str(e)}'
+            logging.error(error_message)
+            raise BaseException(error_message)
+
     def update_appointment(doctor_id, patient_id, old_time, new_time):
         try:
             AppointmentsRepository.update_appointment(doctor_id,patient_id,old_time,new_time)
@@ -99,5 +114,4 @@ class ManageAppointments:
         except BaseException as e:
             error_message=f'Failed to get the Schedule {str(e)}'
             raise BaseException(error_message)
-
 

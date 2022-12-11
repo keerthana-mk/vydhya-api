@@ -39,3 +39,6 @@ class CovidQuestionnaire(Base):
     covid_test=Column(Integer)
     updated_at=Column(String)
     
+# class ScheduleCovidTest(Base):
+#     user_id = Column(String, primary_key=True, foreign_key=ForeignKey(PatientProfile.user_id))
+    
