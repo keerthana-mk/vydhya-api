@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Optional
 
 from pydantic import BaseModel
 from pydantic.fields import List
@@ -13,6 +13,7 @@ from pydantic.fields import List
 #     submitted_at = Column(String, default=datetime.now().strftime('%y-%m-%d %H:%M:%S'))
 
 class FeedbackRequest(BaseModel):
+    appointment_attended : Optional[bool] = False
     feedback : Union[str, None]
     rating : float
     
