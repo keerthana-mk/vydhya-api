@@ -13,7 +13,7 @@ from pydantic.fields import List
 #     submitted_at = Column(String, default=datetime.now().strftime('%y-%m-%d %H:%M:%S'))
 
 class FeedbackRequest(BaseModel):
-    appointment_attended : Optional[bool] = False
+    appointment_attended : Optional[Union[bool,None]] = False
     feedback : Union[str, None]
     rating : float
     
